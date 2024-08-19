@@ -1,7 +1,7 @@
 {
-  "name": "YourBot",
-  "description": "Javascript WhatsApp bot made by YourName",
-  "logo": "https://telegra.ph/file/ad25b2227fa2a1a01b707.jpg",
+  "name": "Dila-MD",
+  "description": "hey this is dilamd whatsapp bot",
+  "logo": "https://telegra.ph/file/2905fce5b1eabd989bcda.jpg",
   "keywords": ["bot"],
   "success_url": "/",
 
@@ -12,7 +12,7 @@
     },  
 
     "ALIVE_IMG": {
-      "description": "Put your alive img here.",
+      "description": "https://telegra.ph/file/d5200670d0dd45e6438da.jpg",
       "required": true
     },
     
