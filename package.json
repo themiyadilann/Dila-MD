@@ -1,12 +1,12 @@
 {
-  "name": "yourbot",
+  "name": "Dila-MD",
   "version": "1.0.0",
-  "description": "A WhatsApp bot created using Node.js",
+  "description": "hey this is dilamd whatsapp bot",
   "main": "index.js",
   "scripts": {
-    "start": "pm2 start index.js --deep-monitoring --attach --name wabot",
-    "stop": "pm2 stop wabot",
-    "restart": "pm2 restart wabot"
+    "start": "pm2 start index.js --deep-monitoring --attach --name dilamd",
+    "stop": "pm2 stop dilamd",
+    "restart": "pm2 restart dilamd"
   },
   "dependencies": {
     "@whiskeysockets/baileys": "6.6.0",
