@@ -7,11 +7,15 @@ function convertToBool(text, fault = 'true') {
 module.exports = {
 SESSION_ID: process.env.SESSION_ID,
 ALIVE_IMG: process.env.ALIVE_IMG || "https://telegra.ph/file/d5200670d0dd45e6438da.jpg",
-ALIVE_MSG: process.env.ALIVE_MSG || "🌟 *Name*: Dilan  
+ALIVE_MSG: process.env.ALIVE_MSG || "I,m Alive Now",
+DILO_IMG: process.env.DILO_IMG || "https://telegra.ph/file/b912907e0f618443d50bc.jpg",
+DILO_MSG: process.env.DILO_MSG || "🌟 *Name*: Dilan  
 🌍 *From*: Matara  
 🎂 *Age*: 20  
 
-🌐 *Link*: https://Wa.me/+94777839446?text=dilo",
+🌐 *Website*:  dilalk.vercel.app 
+
+_You...?_",
 AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
 MODE: process.env.MODE || "public",
 };
