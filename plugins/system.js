@@ -11,8 +11,15 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
     try {
+        const totalRAM = Math.round(require('os').totalmem() / 1024 / 1024); // Total RAM in MB
+        const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // Used RAM in MB
+        const freeRAM = (totalRAM - usedRAM).toFixed(2); // Free RAM in MB
+
         let status = `*🕒 Uptime:*  ${runtime(process.uptime())}
-*💾 RAM Usage:* ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB / ${Math.round(require('os').totalmem() / 1024 / 1024)}MB
+*💾 RAM Usage:* 
+- **Used:** ${usedRAM} MB
+- **Free:** ${freeRAM} MB
+- **Total:** ${totalRAM} MB
 *🏠 HostName:* ${os.hostname()}
 *👤 Owner:* ᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ
 `
