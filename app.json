@@ -7,17 +7,17 @@
 
   "env": {
     "SESSION_ID": {
-      "description": "3QtEzSZJ#dhH0u1WvnHZIv1dx8EENLVS-CTqMIx8kxBumca9oo6g",
+      "description": "Add DilaMD Session ID",
       "required": true
     },  
 
     "ALIVE_IMG": {
-      "description": "https://telegra.ph/file/d5200670d0dd45e6438da.jpg",
+      "description": "Add Alive Imge Url",
       "required": true
     },
     
-    "ALIVE_MSG": {
-      "description": "Put your alive msg here.",
+    "MENU_IMG": {
+      "description": "Put your Menu img url",
       "required": true
     }   
 },
