@@ -13,12 +13,12 @@
 
     "ALIVE_IMG": {
       "description": "Add Alive Imge Url",
-      "required": true
+      "required": false
     },
     
     "MENU_IMG": {
       "description": "Put your Menu img url",
-      "required": true
+      "required": false
     }   
 },
 
