@@ -12,11 +12,11 @@
 <a href = ""><img alt="MR NIMA ODC" src="https://img.shields.io/youtube/channel/subscribers/UCjDKRYcwd5ZIpGICcVVL96Q" target="_blank" /></a>
 </p>
 <p align="center">
-<a href="https://github.com/darkmakerofc?tab=followers"><img title="Followers" src="https://img.shields.io/github/followers/darkmakerofc?color=green&style=flat-square"></a>
-<a href="https://github.com/DarkMakerofc/Queen-Elisa-Md/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/darkmakerofc/Queen-Elisa-MD?color=white&style=flat-square"></a>
-<a href="https://github.com/DarkMakerofc/Queen-Elisa-Md/network/members"><img title="Forks" src="https://img.shields.io/github/forks/darkmakerofc/Queen-Elisa-Md?color=yellow&style=flat-square"></a>
-<a href="https://github.com/DarkMakerofc/Queen-Elisa-Md/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/darkmakerofc/Queen-Elisa-MD?label=Watchers&color=red&style=flat-square"></a>
-<a href="https://github.com/DarkMakerofc/Queen-Elisa-Md"><img title="Size" src="https://img.shields.io/github/repo-size/DarkMakerofc/Queen-Elisa-Md?style=flat-square&color=darkred"></a>
+<a href="https://github.com/themiyadilann?tab=followers"><img title="Followers" src="https://img.shields.io/github/followers/themiyadilann?color=green&style=flat-square"></a>
+<a href="https://github.com/themiyadilann/Dila-Md/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?color=white&style=flat-square"></a>
+<a href="https://github.com/themiyadilann/Dila-Md/network/members"><img title="Forks" src="https://img.shields.io/github/forks/themiyadilann/Dila-Md?color=yellow&style=flat-square"></a>
+<a href="https://github.com/themiyadilann/Dila-Md/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/themiyadilann/Dila-MD?label=Watchers&color=red&style=flat-square"></a>
+<a href="https://github.com/themiyadilann/Dila-Md"><img title="Size" src="https://img.shields.io/github/repo-size/themiyadilann/QDila-Md?style=flat-square&color=darkred"></a>
 <a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https://github.com/DarkMakerofc/Queen-Elisa-Md/hit-counter&count_bg=%2379C83D&title_bg=%23555555&icon=probot.svg&icon_color=%2304FF00&title=hits&edge_flat=false"/></a>
 <a href="https://github.com/DarkMakerofc/Queen-Elisa-Md/graphs/commit-activity"><img height="20" src="https://img.shields.io/badge/Maintained-No-red.svg"></a>&nbsp;&nbsp;
 </p>
