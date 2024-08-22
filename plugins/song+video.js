@@ -27,11 +27,9 @@ async (conn, mek, m, { from, q, reply }) => {
 ⏳ *𝗧𝗶𝗺𝗲*: _${data.timestamp}_
 ⏱️ *𝗔𝗴𝗼*: _${data.ago}_
 👁️‍🗨️ *𝗩𝗶𝗲𝘄𝘀*: _${data.views}_
-👍 *𝗟𝗶𝗸𝗲𝘀*: _${data.likes}_
-💬 *𝗖𝗼𝗺𝗺𝗲𝗻𝘁𝘀*: _${data.comments}_
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
-💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
+dilalk.vercel.app
 `;
 
         // Send video details with thumbnail
@@ -74,11 +72,9 @@ async (conn, mek, m, { from, q, reply }) => {
 ⏳ *𝗧𝗶𝗺𝗲*: _${data.timestamp}_
 ⏱️ *𝗔𝗴𝗼*: _${data.ago}_
 👁️‍🗨️ *𝗩𝗶𝗲𝘄𝘀*: _${data.views}_
-👍 *𝗟𝗶𝗸𝗲𝘀*: _${data.likes}_
-💬 *𝗖𝗼𝗺𝗺𝗲𝗻𝘁𝘀*: _${data.comments}_
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
-💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
+dilalk.vercel.app
 `;
 
         // Send video details with thumbnail
