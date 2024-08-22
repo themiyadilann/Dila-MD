@@ -23,8 +23,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 💬 *𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲*: _${response}_
 
 dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ
-`;
+ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
         // Send the reply with the thumbnail image
         await conn.sendMessage(from, { image: { url: 'https://telegra.ph/file/5aee066590cf0c6eabf9d.jpg' }, caption: replyText }, { quoted: mek });
