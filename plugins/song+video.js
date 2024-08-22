@@ -18,11 +18,16 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         let desc = `
 *𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗔𝘂𝗱𝗶𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 🎧*
 
-*🎶 𝗧𝗶𝘁𝗹𝗲*: ${data.title}
-*📝 𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: ${data.description}
-*⏱️ 𝗧𝗶𝗺𝗲*: ${data.timestamp}
-*📅 𝗔𝗴𝗼*: ${data.ago}
-*👁️‍🗨️ 𝗩𝗶𝗲𝘄𝘀*: ${data.views}
+*🎶 𝗧𝗶𝘁𝗹𝗲*: 
+> _${data.title}_
+*📝 𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: 
+> _${data.description}_
+*⏱️ 𝗧𝗶𝗺𝗲*: 
+> _${data.timestamp}_
+*📅 𝗔𝗴𝗼*: 
+> _${data.ago}_
+*👁️‍🗨️ 𝗩𝗶𝗲𝘄𝘀*: 
+> _${data.views}_
 
 *💻 ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
 `;
@@ -59,11 +64,16 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         let desc = `
 *𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗩𝗶𝗱𝗲𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 🎥*
 
-*🎶 𝗧𝗶𝘁𝗹𝗲*: ${data.title}
-*📝 𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: ${data.description}
-*⏱️ 𝗧𝗶𝗺𝗲*: ${data.timestamp}
-*📅 𝗔𝗴𝗼*: ${data.ago}
-*👁️‍🗨️ 𝗩𝗶𝗲𝘄𝘀*: ${data.views}
+*🎶 𝗧𝗶𝘁𝗹𝗲*: 
+> _${data.title}_
+*📝 𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: 
+> _${data.description}_
+*⏱️ 𝗧𝗶𝗺𝗲*: 
+> _${data.timestamp}_
+*📅 𝗔𝗴𝗼*: 
+> _${data.ago}_
+*👁️‍🗨️ 𝗩𝗶𝗲𝘄𝘀*: 
+> _${data.views}_
 
 *💻 ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
 `;
