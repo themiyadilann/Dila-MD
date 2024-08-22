@@ -16,15 +16,15 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const url = data.url;
 
         let desc = `
-*𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗔𝘂𝗱𝗶𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 ⤵*
+*𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗔𝘂𝗱𝗶𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 🎧*
 
-*𝗧𝗶𝘁𝗹𝗲*: ${data.title}
-*𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: ${data.description}
-*𝗧𝗶𝗺𝗲*: ${data.timestamp}
-*𝗔𝗴𝗼*: ${data.ago}
-*𝗩𝗶𝗲𝘄𝘀*: ${data.views}
+*🎶 𝗧𝗶𝘁𝗹𝗲*: ${data.title}
+*📝 𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: ${data.description}
+*⏱️ 𝗧𝗶𝗺𝗲*: ${data.timestamp}
+*📅 𝗔𝗴𝗼*: ${data.ago}
+*👁️‍🗨️ 𝗩𝗶𝗲𝘄𝘀*: ${data.views}
 
-*ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
+*💻 ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
 `;
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
@@ -34,7 +34,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         // send audio+document message
         await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: data.title + ".mp3", caption: "*ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: data.title + ".mp3", caption: "*💻 ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
@@ -57,15 +57,15 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
         const url = data.url;
 
         let desc = `
-*𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗩𝗶𝗱𝗲𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 ⤵*
+*𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗩𝗶𝗱𝗲𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 🎥*
 
-*𝗧𝗶𝘁𝗹𝗲*: ${data.title}
-*𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: ${data.description}
-*𝗧𝗶𝗺𝗲*: ${data.timestamp}
-*𝗔𝗴𝗼*: ${data.ago}
-*𝗩𝗶𝗲𝘄𝘀*: ${data.views}
+*🎶 𝗧𝗶𝘁𝗹𝗲*: ${data.title}
+*📝 𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: ${data.description}
+*⏱️ 𝗧𝗶𝗺𝗲*: ${data.timestamp}
+*📅 𝗔𝗴𝗼*: ${data.ago}
+*👁️‍🗨️ 𝗩𝗶𝗲𝘄𝘀*: ${data.views}
 
-*ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
+*💻 ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*
 `;
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
@@ -75,7 +75,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         // send video+document message
         await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: data.title + ".mp4", caption: "*ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: data.title + ".mp4", caption: "*💻 ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
