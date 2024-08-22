@@ -7,7 +7,7 @@
   <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=#ff0ab&center=true&vCenter=true&multiline=false&lines=KING+DILA+WHATSAPP+BOT" alt="">
 </p>
     <p align="center">
-<a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-Mrnima-red.svg?style=for-the-badge&logo=github"></a>
+<a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-MrDila-red.svg?style=for-the-badge&logo=github"></a>
      
 <a href = ""><img alt="MR NIMA ODC" src="https://img.shields.io/youtube/channel/subscribers/UCjDKRYcwd5ZIpGICcVVL96Q" target="_blank" /></a>
 </p>
