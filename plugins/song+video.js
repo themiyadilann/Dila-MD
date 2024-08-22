@@ -30,6 +30,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
+ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ
 `;
 
         // Send video details with thumbnail
@@ -75,6 +76,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
+ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ
 `;
 
         // Send video details with thumbnail
