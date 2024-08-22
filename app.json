@@ -6,6 +6,12 @@
   "success_url": "/",
 
   "env": {
+    "MODE": {
+      "description": "public or process or index or group",
+      "required": false,
+      "value": "public"
+    },  
+    
     "SESSION_ID": {
       "description": "Add DilaMD Session ID",
       "required": true
@@ -13,12 +19,14 @@
 
     "ALIVE_IMG": {
       "description": "Add Alive Imge Url",
-      "required": false
+      "required": false,
+      "value": "DEXTER"
     },
     
     "MENU_IMG": {
       "description": "Put your Menu img url",
-      "required": false
+      "required": false,
+      "value": "DEXTER"
     }   
 },
 
