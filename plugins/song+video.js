@@ -1,7 +1,6 @@
 const { cmd } = require('../command');
 const fg = require('api-dylux');
 const yts = require('yt-search');
-const { MessageActionRow, MessageButton } = require('discord.js'); // Adjust according to your library
 
 // Helper function to format views
 const formatViews = (views) => {
@@ -14,11 +13,6 @@ const formatViews = (views) => {
     } else {
         return views.toString();
     }
-};
-
-// Helper function to truncate text
-const truncateText = (text, maxLength) => {
-    return text.length > maxLength ? text.slice(0, maxLength) + '... (Read more)' : text;
 };
 
 //========= Audio Download Command =========//
@@ -37,7 +31,7 @@ async (conn, mek, m, { from, q, reply }) => {
         const data = search.videos[0];
         const url = data.url;
 
-        const fullDesc = `
+        let desc = `
 > *𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗔𝘂𝗱𝗶𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 🎧*
 
 🎶 *𝗧𝗶𝘁𝗹𝗲*: _${data.title}_
@@ -52,34 +46,14 @@ dilalk.vercel.app
 ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ
 `;
 
-        // Define the buttons
-        const row = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('download_audio')
-                    .setLabel('Download Audio')
-                    .setStyle('PRIMARY')
-            );
+        // Send video details with thumbnail
+        await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
-        // Send video details with thumbnail and button
-        await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: truncatedDesc, components: [row] }, { quoted: mek });
-
-        // Send full description in a follow-up message
-        await conn.sendMessage(from, fullDesc, { quoted: mek });
-
-        // Handle button interaction
-        conn.on('interactionCreate', async interaction => {
-            if (!interaction.isButton()) return;
-
-            if (interaction.customId === 'download_audio') {
-                // Download and send audio
-                let down = await fg.yta(url);
-                let downloadUrl = down.dl_url;
-                await interaction.reply({ content: "Downloading audio...", ephemeral: true });
-                await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-                await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
-            }
-        });
+        // Download and send audio
+        let down = await fg.yta(url);
+        let downloadUrl = down.dl_url;
+        await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
@@ -103,7 +77,7 @@ async (conn, mek, m, { from, q, reply }) => {
         const data = search.videos[0];
         const url = data.url;
 
-        const fullDesc = `
+        let desc = `
 *𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗩𝗶𝗱𝗲𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 🎥*
 
 🎶 *𝗧𝗶𝘁𝗹𝗲*: _${data.title}_
@@ -118,11 +92,17 @@ dilalk.vercel.app
 ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ
 `;
 
+        // Send video details with thumbnail
+        await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
-        // Define the buttons
-        const row = new MessageActionRow()
-            .addComponents(
-                new MessageButton()
-                    .setCustomId('download_video')
-                    .setLabel('Download Video')
-                    .setStyle('PRIMARY')
+        // Download and send video
+        let down = await fg.ytv(url);
+        let downloadUrl = down.dl_url;
+        await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: `${data.title}.mp4`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
+
+    } catch (e) {
+        console.log(e);
+        reply(`Error: ${e.message}`);
+    }
+});
