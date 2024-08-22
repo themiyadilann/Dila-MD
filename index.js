@@ -43,7 +43,60 @@ console.log("Connecting wa bot 🧬...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
 var { version } = await fetchLatestBaileysVersion()
 
-const conn = makeWASocket({
+// ... preceding code ...
+// Line: ~46
+conn.ev.on('messages.upsert', async (mek) => {
+    mek = mek.messages[0];
+    if (!mek.message) return;
+
+    mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
+
+    // Line: 54
+    // Check if the message is from a group
+    if (mek.key.remoteJid.endsWith('@g.us')) {
+        const messageContent = mek.message.conversation || mek.message.extendedTextMessage?.text || '';
+
+        // Regular expression to detect URLs
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+
+        // If a URL is detected, delete the message
+        if (urlRegex.test(messageContent)) {
+            try {
+                // Inform the group that links are not allowed
+                await conn.sendMessage(mek.key.remoteJid, { text: 'Links are not allowed in this group.' });
+                // Delete the message containing the link
+                await conn.sendMessage(mek.key.remoteJid, { delete: mek.key });
+            } catch (error) {
+                console.error('Failed to delete message:', error);
+            }
+        }
+    }
+
+    // ... Continue with existing message handling logic ...
+});        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        const conn = makeWASocket({
         logger: P({ level: 'silent' }),
         printQRInTerminal: false,
         browser: Browsers.macOS("Firefox"),
