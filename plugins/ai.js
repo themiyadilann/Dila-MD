@@ -21,8 +21,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
 🔍 *𝗤𝘂𝗲𝗿𝘆*: _${q}_
 
-💬 *𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲*
-> _${response}_
+💬 *𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲*: _${response}_
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
