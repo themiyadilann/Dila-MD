@@ -5,7 +5,7 @@
 <img src="https://i.ibb.co/Kmm5cXJ/Picsart-24-07-29-17-30-47-912.jpg" width="300" height="300"/>
 </p>
 <p align="center">
-  <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=#ffffff&center=true&vCenter=true&multiline=false&lines=MR+DILA+WHATSAPP+BOT" alt="">
+  <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=#ff5733&center=true&vCenter=true&multiline=false&lines=MR+DILA+WHATSAPP+BOT" alt="">
 </p>
 <p align="center">
 <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-Mrnima-red.svg?style=for-the-badge&logo=github"></a>
