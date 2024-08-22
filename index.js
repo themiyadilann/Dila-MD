@@ -187,3 +187,57 @@ app.listen(port, () => console.log(`Server listening on port http://localhost:${
 setTimeout(() => {
 connectToWA()
 }, 4000);  
+
+
+
+
+
+
+
+
+
+
+// Add this function to your bot's main logic, such as in index.js or the command handling file
+
+const { WAConnection, MessageType } = require('@adiwajshing/baileys');
+const conn = new WAConnection();
+
+const linkPatterns = [
+    /https:\/\/wa\.me/,
+    /https:\/\/chat\.whatsapp\.com/,
+    /https:\/\/www\.whatsapp\.com/
+];
+
+// Event listener for incoming messages
+conn.on('chat-update', async (chat) => {
+    if (!chat.hasNewMessage) return;
+
+    const m = chat.messages.all()[0];
+    const messageContent = m.message?.conversation || m.message?.extendedTextMessage?.text;
+
+    if (m.key.fromMe || !messageContent) return;
+
+    // Check if the message contains a prohibited link
+    const containsLink = linkPatterns.some(pattern => pattern.test(messageContent));
+
+    if (containsLink) {
+        // Delete the message
+        await conn.deleteMessage(m.key.remoteJid, {
+            id: m.key.id,
+            remoteJid: m.key.remoteJid,
+            fromMe: false
+        });
+
+        // Send a notification to the group or user
+        const warningMessage = `*ලින්ක් දැමීම තහනම්.....*`;
+        await conn.sendMessage(m.key.remoteJid, warningMessage, MessageType.text, { quoted: m });
+    }
+});
+
+// Initialize the connection
+async function startBot() {
+    await conn.connect();
+    console.log('Bot is online');
+}
+
+startBot();
