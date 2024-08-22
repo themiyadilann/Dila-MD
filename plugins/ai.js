@@ -27,7 +27,7 @@ dilalk.vercel.app
 `;
 
         // Send the reply with the thumbnail image
-        await conn.sendMessage(from, { image: { url: 'https://telegra.ph/file/0565e69ca6fd8265c5de5.jpg' }, caption: replyText }, { quoted: mek });
+        await conn.sendMessage(from, { image: { url: 'https://telegra.ph/file/5aee066590cf0c6eabf9d.jpg' }, caption: replyText }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
