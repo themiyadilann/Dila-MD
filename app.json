@@ -7,7 +7,7 @@
 
   "env": {
     "MODE": {
-      "description": "public or process or index or group",
+      "description": "public or private or index or group",
       "required": false,
       "value": "public"
     },  
