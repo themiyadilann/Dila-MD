@@ -4,7 +4,7 @@
 <img src = "logologo.jpg"  width="300" height="300">
 </img>
  <p align="center">
-  <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=#cccaca&center=true&vCenter=true&multiline=false&lines=KING+DILA+WHATSAPP+BOT" alt="">
+  <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=#ff0ab&center=true&vCenter=true&multiline=false&lines=KING+DILA+WHATSAPP+BOT" alt="">
 </p>
     <p align="center">
 <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-Mrnima-red.svg?style=for-the-badge&logo=github"></a>
