@@ -27,7 +27,7 @@ async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, send
         if (!q && !q.startsWith("https://")) return reply("give me fb url")
         //fetch data from api  
         let data = await fetchJson(`${baseUrl}/api/fdown?url=${q}`)
-        reply("*Downloading...*")
+        reply("*Downloading... 📥*")
         //send video (hd,sd)
         await conn.sendMessage(from, { video: { url: data.data.hd }, mimetype: "video/mp4", caption: `📺 FB HD VIDEO 🚀✨🎥\n\n ${yourName}` }, { quoted: mek })
         await conn.sendMessage(from, { video: { url: data.data.sd }, mimetype: "video/mp4", caption: `📱 FB SD VIDEO 🎬⚡📥\n\n ${yourName}` }, { quoted: mek })  
@@ -50,7 +50,7 @@ async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, send
         if (!q && !q.startsWith("https://")) return reply("give me tiktok url")
         //fetch data from api  
         let data = await fetchJson(`${baseUrl}/api/tiktokdl?url=${q}`)
-        reply("*Downloading...*")
+        reply("*Downloading... 📥*")
         //send video (wm,nwm)
         await conn.sendMessage(from, { video: { url: data.data.no_wm }, mimetype: "video/mp4", caption: `🚀 NO-WATERMARK DilaMD TIKTOK DOWNLOADER 🎵✨📥\n\n ${yourName}` }, { quoted: mek })
         await conn.sendMessage(from, { video: { url: data.data.wm }, mimetype: "video/mp4", caption: `🚀 With-WATERMARK DilaMD TIKTOK DOWNLOADER 🎵✨📥\n\n ${yourName}` }, { quoted: mek })  
