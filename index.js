@@ -193,30 +193,3 @@ connectToWA()
 
 
 
-
-
-
-
-async function connectToWA() {
-    // ...existing code...
-
-    conn.ev.on('messages.upsert', async (m) => {
-        try {
-            // Get the message content
-            const msg = m.messages[0];
-            const text = msg.message.conversation || msg.message.extendedTextMessage?.text || '';
-
-            // Check if the message is "Mk"
-            if (text === "Mk") {
-                // Send the reply "mN"
-                await conn.sendMessage(msg.key.remoteJid, { text: "mN" }, { quoted: msg });
-            }
-
-            // ...existing message handling logic...
-        } catch (err) {
-            console.log(err);
-        }
-    });
-
-    // ...existing code...
-}
