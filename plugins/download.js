@@ -16,9 +16,6 @@ let baseUrl;
 
 const yourName = "dilalk.vercel.app\n ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ";
 
-// Function to validate URL and domain
-const isValidUrl = (url, pattern) => url && url.startsWith("https://") && url.includes(pattern);
-
 // Facebook Downloader
 cmd({
     pattern: "fb",
@@ -28,7 +25,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!isValidUrl(q, 'facebook')) return reply("*Please give me your link 🚫*\nExample: .fb (fb video link)");
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid FB URL.");
         
         let data = await fetchJson(`${baseUrl}/api/fdown?url=${q}`);
         reply("*Downloading... 📥*");
@@ -54,7 +51,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!isValidUrl(q, 'tiktok')) return reply("*Please give me your link 🚫*\nExample: .tiktok (tiktok video link)");
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid TikTok URL.");
         
         let data = await fetchJson(`${baseUrl}/api/tiktokdl?url=${q}`);
         reply("*Downloading... 📥*");
@@ -83,7 +80,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!isValidUrl(q, 'twitter')) return reply("*Please give me your link 🚫*\nExample: .twitter (twitter video link)");
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid Twitter URL.");
         
         let data = await fetchJson(`${baseUrl}/api/twitterdl?url=${q}`);
         reply("*Downloading...*");
@@ -112,7 +109,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!isValidUrl(q, 'googledrive')) return reply("*Please give me your link 🚫*\nExample: .gdrive (gdrive link)");
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid Google Drive URL.");
         
         let data = await fetchJson(`${baseUrl}/api/gdrivedl?url=${q}`);
         reply("*Downloading...*");
@@ -135,7 +132,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!isValidUrl(q, 'mediafire')) return reply("*Please give me your link 🚫*\nExample: .mediafire (mediafire link)");
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid MediaFire URL.");
         
         let data = await fetchJson(`${baseUrl}/api/mediafiredl?url=${q}`);
         reply("*Downloading...*");
