@@ -10,7 +10,7 @@ let baseUrl;
 })();
 
 
-const yourName = "dilalk.vercel.app\nᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ"; 
+const yourName = "dilalk.vercel.app\n ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ"; 
 
 
 
@@ -29,8 +29,8 @@ async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, send
         let data = await fetchJson(`${baseUrl}/api/fdown?url=${q}`)
         reply("*Downloading...*")
         //send video (hd,sd)
-        await conn.sendMessage(from, { video: { url: data.data.hd }, mimetype: "video/mp4", caption: `- HD\n\n ${yourName}` }, { quoted: mek })
-        await conn.sendMessage(from, { video: { url: data.data.sd }, mimetype: "video/mp4", caption: `- SD \n\n ${yourName}` }, { quoted: mek })  
+        await conn.sendMessage(from, { video: { url: data.data.hd }, mimetype: "video/mp4", caption: `📺 FB HD VIDEO 🚀✨🎥\n\n ${yourName}` }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.data.sd }, mimetype: "video/mp4", caption: `📱 FB SD VIDEO 🎬⚡📥\n\n ${yourName}` }, { quoted: mek })  
     } catch (e) {
         console.log(e)
         reply(`${e}`)
@@ -52,8 +52,8 @@ async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, send
         let data = await fetchJson(`${baseUrl}/api/tiktokdl?url=${q}`)
         reply("*Downloading...*")
         //send video (wm,nwm)
-        await conn.sendMessage(from, { video: { url: data.data.no_wm }, mimetype: "video/mp4", caption: `- NO-WATERMARK\n\n ${yourName}` }, { quoted: mek })
-        await conn.sendMessage(from, { video: { url: data.data.wm }, mimetype: "video/mp4", caption: `- WITH-WATERMARK \n\n ${yourName}` }, { quoted: mek })  
+        await conn.sendMessage(from, { video: { url: data.data.no_wm }, mimetype: "video/mp4", caption: `🚀 NO-WATERMARK DilaMD TIKTOK DOWNLOADER 🎵✨📥\n\n ${yourName}` }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.data.wm }, mimetype: "video/mp4", caption: `🚀 With-WATERMARK DilaMD TIKTOK DOWNLOADER 🎵✨📥\n\n ${yourName}` }, { quoted: mek })  
         //send audio    
         await conn.sendMessage(from, { audio: { url: data.data.audio }, mimetype: "audio/mpeg" }, { quoted: mek })  
     } catch (e) {
@@ -77,8 +77,8 @@ async(conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, send
         let data = await fetchJson(`${baseUrl}/api/twitterdl?url=${q}`)
         reply("*Downloading...*")
         //send video (hd,sd)
-        await conn.sendMessage(from, { video: { url: data.data.data.HD }, mimetype: "video/mp4", caption: `- HD\n\n ${yourName}` }, { quoted: mek })
-        await conn.sendMessage(from, { video: { url: data.data.data.SD }, mimetype: "video/mp4", caption: `- SD \n\n ${yourName}` }, { quoted: mek })  
+        await conn.sendMessage(from, { video: { url: data.data.data.HD }, mimetype: "video/mp4", caption: `📺 TWITTER HD VIDEO 🚀✨🎥\n\n ${yourName}` }, { quoted: mek })
+        await conn.sendMessage(from, { video: { url: data.data.data.SD }, mimetype: "video/mp4", caption: `📱 TWITTER SD VIDEO 🎬⚡📥\n\n ${yourName}` }, { quoted: mek })  
         //send audio    
         await conn.sendMessage(from, { audio: { url: data.data.data.audio }, mimetype: "audio/mpeg" }, { quoted: mek })  
     } catch (e) {
