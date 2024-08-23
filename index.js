@@ -197,6 +197,3 @@ connectToWA()
 
 
 
-case 'themiya':
-xeonimun('🌟 *Name*: Dilan \n 🌍 *From*: Matara   \n\n 🎂 *Age*: 20   \n _https://Wa.me/+94777839446?text=dilo_ 🤖❤️')
-break
