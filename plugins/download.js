@@ -10,8 +10,7 @@ let baseUrl;
 })();
 
 
-const yourName = "dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ"; 
+const yourName = "dilalk.vercel.app\nᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ"; 
 
 
 
