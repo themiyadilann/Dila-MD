@@ -16,18 +16,6 @@ let baseUrl;
 
 const yourName = "dilalk.vercel.app\n ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ";
 
-// Function to validate URL
-const isValidUrl = (url) => {
-    const validDomains = [
-        'fb', 'facebook',
-        'tiktok', 'tt',
-        'twitter', 'twdl',
-        'gdrive', 'googledrive',
-        'mediafire', 'mfire'
-    ];
-    return validDomains.some(domain => url.includes(domain));
-};
-
 // Facebook Downloader
 cmd({
     pattern: "fb",
@@ -37,9 +25,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q || !q.startsWith("https://") || !isValidUrl(q)) {
-            return reply("*Please give me your link 🚫*");
-        }
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid FB URL.");
         
         let data = await fetchJson(`${baseUrl}/api/fdown?url=${q}`);
         reply("*Downloading... 📥*");
@@ -65,9 +51,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q || !q.startsWith("https://") || !isValidUrl(q)) {
-            return reply("*Please give me your link 🚫*");
-        }
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid TikTok URL.");
         
         let data = await fetchJson(`${baseUrl}/api/tiktokdl?url=${q}`);
         reply("*Downloading... 📥*");
@@ -96,9 +80,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q || !q.startsWith("https://") || !isValidUrl(q)) {
-            return reply("*Please give me your link 🚫*");
-        }
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid Twitter URL.");
         
         let data = await fetchJson(`${baseUrl}/api/twitterdl?url=${q}`);
         reply("*Downloading...*");
@@ -127,9 +109,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q || !q.startsWith("https://") || !isValidUrl(q)) {
-            return reply("*Please give me your link 🚫*");
-        }
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid Google Drive URL.");
         
         let data = await fetchJson(`${baseUrl}/api/gdrivedl?url=${q}`);
         reply("*Downloading...*");
@@ -152,9 +132,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q || !q.startsWith("https://") || !isValidUrl(q)) {
-            return reply("*Please give me your link 🚫*");
-        }
+        if (!q || !q.startsWith("https://")) return reply("Give me a valid MediaFire URL.");
         
         let data = await fetchJson(`${baseUrl}/api/mediafiredl?url=${q}`);
         reply("*Downloading...*");
