@@ -43,8 +43,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ
-`;
+ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
@@ -89,8 +88,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ
-`;
+ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
