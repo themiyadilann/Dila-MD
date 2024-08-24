@@ -13,6 +13,12 @@ cmd({
     try {
         const start = Date.now(); // Start time for ping calculation
 
+        // Reply to measure the ping
+        const sentMsg = await reply('Calculating ping...');
+
+        const end = Date.now(); // End time after message is sent
+        const ping = end - start; // Calculate ping
+
         // RAM usage
         const totalRAM = Math.round(require('os').totalmem() / 1024 / 1024); // Total RAM in MB
         const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // Used RAM in MB
@@ -25,13 +31,12 @@ cmd({
 - *Total*: ${totalRAM} MB
 *🏠 HostName:* ${os.hostname()}
 *👤 Owner:* ᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ
+*📶 Ping:* ${ping} ms
 `
 
-        const end = Date.now(); // End time for ping calculation
-        const ping = end - start; // Calculate ping
-
-        // Include ping in the status message
-        return reply(`${status}\n*📶 Ping:* ${ping} ms`)
+        // Update the message with the status and ping
+        await conn.sendMessage(from, { text: status }, { quoted: sentMsg });
+        
     } catch (e) {
         console.log(e)
         reply(`Error: ${e}`)
