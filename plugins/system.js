@@ -1,29 +1,30 @@
-require('../command').cmd({
+const config = require('../config');
+const {cmd} = require('../command');
+const os = require("os");
+const {runtime} = require('../lib/functions');
+
+cmd({
     pattern: "system",
     alias: ["status", "botinfo", "runtime", "uptime"],
     desc: "Check uptime, RAM usage, and more",
     category: "main",
     filename: __filename
-}, async (conn, mek, m, {
-    from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, 
-    pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
-}) => {
+}, async (conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
     try {
-        const os = require('os');
-        const { runtime } = require('../lib/functions');
-        const totalRAM = Math.round(os.totalmem() / 1024 / 1024);
-        const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
-        const freeRAM = (totalRAM - usedRAM).toFixed(2);
+        // RAM usage
+        const totalRAM = Math.round(os.totalmem() / 1024 / 1024); // Total RAM in MB
+        const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // Used RAM in MB
+        const freeRAM = (totalRAM - usedRAM).toFixed(2); // Free RAM in MB
 
-        const status = `*🕒 Uptime:* ${runtime(process.uptime())}\n` +
-                       `*💾 RAM Usage:*\n` +
-                       `- *Used*: ${usedRAM} MB\n` +
-                       `- *Free*: ${freeRAM} MB\n` +
-                       `- *Total*: ${totalRAM} MB\n` +
-                       `*🏠 HostName:* ${os.hostname()}\n` +
-                       `*👤 Owner:* ᴍʀᴅɪʟᴀ`;
-
-        return reply(status);
+        let status = `*🕒 Uptime:* ${runtime(process.uptime())}
+*💾 RAM Usage:* 
+- *Used*: ${usedRAM} MB
+- *Free*: ${freeRAM} MB
+- *Total*: ${totalRAM} MB
+*🏠 HostName:* ${os.hostname()}
+*👤 Owner:* ᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ
+`;
+        return reply(`${status}`);
     } catch (e) {
         console.log(e);
         reply(`Error: ${e}`);
