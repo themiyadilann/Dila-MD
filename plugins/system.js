@@ -24,13 +24,7 @@ cmd({
 *🏠 HostName:* ${os.hostname()}
 *👤 Owner:* ᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ
 `
-
-        // URL of the thumbnail image
-        const imageUrl = 'https://telegra.ph/file/50e9d2e8b43e5efe0b05f.jpg';
-
-        // Send the status with the image as a thumbnail
-        await conn.sendMessage(from, { image: { url: imageUrl }, caption: status }, { quoted: quoted || null });
-        
+        return reply(`${status}`)
     } catch (e) {
         console.log(e)
         reply(`Error: ${e}`)
