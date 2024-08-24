@@ -17,9 +17,8 @@ const util = require('util')
 const { sms,downloadMediaMessage } = require('./lib/msg')
 const axios = require('axios')
 const { File } = require('megajs')
-const prefix = '.'
 
-const ownerNumber = ['94777839446']
+const ownerNumber = ['94777839446', '94727839446']
 
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
@@ -44,8 +43,11 @@ const connectDB = require('./lib/mongodb')
 connectDB();
 
 //=====
-
-console.log("Connecting wa bot 🧬...");
+const {readEnv} = require('./lib/database')
+const config = await readEnv();
+const prefix = config.PREFIX
+        
+console.log("Connecting DilaMD 🤖...");
 const { state, saveCreds } = await useMultiFileAuthState(__dirname + '/auth_info_baileys/')
 var { version } = await fetchLatestBaileysVersion()
 
