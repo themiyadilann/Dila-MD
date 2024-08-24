@@ -26,8 +26,8 @@ _example - .ai Hey_
 𝚈𝚘𝚞𝚝𝚞𝚋𝚎 - https://youtube.com/@dila_lk
 𝚆𝚎𝚋 𝚂𝚒𝚝𝚎 - dilalk.vercel.app
 
-RAM ${usedRAM} MB
-${runtime(process.uptime())}
+𝚁𝙰𝙼: ${usedRAM} 𝙼𝙱
+𝚄𝙿 𝚃𝙸𝙼𝙴: ${runtime(process.uptime())}
 ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ`
 
         // URL of the image you want to include
