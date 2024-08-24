@@ -22,7 +22,7 @@ cmd({
 - *Free*: ${freeRAM} MB
 - *Total*: ${totalRAM} MB
 *🏠 HostName:* ${os.hostname()}
-*👤 Owner:* ᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ
+*👤 Owner:* ᴍʀ ᴅɪʟᴀ
 `
 
         // URL of the image you want to include
