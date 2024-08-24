@@ -27,9 +27,9 @@ cmd({
 
         // URL of the image you want to send
         const imageUrl = 'https://telegra.ph/file/50e9d2e8b43e5efe0b05f.jpg'; // Replace with your actual image URL
-        
+
         // Send the image with the status as the caption
-        await conn.sendMessage(from, { image: { url: imageUrl }, caption: status }, { quoted: quoted });
+        await conn.sendMessage(from, { image: { url: imageUrl }, caption: status }, { quoted: quoted || null });
         
     } catch (e) {
         console.log(e)
