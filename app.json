@@ -17,6 +17,13 @@
       "required": true
     },  
 
+        "AUTO_READ_STATUS": {
+      "description": "true or false",
+      "required": false,
+      "value": "true"
+    },  
+
+    
     "ALIVE_IMG": {
       "description": "Add Alive Imge Url",
       "required": false,
