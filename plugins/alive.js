@@ -12,7 +12,7 @@ cmd({
         await conn.sendMessage(from, { image: { url: config.ALIVE_IMG }, caption: config.ALIVE_MSG }, { quoted: mek });
 
         // Send audio as a voice message
-        await conn.sendMessage(from, { audio: { url: 'https://drive.google.com/uc?export=download&id=1UtbyKhdUoVWTJlwSGRUFo6tl3dAq42mF' }, mimetype: 'audio/mp4' }, { quoted: mek });
+        await conn.sendMessage(from, { audio: { url: 'https://drive.google.com/uc?export=download&id=1XZ6bF15m4V3VPXMdt0d2gBTJwLh8Xby7' }, mimetype: 'audio/mp4' }, { quoted: mek });
         
     } catch (e) {
         console.log(e);
