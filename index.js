@@ -197,3 +197,32 @@ connectToWA()
 
 
 
+const startBot = require('./bot');
+function startApp() {
+    console.log('App is starting...');
+
+    // Some existing code
+}
+
+startApp();
+startBot().catch(err => console.error("Unexpected error: " + err));
+const someLibrary = require('some-library');
+
+function startApp() {
+    console.log('App is starting...');
+    // Existing code here
+}
+
+startApp();
+const someLibrary = require('some-library');
+const startBot = require('./bot');  // <- Add this line at the top
+
+function startApp() {
+    console.log('App is starting...');
+    
+    startBot().catch(err => console.error("Unexpected error: " + err));  // <- Add this line inside the function
+    
+    // Existing code here
+}
+
+startApp();
