@@ -197,6 +197,4 @@ connectToWA()
 
 
 
-case 'kaviya':
-    sendRecordedVoice(from, 'https://drive.google.com/uc?export=download&id=1X_1t6RkqUTPtob_g_dZsZucoXid7y5W0');
-    break;
+
