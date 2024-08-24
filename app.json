@@ -23,10 +23,15 @@
       "value": "https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg"
     },
 
-        "": {
-      "description": "Add Alive Imge Url",
+      "MONGODB": {
+      "description": "Add Your Mongodb Url",
+      "required": true,
+    },
+
+        "AUTO_READ_STATUS": {
+      "description": "true or false",
       "required": false,
-      "value": "https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg"
+      "value": "true"
     },
     
     "MENU_IMG": {
