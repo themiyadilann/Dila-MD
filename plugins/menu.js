@@ -6,7 +6,7 @@ const {runtime} = require('../lib/functions')
 cmd({
     pattern: "menu",
     alias: ["panel","penal","list","allmenu"],
-    desc: "Check uptime, RAM usage, and more",
+    desc: "Check menu all",
     category: "main",
     filename: __filename
 }, async (conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
@@ -27,13 +27,12 @@ _ex-.aiHey_
 𝚈𝚘𝚞𝚝𝚞𝚋𝚎-https://youtube.com/@dila_lk
 𝚆𝚎𝚋𝚂𝚒𝚝𝚎-dilalk.vercel.app
 
-*🕒 Uptime:* ${runtime(process.uptime())}
-*💾 RAM Usage:* 
+*Uptime:* ${runtime(process.uptime())}
+*RAM Usage:* 
 - *Used*: ${usedRAM} MB
 - *Free*: ${freeRAM} MB
 - *Total*: ${totalRAM} MB
-*🏠 HostName:* ${os.hostname()}
-*👤 Owner:* ᴍʀ ᴅɪʟᴀ
+*Owner:* ᴍʀ ᴅɪʟᴀ
 
 *OWNERMENU⤵*
 _.getsession_
@@ -104,7 +103,10 @@ _.googledrive_
 *AIMENU⤵*
 _.ai_
 _.gemini_
-_.gpt3_`
+_.gpt3_
+
+dilalk.vercel.app
+ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`
 
         // URL of the image you want to include
         const imageUrl = 'https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg'; // Replace with your actual image URL
