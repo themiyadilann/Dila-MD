@@ -3,6 +3,7 @@ const {cmd , commands} = require('../command')
 
 cmd({
     pattern: "menu",
+    alias: ["panel","penal"],
     desc: "menu online offline chek",
     category: "main",
     filename: __filename
