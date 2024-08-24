@@ -16,7 +16,7 @@ cmd({
         const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // Used RAM in MB
         const freeRAM = (totalRAM - parseFloat(usedRAM)).toFixed(2); // Free RAM in MB
 
-        let status = `*🕒 Uptime:*  ${runtime(process.uptime())}
+        let status = `*🕒 Uptime:* ${runtime(process.uptime())}
 *💾 RAM Usage:* 
 - *Used*: ${usedRAM} MB
 - *Free*: ${freeRAM} MB
@@ -24,7 +24,16 @@ cmd({
 *🏠 HostName:* ${os.hostname()}
 *👤 Owner:* ᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ
 `
-        return reply(`${status}`)
+
+        // URL of the image you want to include
+        const imageUrl = 'https://telegra.ph/file/50e9d2e8b43e5efe0b05f.jpg'; // Replace with your actual image URL
+
+        // Send the image with the status as the caption
+        await conn.sendMessage(from, {
+            image: { url: imageUrl },
+            caption: status
+        }, { quoted: mek || null });
+        
     } catch (e) {
         console.log(e)
         reply(`Error: ${e}`)
