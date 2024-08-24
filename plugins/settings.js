@@ -1,21 +1,20 @@
 const config = require('../config');
-const { cmd } = require('../command');
+const { cmd, commands } = require('../command');
 
 cmd({
     pattern: "settings",
-    desc: "Check bot settings ",
+    desc: "Check bot online or not.",
     category: "main",
     filename: __filename
-}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+}, 
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        // Send image with caption
-        await conn.sendMessage(from, { image: { url: config.ALIVE_IMG }, caption: config.ALIVE_MSG }, { quoted: mek });
-
-        // Send audio as a voice message
-        await conn.sendMessage(from, { audio: { url: 'https://drive.google.com/uc?export=download&id=1UtbyKhdUoVWTJlwSGRUFo6tl3dAq42mF' }, mimetype: 'audio/mp4' }, { quoted: mek });
-        
+        return await conn.sendMessage(from, {
+            image: { url: 'https://telegra.ph/file/959a00b8f92106a8856de.jpg' },
+            caption: 'hi, setting now karanna'
+        }, { quoted: mek });
     } catch (e) {
         console.log(e);
-        reply(`Error: ${e.message}`);
+        reply(`${e}`);
     }
 });
