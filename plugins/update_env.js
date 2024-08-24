@@ -13,7 +13,7 @@ async (conn, mek, m, { from, q, reply, isOwner }) => {
     if (!isOwner) return;
 
     if (!q) {
-        return reply("🙇‍♂️ *Please provide the environment variable and its new value.* \n\nExample: `.update ALIVE_MSG: hello i am prabath kumara`");
+        return reply("🙇‍♂️ *Please provide the environment variable and its new value.* \n\nExample: `.update ALIVE_MSG: hello i am Dilan`");
     }
 
     // Find the position of the first colon or comma
@@ -48,6 +48,14 @@ async (conn, mek, m, { from, q, reply, isOwner }) => {
     }
 
     if (key === 'ALIVE_IMG' && !newValue.startsWith('https://')) {
+        return reply("😓 *Invalid URL format. PLEASE GIVE ME IMAGE URL*");
+    }
+
+    if (key === 'DILO_IMG' && !newValue.startsWith('https://')) {
+        return reply("😓 *Invalid URL format. PLEASE GIVE ME IMAGE URL*");
+    }
+
+    if (key === 'MENU_IMG' && !newValue.startsWith('https://')) {
         return reply("😓 *Invalid URL format. PLEASE GIVE ME IMAGE URL*");
     }
 
