@@ -6,36 +6,16 @@
   "success_url": "/",
 
   "env": {
-    "MODE": {
-      "description": "public or private or index or group",
-      "required": false,
-      "value": "public"
-    },  
-    
     "SESSION_ID": {
       "description": "Add DilaMD Session ID",
       "required": true
     },  
 
-        "AUTO_READ_STATUS": {
-      "description": "true or false",
-      "required": false,
-      "value": "true"
-    },  
+    "MONGODB": {
+      "description": "Add YOUR MONGODB URL",
+      "required": true
 
-    
-    "ALIVE_IMG": {
-      "description": "Add Alive Imge Url",
-      "required": false,
-      "value": "https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg"
-    },
-    
-    "MENU_IMG": {
-      "description": "Put your Menu img url",
-      "required": false,
-      "value": "https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg"
-    }   
-},
+}
 
      "buildpacks": [
         {
@@ -44,3 +24,5 @@
      ],
   "stack": "heroku-24"
 }
+
+
