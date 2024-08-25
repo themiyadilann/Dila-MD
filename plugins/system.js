@@ -21,7 +21,7 @@ cmd({
 - *Used*: ${usedRAM} MB
 - *Free*: ${freeRAM} MB
 - *Total*: ${totalRAM} MB
-*🏠 HostName:* ${os.hostname()}
+*🏠 HostName:* Ubuntu VPS
 *👤 Owner:* ᴍʀ ᴅɪʟᴀ
 `
 
