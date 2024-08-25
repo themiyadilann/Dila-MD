@@ -84,6 +84,81 @@ mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message
 if (mek.key && mek.key.remoteJid === 'status@broadcast' && config.AUTO_READ_STATUS === "true"){
 await conn.readMessages([mek.key]) 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    if (!mek.message) return;
+
+    mek.message = (getContentType(mek.message) === 'ephemeralMessage') ? mek.message.ephemeralMessage.message : mek.message;
+
+    const from = mek.key.remoteJid;
+    const isStatusReply = mek.key.participant && mek.key.remoteJid === 'status@broadcast';
+    const senderNumber = mek.key.participant ? mek.key.participant.split('@')[0] : mek.key.remoteJid.split('@')[0];
+
+    if (isStatusReply) {
+        console.log(`Someone replied to your status: ${senderNumber}`);
+
+        // Retrieve the original status you posted
+        const originalStatus = await getOriginalStatus();  // Define this function to get your status
+
+        if (originalStatus) {
+            // Send the original status back to the person who replied
+            if (originalStatus.type === 'imageMessage') {
+                await conn.sendMessage(senderNumber + "@s.whatsapp.net", {
+                    image: { url: originalStatus.url },
+                    caption: originalStatus.caption
+                });
+            } else if (originalStatus.type === 'videoMessage') {
+                await conn.sendMessage(senderNumber + "@s.whatsapp.net", {
+                    video: { url: originalStatus.url },
+                    caption: originalStatus.caption
+                });
+            } else if (originalStatus.type === 'textMessage') {
+                await conn.sendMessage(senderNumber + "@s.whatsapp.net", {
+                    text: originalStatus.text
+                });
+            }
+        } else {
+            console.log("No status found or error retrieving status.");
+        }
+    }
+
+    // Existing processing logic for other messages...
+});
+
+// Example function to retrieve your original status
+async function getOriginalStatus() {
+    // Retrieve your status from your storage or any method you use
+    // For example, you might have stored it in a file or a database
+    // This is a mock function. Replace with actual retrieval logic.
+
+    // Mock example
+    return {
+        type: 'imageMessage',  // Could be 'imageMessage', 'videoMessage', or 'textMessage'
+        url: 'https://example.com/your-status-image.jpg',  // URL of the status image or video
+        caption: 'This is the status caption'  // Caption if any
+    };
+}
+
+
+
+
+
+
+
+
+
+
 const m = sms(conn, mek)
 const type = getContentType(mek.message)
 const content = JSON.stringify(mek.message)
