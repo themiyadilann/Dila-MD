@@ -12,7 +12,7 @@ async(conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sende
         return await conn.sendMessage(
             from,
             {
-                video: {url: config.DILO_VIDEO}, // Set the video URL
+                image: {url: config.DILO_IMG}, // Set the video URL
                 caption: config.DILO_MSG         // Add the caption
             },
             {quoted: mek}
