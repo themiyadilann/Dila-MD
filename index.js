@@ -21,6 +21,11 @@ const prefix = '.'
 
 const ownerNumber = ['94777839446']
 
+
+const { default: googlePlayScraper } = await import('google-play-scraper');
+
+
+
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
 if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
@@ -31,8 +36,6 @@ if(err) throw err
 fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
 console.log("Session downloaded ✅")
 })})}
-
-const { default: googlePlayScraper } = await import('google-play-scraper');
 
 
 
