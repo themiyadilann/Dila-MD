@@ -1,6 +1,7 @@
 const { cmd } = require('../command');
 const fg = require('api-dylux');
 const yts = require('yt-search');
+const downloader = require('apk-downloader');
 
 // Helper function to format views
 const formatViews = (views) => {
@@ -14,6 +15,49 @@ const formatViews = (views) => {
         return views.toString();
     }
 };
+
+//========= APK Download Command =========//
+
+cmd({
+    pattern: "apk",
+    desc: "Download APK",
+    category: "download",
+    filename: __filename
+},
+async (conn, mek, m, { from, q, reply }) => {
+    try {
+        if (!q) return reply("Please type the APK package name... 🤖");
+
+        let packageName = q.trim();
+
+        reply(`🔄 Downloading APK for package: ${packageName}...`);
+
+        let apkInfo = await downloader.downloadAPK(packageName);
+
+        let apkUrl = apkInfo.downloadURL;
+
+        if (!apkUrl) {
+            return reply(`❌ Unable to download APK for package: ${packageName}.`);
+        }
+
+        let desc = `
+*𝗗𝗶𝗹𝗮𝗠𝗗 𝗔𝗣𝗞 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 📱*
+
+📦 *𝗣𝗮𝗰𝗸𝗮𝗴𝗲*: _${packageName}_
+🔗 *𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸*: ${apkUrl}
+
+dilalk.vercel.app
+ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+
+        // Send APK download link
+        await conn.sendMessage(from, { text: desc }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: apkUrl }, mimetype: "application/vnd.android.package-archive", fileName: `${packageName}.apk`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
+
+    } catch (e) {
+        console.log(e);
+        reply(`Error: ${e.message}`);
+    }
+});
 
 //========= Audio Download Command =========//
 
@@ -43,7 +87,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
@@ -52,7 +96,7 @@ dilalk.vercel.app
         let down = await fg.yta(url);
         let downloadUrl = down.dl_url;
         await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
@@ -88,7 +132,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
@@ -97,12 +141,10 @@ dilalk.vercel.app
         let down = await fg.ytv(url);
         let downloadUrl = down.dl_url;
         await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: `${data.title}.mp4`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: `${data.title}.mp4`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
-
-
