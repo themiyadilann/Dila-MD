@@ -22,8 +22,6 @@ const prefix = '.'
 const ownerNumber = ['94777839446']
 
 
-const { default: googlePlayScraper } = await import('google-play-scraper');
-
 
 
 //===================SESSION-AUTH============================
