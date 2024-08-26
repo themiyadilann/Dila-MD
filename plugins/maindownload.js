@@ -34,11 +34,12 @@ async (conn, mek, m, { from, q, reply }) => {
 
         let apkInfo = await downloader.downloadAPK(packageName);
 
-        let apkUrl = apkInfo.downloadURL;
-
-        if (!apkUrl) {
+        // Check if apkInfo and downloadURL are defined
+        if (!apkInfo || !apkInfo.downloadURL) {
             return reply(`❌ Unable to download APK for package: ${packageName}.`);
         }
+
+        let apkUrl = apkInfo.downloadURL;
 
         let desc = `
 *𝗗𝗶𝗹𝗮𝗠𝗗 𝗔𝗣𝗞 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 📱*
@@ -47,11 +48,11 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸*: ${apkUrl}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ`;
 
         // Send APK download link
         await conn.sendMessage(from, { text: desc }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: apkUrl }, mimetype: "application/vnd.android.package-archive", fileName: `${packageName}.apk`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: apkUrl }, mimetype: "application/vnd.android.package-archive", fileName: `${packageName}.apk`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
