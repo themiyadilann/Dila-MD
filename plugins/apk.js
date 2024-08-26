@@ -1,10 +1,10 @@
 const { cmd } = require('../command');
 
-// Replace this:
-// const downloader = require('apkmirror-downloader');
-
-// With this:
-const downloader = await import('apkmirror-downloader');
+// Use an async function to handle dynamic import
+async function loadDownloader() {
+    const { default: downloader } = await import('apkmirror-downloader');
+    return downloader;
+}
 
 //========= APK Download Command =========//
 cmd({
@@ -20,6 +20,9 @@ async (conn, mek, m, { from, q, reply }) => {
         let packageName = q.trim();
 
         reply(`🔄 Downloading APK for package: ${packageName}...`);
+
+        // Load the downloader dynamically
+        let downloader = await loadDownloader();
 
         let apkInfo = await downloader.downloadAPK(packageName);
 
@@ -37,11 +40,11 @@ async (conn, mek, m, { from, q, reply }) => {
         🔗 *𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸*: ${apkUrl}
 
         dilalk.vercel.app
-        ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ`;
+        ᵐᵃᵈᵉ ʙʏ ᴍʳᴅɪʟᴀ ᵒᶠᶜ`;
 
         // Send APK download link
         await conn.sendMessage(from, { text: desc }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: apkUrl }, mimetype: "application/vnd.android.package-archive", fileName: `${packageName}.apk`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: apkUrl }, mimetype: "application/vnd.android.package-archive", fileName: `${packageName}.apk`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
