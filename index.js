@@ -32,6 +32,13 @@ fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
 console.log("Session downloaded ✅")
 })})}
 
+const { default: googlePlayScraper } = await import('google-play-scraper');
+
+
+
+
+
+
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
