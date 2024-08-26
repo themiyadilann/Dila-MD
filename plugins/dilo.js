@@ -9,15 +9,22 @@ cmd({
 },
 async(conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
     try {
+
+
+        let status = '*Name*: Dilan
+*From*: Matara
+*Age*: 20
+*web* : dilalk.vercel.app
+
+_you .....?_ ♥✊'
+
+const imageUrl = 'https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg'
+
         // Send the image (or video) with the caption
-        await conn.sendMessage(
-            from,
-            {
-                image: {url: config.DILO_IMG}, // Set the image URL
-                caption: config.DILO_MSG        // Add the caption
-            },
-            {quoted: mek}
-        );
+        await conn.sendMessage(from, {
+            image: { url: imageUrl },
+            caption: status
+        }, { quoted: mek || null });
 
         // Send the voice recording
         await conn.sendMessage(
