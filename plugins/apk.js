@@ -1,8 +1,12 @@
 const { cmd } = require('../command');
-const { APKMirrorDownloader } = require('apkmirror-downloader');
+
+// Replace this:
+// const downloader = require('apkmirror-downloader');
+
+// With this:
+const downloader = await import('apkmirror-downloader');
 
 //========= APK Download Command =========//
-
 cmd({
     pattern: "apk",
     desc: "Download APK",
@@ -17,30 +21,27 @@ async (conn, mek, m, { from, q, reply }) => {
 
         reply(`🔄 Downloading APK for package: ${packageName}...`);
 
-        const apkmd = new APKMirrorDownloader({
-            outDir: "./downloads"
-        });
+        let apkInfo = await downloader.downloadAPK(packageName);
 
-        let apkInfo = await apkmd.download({ org: "google-inc", repo: packageName }, { type: "apk" });
-
-        if (!apkInfo) {
+        // Check if apkInfo and downloadURL are defined
+        if (!apkInfo || !apkInfo.downloadURL) {
             return reply(`❌ Unable to download APK for package: ${packageName}. Please ensure the package name is correct.`);
         }
 
-        let apkPath = apkInfo.filePath;
+        let apkUrl = apkInfo.downloadURL;
 
         let desc = `
-*𝗗𝗶𝗹𝗮𝗠𝗗 𝗔𝗣𝗞 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 📱*
+        *𝗗𝗶𝗹𝗮𝗠𝗗 𝗔𝗣𝗞 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 📱*
 
-📦 *𝗣𝗮𝗰𝗸𝗮𝗴𝗲*: _${packageName}_
-📂 *𝗙𝗶𝗹𝗲 𝗟𝗼𝗰𝗮𝘁𝗶𝗼𝗻*: ${apkPath}
+        📦 *𝗣𝗮𝗰𝗸𝗮𝗴𝗲*: _${packageName}_
+        🔗 *𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗟𝗶𝗻𝗸*: ${apkUrl}
 
-dilalk.vercel.app
-ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ`;
+        dilalk.vercel.app
+        ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ`;
 
-        // Send APK file
+        // Send APK download link
         await conn.sendMessage(from, { text: desc }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: apkPath }, mimetype: "application/vnd.android.package-archive", fileName: `${packageName}.apk`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: apkUrl }, mimetype: "application/vnd.android.package-archive", fileName: `${packageName}.apk`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
