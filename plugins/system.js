@@ -2,7 +2,7 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const os = require("os");
 const { runtime } = require('../lib/functions');
-const speedTest = require('speedtest-net'); // You may need to install this package
+const speedTest = require('speedtest-net'); 
 
 cmd({
     pattern: "system",
@@ -12,9 +12,9 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
     try {
-        // Calculate ping
+        // Calculate ping with delay
         const start = Date.now();
-        await reply('Calculating ping...');
+        await new Promise(resolve => setTimeout(resolve, 100)); // 100ms delay
         const end = Date.now();
         const ping = end - start;
 
