@@ -60,7 +60,7 @@ async (conn, mek, m, { from, q, reply }) => {
         await conn.sendMessage(from, { image: { url: thumbnailUrl }, caption: message }, { quoted: mek });
 
         // Send the voice note after sending the message
-        await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mpeg' }, { quoted: mek });
+        await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mp4', ptt: true }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
