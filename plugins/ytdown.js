@@ -55,9 +55,13 @@ dilalk.vercel.app
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
         // Download and send audio
-        let downloadUrl = await ytdl.getInfo(url).then(info => info.formats.find(f => f.itag === 140).url);
+        const info = await ytdl.getInfo(url);
+        const audioFormat = info.formats.find(f => f.itag === 140); // Adjust itag if necessary
+        if (!audioFormat) throw new Error('Audio format not available');
+        
+        let downloadUrl = audioFormat.url;
         await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᵃ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
@@ -102,7 +106,11 @@ dilalk.vercel.app
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
         // Download and send video
-        let downloadUrl = await ytdl.getInfo(url).then(info => info.formats.find(f => f.itag === 22).url);
+        const info = await ytdl.getInfo(url);
+        const videoFormat = info.formats.find(f => f.itag === 22); // Adjust itag if necessary
+        if (!videoFormat) throw new Error('Video format not available');
+        
+        let downloadUrl = videoFormat.url;
         await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
         await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: `${data.title}.mp4`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᵃ*" }, { quoted: mek });
 
