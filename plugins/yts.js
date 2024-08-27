@@ -44,6 +44,9 @@ async (conn, mek, m, { from, q, reply }) => {
             message += `🔗 *𝗟𝗶𝗻𝗸*: ${data.url}\n\n`;
         });
 
+        message += `*𝗛𝗼𝘄 𝗧𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗩𝗶𝗱𝗲𝗼 𝗢𝗿 𝗔𝘂𝗱𝗶𝗼 ✅*\n\n`;
+        message += `Example -  .video (enter video title)\n`;
+        message += `Example - .song (enter video title)\n\n`;
         message += "dilalk.vercel.app\nᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ";
 
         // Send the video details
