@@ -1,6 +1,6 @@
 const { cmd } = require('../command');
 const yts = require('yt-search');
-// Import MessageMedia to send images
+const { fetchJson } = require('../lib/functions');
 
 // Helper function to format views
 const formatViews = (views) => {
@@ -51,11 +51,10 @@ async (conn, mek, m, { from, q, reply }) => {
         message += `*𝗛𝗼𝘄 𝗧𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗩𝗶𝗱𝗲𝗼 𝗢𝗿 𝗔𝘂𝗱𝗶𝗼 ✅*\n\n`;
         message += `Example -  .video (enter video title)\n`;
         message += `Example - .song (enter video title)\n\n`;
-        message += "dilalk.vercel.app\nᵐᵃᵈᵉ ʙʏ ᴍʳᴅɪʟᴀ ᵒᶠᶜ";
+        message += "dilalk.vercel.app\nᵐᵃᵈᵆ ʙʸ ᴍʳᴅɪʟᴀ ᵒᶠᶜ";
 
         // Send the video details with the image
-        const media = MessageMedia.fromFilePath(thumbnailUrl);
-        await conn.sendMessage(from, media, { caption: message, quoted: mek });
+        await conn.sendMessage(from, { image: { url: thumbnailUrl }, caption: message }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
