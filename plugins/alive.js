@@ -39,7 +39,7 @@ _example - .ai Hey_
             caption: status
         }, { quoted: mek || null });
         
-   await conn.sendMessage(from, { audio: { url: 'https://drive.google.com/uc?export=download&id=1XZ6bF15m4V3VPXMdt0d2gBTJwLh8Xby7' }, mimetype: 'audio/ogg; codecs=opus', ptt: true }, { quoted: mek });
+   await conn.sendMessage(from, { audio: { url: 'https://drive.google.com/uc?export=download&id=1_B41I68rU2RRkcHtrUcpGQhK8Gjct_Es' }, mimetype: 'audio/mp4', ptt: true }, { quoted: mek });
 
  } catch (e) {
         console.log(e)
