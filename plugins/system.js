@@ -6,7 +6,7 @@ const speedTest = require('speedtest-net'); // You may need to install this pack
 
 cmd({
     pattern: "system",
-    alias: ["status", "botinfo", "runtime", "uptime"],
+    alias: ["status", "botinfo", "runtime", "uptime","ping"],
     desc: "Check uptime, RAM usage, network speed, and more",
     category: "main",
     filename: __filename
