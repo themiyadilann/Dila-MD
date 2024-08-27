@@ -29,7 +29,7 @@ cmd({
 async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) {
-            await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mpeg' }, { quoted: mek });
+            await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mp4', ptt: true }, { quoted: mek });
             return;
         }
 
@@ -77,7 +77,7 @@ cmd({
 async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) {
-            await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mpeg' }, { quoted: mek });
+            await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mp4', ptt: true }, { quoted: mek });
             return;
         }
 
