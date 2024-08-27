@@ -15,6 +15,9 @@ const formatViews = (views) => {
     }
 };
 
+// Voice recording URL
+const voiceUrl = 'https://drive.google.com/uc?export=download&id=1_Pd4yQVfofr14xPMIOvebVGwoXh1rohu';
+
 //========= Audio Download Command =========//
 
 cmd({
@@ -25,7 +28,10 @@ cmd({
 },
 async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply("Please type a Name or Url... 🤖");
+        if (!q) {
+            await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mpeg' }, { quoted: mek });
+            return;
+        }
 
         const search = await yts(q);
         const data = search.videos[0];
@@ -43,7 +49,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ`;
 
         // Send video details with thumbnail
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
@@ -52,7 +58,7 @@ dilalk.vercel.app
         let down = await fg.yta(url);
         let downloadUrl = down.dl_url;
         await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
@@ -70,7 +76,10 @@ cmd({
 },
 async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply("Please type a Name or Url... 🤖");
+        if (!q) {
+            await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mpeg' }, { quoted: mek });
+            return;
+        }
 
         const search = await yts(q);
         const data = search.videos[0];
@@ -88,7 +97,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ`;
 
         // Send video details with thumbnail
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
@@ -97,7 +106,7 @@ dilalk.vercel.app
         let down = await fg.ytv(url);
         let downloadUrl = down.dl_url;
         await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: `${data.title}.mp4`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: `${data.title}.mp4`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
