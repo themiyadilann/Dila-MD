@@ -27,6 +27,8 @@
     "api-dylux":"1.8.5",
     "ytdl-core":"4.11.5",
     "speedtest-net":"2.2.0",
-    "wikipedia":"2.1.2"
+    "wikipedia":"2.1.2",
+    "youtube-dl-exec":"3.0.7",
+    "youtube-api-v3-search":"1.2.1"
   }
 }
