@@ -1,7 +1,7 @@
 {
   "name": "Dila-MD",
   "version": "1.0.0",
-  "description": "hey this is dilamd whatsapp bot",
+  "description": "Hey, this is Dila-MD WhatsApp bot",
   "main": "index.js",
   "scripts": {
     "start": "pm2 start index.js --deep-monitoring --attach --name dilamd",
@@ -23,10 +23,19 @@
     "megajs": "^1.1.0",
     "vm": "^0.1.0",
     "qrcode-terminal": "^0.12.0",
-    "yt-search":"2.12.1",
-    "api-dylux":"1.8.5",
-    "ytdl-core":"4.11.5",
-    "speedtest-net":"2.2.0",
-    "wikipedia":"2.1.2"
+    "yt-search": "2.12.1",
+    "api-dylux": "1.8.5",
+    "ytdl-core": "4.11.5",
+    "speedtest-net": "2.2.0",
+    "wikipedia": "2.1.2",
+    "tiktok-scraper": "^3.0.0",
+    "instagram-scraper": "^1.8.0",
+    "facebook-video-downloader": "^1.0.1",
+    "twitter-video-downloader": "^1.0.0",
+    "soundcloud-downloader": "^1.0.1",
+    "pinterest-api": "^1.0.0",
+    "wallhaven-api": "^1.0.0",
+    "stickerapi": "^1.0.0",
+    "npm-registry": "^1.0.0"
   }
 }
