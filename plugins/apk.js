@@ -1,57 +1,47 @@
 const { cmd } = require('../command');
-const axios = require('axios');
-const fs = require('fs');
-const path = require('path');
+const gplay = require('google-play-scraper');
+const fetch = require('node-fetch'); // For HTTP requests, if needed
 
-// Helper function to download APK
-async function downloadApk(url, outputPath) {
-    try {
-        const response = await axios.get(url, { responseType: 'stream' });
-        const writer = fs.createWriteStream(outputPath);
-        response.data.pipe(writer);
-        return new Promise((resolve, reject) => {
-            writer.on('finish', resolve);
-            writer.on('error', reject);
-        });
-    } catch (error) {
-        console.error(`Error downloading APK: ${error.message}`);
-        throw error;
-    }
-}
+// Voice recording URL
+const voiceUrl = 'https://drive.google.com/uc?export=download&id=1_Pd4yQVfofr14xPMIOvebVGwoXh1rohu';
 
-// Define the APK download command
+//========= App Download Command =========//
+
 cmd({
     pattern: "apk",
-    desc: "Download APK with details and thumbnail",
+    desc: "Download apps from Google Play Store",
     category: "download",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) {
-            return reply('Please provide an APK URL.');
+            await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mp4', ptt: true }, { quoted: mek });
+            return;
         }
 
-        // Replace with your logic to get APK details
-        // For demonstration, we'll use a dummy URL and thumbnail
-        const apkUrl = q; // The URL from the command argument
-        const outputPath = path.resolve(__dirname, 'downloaded.apk');
-        const thumbnailUrl = 'https://example.com/thumbnail.jpg'; // Replace with actual thumbnail URL
+        // Fetch app details from Google Play Store
+        const app = await gplay.app(q);
+        const { title, icon, url, description, developer } = app;
 
-        // Download APK
-        await downloadApk(apkUrl, outputPath);
+        let desc = `
+> *𝗗𝗶𝗹𝗮𝗠𝗗 𝗚𝗼𝗼𝗴𝗹𝗲 𝗣𝗹𝗮𝘆 𝗔𝗽𝗽 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱𝗲𝗿 📱*
 
-        // Send APK details and thumbnail
-        const description = `
-*DilaMD APK Download Complete*
+🎵 *𝗧𝗶𝘁𝗹𝗲*: _${title}_
+👤 *𝗗𝗲𝘃𝗲𝗹𝗼𝗽𝗲𝗿*: _${developer}_
+📝 *𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: _${description}_
+🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
-🔗 *APK Link*: ${apkUrl}
-📂 *File Name*: downloaded.apk
-📥 *Status*: Successfully downloaded
+dilalk.vercel.app
+ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ`;
 
-`;
+        // Send app details with thumbnail
+        await conn.sendMessage(from, { image: { url: icon }, caption: desc }, { quoted: mek });
 
-        await conn.sendMessage(from, { image: { url: thumbnailUrl }, caption: description }, { quoted: mek });
-        await conn.sendMessage(from, { document: { url: outputPath }, mimetype: "application/vnd.android.package-archive", fileName: 'downloaded.apk', caption: 'Here is your APK file.' }, { quoted: mek });
+        // Provide URL for APK download if available
+        // Note: Direct APK download functionality is not provided by `google-play-scraper`
+        // You will need to use an external service or manually provide APK download links.
+        reply("Direct APK download is not supported. Please use an external service or manual download link.");
 
     } catch (e) {
         console.log(e);
