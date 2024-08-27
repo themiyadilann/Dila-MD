@@ -231,8 +231,7 @@ cmd({
 
 🔍 *Query*: _${q}_
 
-🔗 *Image URLs*: 
-${data.map((image, index).join('\n')}
+🔗 *Image URLs*:
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
