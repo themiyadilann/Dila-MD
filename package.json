@@ -27,6 +27,7 @@
     "api-dylux":"1.8.5",
     "ytdl-core":"4.11.5",
     "speedtest-net":"2.2.0",
-    "wikipedia":"2.1.2"
+    "wikipedia":"2.1.2",
+    "google-images":"2.1.0"
   }
 }
