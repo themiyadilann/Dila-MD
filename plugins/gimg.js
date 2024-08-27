@@ -2,7 +2,7 @@ const config = require('../config');
 const { cmd, commands } = require('../command');
 const GoogleImages = require('google-images');
 const axios = require('axios');
-const fs = require('fs');
+const fs-extra = require('fs-extra');
 const path = require('path');
 
 // Initialize Google Images client
@@ -33,7 +33,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
 
         // Download the image
         const imagePath = path.join(__dirname, 'temp_image.jpg');
-        const writer = fs.createWriteStream(imagePath);
+        const writer = fs-extra.createWriteStream(imagePath);
         const response = await axios({
             url: imageUrl,
             method: 'GET',
@@ -46,7 +46,7 @@ async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sen
             await conn.sendMessage(from, { image: { url: imagePath }, caption: `Image search result for: ${q}` }, { quoted: mek });
 
             // Clean up the image file
-            fs.unlinkSync(imagePath);
+            fs-extra.unlinkSync(imagePath);
         });
 
         writer.on('error', (err) => {
