@@ -1,6 +1,6 @@
 const { cmd } = require('../command');
 const yts = require('yt-search');
-const { MessageMedia } = require('whatsapp-web.js'); // Import MessageMedia to send images
+// Import MessageMedia to send images
 
 // Helper function to format views
 const formatViews = (views) => {
