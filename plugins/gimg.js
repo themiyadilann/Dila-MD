@@ -10,7 +10,7 @@ const client = new GoogleImages(config.googleCSEId, config.googleApiKey);
 
 // Define the Google Images search command
 cmd({
-    pattern: "image",
+    pattern: "img",
     desc: "Search Google for images",
     category: "main",
     filename: __filename
