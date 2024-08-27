@@ -1,206 +1,200 @@
 const config = require('../config');
 const { cmd, commands } = require('../command');
 const fg = require('api-dylux');
+const yts = require('yt-search');
 
-// Define the YouTube MP3 download command
+// YouTube Downloader Command
 cmd({
-    pattern: "song",
-    desc: "Download YouTube video as MP3",
-    category: "downloader",
+    pattern: "yt",
+    desc: "Download YouTube video or audio",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a YouTube video URL.');
-        const data = await fg.ytmp3(q);
-        const replyText = `
-*🎵 YouTube MP3 Download 🎵*
 
-🔍 *Title*: _${data.title}_
+        // Download audio (mp3)
+        const audioData = await fg.ytmp3(q);
+        const videoData = await fg.ytmp4(q); // Download video (mp4)
 
-🕒 *Duration*: _${data.duration}_
+        // Send video and audio options
+        let replyText = `
+*📹 YouTube Downloader 📹*
 
-🔗 *Download URL*: ${data.dl_link}
+🔗 *URL*: ${q}
 
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { image: { url: data.thumb }, caption: replyText }, { quoted: mek });
+*Choose download format:*
+1. Audio (mp3)
+2. Video (mp4)
+        `;
+
+        await conn.sendMessage(from, { text: replyText }, { quoted: mek });
+
+        // Handle user response
+        conn.on('message', async (downloadMek) => {
+            const chosenOption = downloadMek.body.trim();
+
+            if (chosenOption === '1') {
+                // Send audio
+                await conn.sendMessage(from, { audio: { url: audioData.url }, mimetype: 'audio/mp4' }, { quoted: downloadMek });
+                reply('Audio download complete.');
+            } else if (chosenOption === '2') {
+                // Send video
+                await conn.sendMessage(from, { video: { url: videoData.url }, mimetype: 'video/mp4' }, { quoted: downloadMek });
+                reply('Video download complete.');
+            } else {
+                reply('Invalid choice. Please choose 1 or 2.');
+            }
+        });
+
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the YouTube MP4 download command
-cmd({
-    pattern: "video",
-    desc: "Download YouTube video as MP4",
-    category: "downloader",
-    filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
-    try {
-        if (!q) return reply('Please provide a YouTube video URL.');
-        const data = await fg.ytmp4(q);
-        const replyText = `
-*📹 YouTube MP4 Download 📹*
-
-🔍 *Title*: _${data.title}_
-
-🕒 *Duration*: _${data.duration}_
-
-🔗 *Download URL*: ${data.dl_link}
-
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { image: { url: data.thumb }, caption: replyText }, { quoted: mek });
-    } catch (e) {
-        console.log(e);
-        reply(`Error: ${e.message}`);
-    }
-});
-
-// Define the TikTok download command
+// TikTok Downloader Command
 cmd({
     pattern: "tiktok",
     desc: "Download TikTok video",
-    category: "downloader",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a TikTok video URL.');
+
+        // Download TikTok video
         const data = await fg.tiktok(q);
-        const replyText = `
-*🎶 TikTok Video Download 🎶*
 
-🔍 *Title*: _${data.title}_
+        // Send video
+        await conn.sendMessage(from, { video: { url: data.url }, mimetype: 'video/mp4' }, { quoted: mek });
+        reply('TikTok download complete.');
 
-🔗 *Download URL*: ${data.url}
-
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { video: { url: data.url }, caption: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the Instagram Story download command
+// Instagram Story Downloader Command
 cmd({
-    pattern: "instagram",
-    desc: "Download Instagram stories",
-    category: "downloader",
+    pattern: "igstory",
+    desc: "Download Instagram story",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide an Instagram username.');
+
+        // Download Instagram story
         const data = await fg.igstory(q);
-        const replyText = `
-*📸 Instagram Story Download 📸*
 
-🔍 *Username*: _${q}_
+        // Send story images or videos
+        for (const story of data) {
+            if (story.type === 'image') {
+                await conn.sendMessage(from, { image: { url: story.url } }, { quoted: mek });
+            } else if (story.type === 'video') {
+                await conn.sendMessage(from, { video: { url: story.url } }, { quoted: mek });
+            }
+        }
+        reply('Instagram story download complete.');
 
-🔗 *Story URLs*: 
-${data.map((story, index) => `${index + 1}. ${story.url}`).join('\n')}
-
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { text: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the Facebook video download command
+// Facebook Video Downloader Command
 cmd({
-    pattern: "fb",
+    pattern: "facebook",
     desc: "Download Facebook video",
-    category: "downloader",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a Facebook video URL.');
+
+        // Download Facebook video
         const data = await fg.fbdl(q);
-        const replyText = `
-*📘 Facebook Video Download 📘*
 
-🔍 *Title*: _${data.title}_
+        // Send video
+        await conn.sendMessage(from, { video: { url: data.url }, mimetype: 'video/mp4' }, { quoted: mek });
+        reply('Facebook video download complete.');
 
-🔗 *Download URL*: ${data.dl_link}
-
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { video: { url: data.dl_link }, caption: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the Twitter video download command
+// Twitter Video Downloader Command
 cmd({
     pattern: "twitter",
     desc: "Download Twitter video",
-    category: "downloader",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a Twitter video URL.');
+
+        // Download Twitter video
         const data = await fg.twitter(q);
-        const replyText = `
-*🐦 Twitter Video Download 🐦*
 
-🔍 *Title*: _${data.title}_
+        // Send video
+        await conn.sendMessage(from, { video: { url: data.url }, mimetype: 'video/mp4' }, { quoted: mek });
+        reply('Twitter video download complete.');
 
-🔗 *Download URL*: ${data.dl_link}
-
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { video: { url: data.dl_link }, caption: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the SoundCloud download command
+// SoundCloud Downloader Command
 cmd({
     pattern: "soundcloud",
     desc: "Download SoundCloud track",
-    category: "downloader",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a SoundCloud track URL.');
+
+        // Download SoundCloud track
         const data = await fg.soundcloudDl(q);
-        const replyText = `
-*🎧 SoundCloud Track Download 🎧*
 
-🔍 *Title*: _${data.title}_
+        // Send audio
+        await conn.sendMessage(from, { audio: { url: data.url }, mimetype: 'audio/mp4' }, { quoted: mek });
+        reply('SoundCloud download complete.');
 
-🔗 *Download URL*: ${data.url}
-
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { audio: { url: data.url }, caption: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the Pinterest search command
+// Pinterest Search Command
 cmd({
     pattern: "pinterest",
     desc: "Search Pinterest for images",
-    category: "search",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a search query.');
+
         const data = await fg.pinterest(q);
-        const replyText = `
-*🔍 Pinterest Image Search 🔍*
+
+        let replyText = `
+*🔍 Pinterest Search Results 🔍*
 
 🔍 *Query*: _${q}_
 
@@ -209,6 +203,7 @@ ${data.map((image, index) => `${index + 1}. ${image.url}`).join('\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+
         await conn.sendMessage(from, { text: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
@@ -216,25 +211,30 @@ dilalk.vercel.app
     }
 });
 
-// Define the HD Wallpaper search command
+// Wallpaper Search Command
 cmd({
     pattern: "wallpaper",
     desc: "Search for HD wallpapers",
-    category: "search",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a search query.');
+
         const data = await fg.wallpaper(q);
-        const replyText = `
-*🖼️ HD Wallpaper Search 🖼️*
+
+        let replyText = `
+*🔍 Wallpaper Search Results 🔍*
 
 🔍 *Query*: _${q}_
 
-🔗 *Image URLs*:
+🔗 *Image URLs*: 
+${data.map((image, index) => `${index + 1}. ${image.url}`).join('\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+
         await conn.sendMessage(from, { text: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
@@ -242,18 +242,21 @@ dilalk.vercel.app
     }
 });
 
-// Define the Sticker Search command
+// Sticker Search Command
 cmd({
     pattern: "stickersearch",
     desc: "Search for stickers",
-    category: "search",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a search query.');
+
         const data = await fg.StickerSearch(q);
-        const replyText = `
-*🔍 Sticker Search 🔍*
+
+        let replyText = `
+*🔍 Sticker Search Results 🔍*
 
 🔍 *Query*: _${q}_
 
@@ -262,6 +265,7 @@ ${data.map((sticker, index) => `${index + 1}. ${sticker.url}`).join('\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+
         await conn.sendMessage(from, { text: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
@@ -269,26 +273,31 @@ dilalk.vercel.app
     }
 });
 
-// Define the NPM Package Search command
+// npm Search Command
 cmd({
     pattern: "npmsearch",
-    desc: "Search for NPM packages",
-    category: "search",
+    desc: "Search for npm packages",
+    category: "tools",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply('Please provide a package name to search.');
+        if (!q) return reply('Please provide a search query.');
+
+        // Search for npm packages
         const data = await fg.npmSearch(q);
-        const replyText = `
-*📦 NPM Package Search 📦*
+
+        let replyText = `
+*🔍 npm Search Results 🔍*
 
 🔍 *Query*: _${q}_
 
-🔗 *Package URLs*: 
-${data.map((pkg, index) => `${index + 1}. ${pkg.name} - ${pkg.link}`).join('\n')}
+🔗 *Package Information*:
+${data.map((pkg, index) => `${index + 1}. *Name*: ${pkg.name}\n   *Version*: ${pkg.version}\n   *Description*: ${pkg.description}\n   *Link*: ${pkg.link}`).join('\n\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+
         await conn.sendMessage(from, { text: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
@@ -296,110 +305,98 @@ dilalk.vercel.app
     }
 });
 
-// Define the YouTube MP3 (Alternative) download command
+// YouTube Search Command using yt-search
 cmd({
-    pattern: "yta",
-    desc: "Download YouTube video as MP3 (Alternative)",
-    category: "downloader",
+    pattern: "yts",
+    desc: "Search for YouTube videos",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply('Please provide a YouTube video URL.');
-        const data = await fg.yta(q);
-        const replyText = `
-*🎵 YouTube MP3 Download (Alternative) 🎵*
+        if (!q) return reply('Please provide a search query.');
 
-🔍 *Title*: _${data.title}_
+        const r = await yts(q);
 
-🕒 *Duration*: _${data.duration}_
+        let replyText = `
+*🔍 YouTube Search Results 🔍*
 
-🔗 *Download URL*: ${data.dl_link}
+🔍 *Query*: _${q}_
+
+${r.videos.slice(0, 5).map((video, index) => `${index + 1}. *Title*: ${video.title}\n   *Duration*: ${video.timestamp}\n   *Views*: ${video.views}\n   *Link*: ${video.url}`).join('\n\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { image: { url: data.thumb }, caption: replyText }, { quoted: mek });
+
+        await conn.sendMessage(from, { text: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the YouTube MP4 (Alternative) download command
+// YouTube Video Information Command
 cmd({
-    pattern: "ytv",
-    desc: "Download YouTube video as MP4 (Alternative)",
-    category: "downloader",
+    pattern: "ytinfo",
+    desc: "Get information about a YouTube video",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply('Please provide a YouTube video URL.');
-        const data = await fg.ytv(q);
-        const replyText = `
-*📹 YouTube MP4 Download (Alternative) 📹*
+        if (!q) return reply('Please provide a YouTube video URL or ID.');
 
-🔍 *Title*: _${data.title}_
+        const video = await yts({ videoId: q });
 
-🕒 *Duration*: _${data.duration}_
+        let replyText = `
+*🎬 YouTube Video Information 🎬*
 
-🔗 *Download URL*: ${data.dl_link}
+🔗 *URL*: ${video.url}
+🎥 *Title*: ${video.title}
+⌛ *Duration*: ${video.duration.timestamp}
+👁️ *Views*: ${video.views}
+📅 *Uploaded on*: ${video.uploadDate}
+📢 *Channel*: ${video.author.name}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { image: { url: data.thumb }, caption: replyText }, { quoted: mek });
+
+        await conn.sendMessage(from, { image: { url: video.thumbnail }, caption: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the TikTok (Alternative) download command
+// YouTube Playlist Information Command
 cmd({
-    pattern: "tiktok2",
-    desc: "Download TikTok video (Alternative)",
-    category: "downloader",
+    pattern: "ytplaylist",
+    desc: "Get information about a YouTube playlist",
+    category: "media",
     filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
+},
+async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply('Please provide a TikTok video URL.');
-        const data = await fg.tiktok2(q);
-        const replyText = `
-*🎶 TikTok Video Download (Alternative) 🎶*
+        if (!q) return reply('Please provide a YouTube playlist ID.');
 
-🔍 *Title*: _${data.title}_
+        const list = await yts({ listId: q });
 
-🔗 *Download URL*: ${data.url}
+        let replyText = `
+*🎶 YouTube Playlist Information 🎶*
+
+🔗 *Playlist URL*: ${list.url}
+🎵 *Playlist Title*: ${list.title}
+🗒️ *Videos in Playlist*:
+${list.videos.map((video, index) => `${index + 1}. *Title*: ${video.title} (${video.duration})`).join('\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { video: { url: data.url }, caption: replyText }, { quoted: mek });
+
+        await conn.sendMessage(from, { text: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
     }
 });
 
-// Define the SoundCloud download (Alternative) command
-cmd({
-    pattern: "soundcloud2",
-    desc: "Download SoundCloud track (Alternative)",
-    category: "downloader",
-    filename: __filename
-}, async (conn, mek, m, { from, q, reply }) => {
-    try {
-        if (!q) return reply('Please provide a SoundCloud track URL.');
-        const data = await fg.soundcloudDl2(q);
-        const replyText = `
-*🎧 SoundCloud Track Download (Alternative) 🎧*
-
-🔍 *Title*: _${data.title}_
-
-🔗 *Download URL*: ${data.url}
-
-dilalk.vercel.app
-ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
-        await conn.sendMessage(from, { audio: { url: data.url }, caption: replyText }, { quoted: mek });
-    } catch (e) {
-        console.log(e);
-        reply(`Error: ${e.message}`);
-    }
-});
+module.exports = commands;
