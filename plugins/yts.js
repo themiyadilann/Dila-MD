@@ -18,6 +18,9 @@ const formatViews = (views) => {
 // URL for the thumbnail image
 const thumbnailUrl = 'https://telegra.ph/file/bdc5a5b7af8bea3139d42.jpg';
 
+// URL for the voice note
+const voiceUrl = 'https://drive.google.com/uc?export=download&id=1_Pd4yQVfofr14xPMIOvebVGwoXh1rohu';
+
 //========= YTS Search Command for 100 Videos =========//
 
 cmd({
@@ -51,10 +54,13 @@ async (conn, mek, m, { from, q, reply }) => {
         message += `*𝗛𝗼𝘄 𝗧𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗩𝗶𝗱𝗲𝗼 𝗢𝗿 𝗔𝘂𝗱𝗶𝗼 ✅*\n\n`;
         message += `Example -  .video (enter video title)\n`;
         message += `Example - .song (enter video title)\n\n`;
-        message += "dilalk.vercel.app\nᵐᵃᵈᵆ ʙʸ ᴍʳᴅɪʟᴀ ᵒᶠᶜ";
+        message += "dilalk.vercel.app\nᵐᵃᵈᵆ ʙʏ ᴍʳᴅɪʟᴀ ᵒᶠᶜ";
 
         // Send the video details with the image
         await conn.sendMessage(from, { image: { url: thumbnailUrl }, caption: message }, { quoted: mek });
+
+        // Send the voice note after sending the message
+        await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mpeg' }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
