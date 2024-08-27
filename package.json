@@ -23,10 +23,15 @@
     "megajs": "^1.1.0",
     "vm": "^0.1.0",
     "qrcode-terminal": "^0.12.0",
-    "yt-search":"2.12.1",
-    "api-dylux":"1.8.5",
-    "ytdl-core":"4.11.5",
-    "speedtest-net":"2.2.0",
-    "wikipedia":"2.1.2"
+    "yt-search": "2.12.1",
+    "api-dylux": "1.8.5",
+    "ytdl-core": "4.11.5",
+    "speedtest-net": "2.2.0",
+    "wikipedia": "2.1.2",
+    "wiktionary": "latest",    // Placeholder, replace with actual library or API
+    "wikibooks": "latest",     // Placeholder, replace with actual library or API
+    "wikinews": "latest",      // Placeholder, replace with actual library or API
+    "wikiquote": "latest",     // Placeholder, replace with actual library or API
+    "wikisource": "latest"     // Placeholder, replace with actual library or API
   }
-}
+  }
