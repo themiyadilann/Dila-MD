@@ -1,5 +1,6 @@
 const { cmd } = require('../command');
 const yts = require('yt-search');
+const { MessageMedia } = require('whatsapp-web.js'); // Import MessageMedia to send images
 
 // Helper function to format views
 const formatViews = (views) => {
@@ -13,6 +14,9 @@ const formatViews = (views) => {
         return views.toString();
     }
 };
+
+// URL for the thumbnail image
+const thumbnailUrl = 'https://telegra.ph/file/bdc5a5b7af8bea3139d42.jpg';
 
 //========= YTS Search Command for 100 Videos =========//
 
@@ -47,10 +51,11 @@ async (conn, mek, m, { from, q, reply }) => {
         message += `*𝗛𝗼𝘄 𝗧𝗼 𝗗𝗼𝘄𝗻𝗹𝗼𝗮𝗱 𝗩𝗶𝗱𝗲𝗼 𝗢𝗿 𝗔𝘂𝗱𝗶𝗼 ✅*\n\n`;
         message += `Example -  .video (enter video title)\n`;
         message += `Example - .song (enter video title)\n\n`;
-        message += "dilalk.vercel.app\nᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ";
+        message += "dilalk.vercel.app\nᵐᵃᵈᵉ ʙʏ ᴍʳᴅɪʟᴀ ᵒᶠᶜ";
 
-        // Send the video details
-        await conn.sendMessage(from, { text: message }, { quoted: mek });
+        // Send the video details with the image
+        const media = MessageMedia.fromFilePath(thumbnailUrl);
+        await conn.sendMessage(from, media, { caption: message, quoted: mek });
 
     } catch (e) {
         console.log(e);
