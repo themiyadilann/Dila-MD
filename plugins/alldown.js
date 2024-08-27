@@ -1,7 +1,14 @@
-const config = require('../config');
 const { cmd, commands } = require('../command');
-const fg = require('api-dylux');
-const yts = require('yt-search');
+const ytdl = require('ytdl-core');
+const TikTokScraper = require('tiktok-scraper');
+const InstagramScraper = require('instagram-scraper');
+const FacebookVideoDownloader = require('facebook-video-downloader');
+const TwitterVideoDownloader = require('twitter-video-downloader');
+const SoundCloudDownloader = require('soundcloud-downloader');
+const PinterestAPI = require('pinterest-api');
+const WallhavenAPI = require('wallhaven-api');
+const StickerAPI = require('stickerapi');
+const npmRegistry = require('npm-registry');
 
 // YouTube Downloader Command
 cmd({
@@ -15,8 +22,8 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply('Please provide a YouTube video URL.');
 
         // Download audio (mp3)
-        const audioData = await fg.ytmp3(q);
-        const videoData = await fg.ytmp4(q); // Download video (mp4)
+        const audioData = await ytdl.getInfo(q);
+        const videoData = await ytdl(q, { quality: 'highestvideo' }); // Download video (mp4)
 
         // Send video and audio options
         let replyText = `
@@ -37,7 +44,7 @@ async (conn, mek, m, { from, q, reply }) => {
 
             if (chosenOption === '1') {
                 // Send audio
-                await conn.sendMessage(from, { audio: { url: audioData.url }, mimetype: 'audio/mp4' }, { quoted: downloadMek });
+                await conn.sendMessage(from, { audio: { url: audioData.formats.find(format => format.mimeType.includes('audio')).url }, mimetype: 'audio/mp4' }, { quoted: downloadMek });
                 reply('Audio download complete.');
             } else if (chosenOption === '2') {
                 // Send video
@@ -66,10 +73,10 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply('Please provide a TikTok video URL.');
 
         // Download TikTok video
-        const data = await fg.tiktok(q);
+        const data = await TikTokScraper.getVideoMeta(q);
 
         // Send video
-        await conn.sendMessage(from, { video: { url: data.url }, mimetype: 'video/mp4' }, { quoted: mek });
+        await conn.sendMessage(from, { video: { url: data.videoUrl }, mimetype: 'video/mp4' }, { quoted: mek });
         reply('TikTok download complete.');
 
     } catch (e) {
@@ -90,10 +97,10 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply('Please provide an Instagram username.');
 
         // Download Instagram story
-        const data = await fg.igstory(q);
+        const data = await InstagramScraper.getUserStories(q);
 
         // Send story images or videos
-        for (const story of data) {
+        for (const story of data.stories) {
             if (story.type === 'image') {
                 await conn.sendMessage(from, { image: { url: story.url } }, { quoted: mek });
             } else if (story.type === 'video') {
@@ -120,7 +127,7 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply('Please provide a Facebook video URL.');
 
         // Download Facebook video
-        const data = await fg.fbdl(q);
+        const data = await FacebookVideoDownloader(q);
 
         // Send video
         await conn.sendMessage(from, { video: { url: data.url }, mimetype: 'video/mp4' }, { quoted: mek });
@@ -144,7 +151,7 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply('Please provide a Twitter video URL.');
 
         // Download Twitter video
-        const data = await fg.twitter(q);
+        const data = await TwitterVideoDownloader(q);
 
         // Send video
         await conn.sendMessage(from, { video: { url: data.url }, mimetype: 'video/mp4' }, { quoted: mek });
@@ -168,7 +175,7 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply('Please provide a SoundCloud track URL.');
 
         // Download SoundCloud track
-        const data = await fg.soundcloudDl(q);
+        const data = await SoundCloudDownloader(q);
 
         // Send audio
         await conn.sendMessage(from, { audio: { url: data.url }, mimetype: 'audio/mp4' }, { quoted: mek });
@@ -191,7 +198,7 @@ async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a search query.');
 
-        const data = await fg.pinterest(q);
+        const data = await PinterestAPI.search(q);
 
         let replyText = `
 *🔍 Pinterest Search Results 🔍*
@@ -222,7 +229,7 @@ async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a search query.');
 
-        const data = await fg.wallpaper(q);
+        const data = await WallhavenAPI.search(q);
 
         let replyText = `
 *🔍 Wallpaper Search Results 🔍*
@@ -253,7 +260,7 @@ async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a search query.');
 
-        const data = await fg.StickerSearch(q);
+        const data = await StickerAPI.search(q);
 
         let replyText = `
 *🔍 Sticker Search Results 🔍*
@@ -285,7 +292,7 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply('Please provide a search query.');
 
         // Search for npm packages
-        const data = await fg.npmSearch(q);
+        const data = await npmRegistry.search(q);
 
         let replyText = `
 *🔍 npm Search Results 🔍*
@@ -293,7 +300,7 @@ async (conn, mek, m, { from, q, reply }) => {
 🔍 *Query*: _${q}_
 
 🔗 *Package Information*:
-${data.map((pkg, index) => `${index + 1}. *Name*: ${pkg.name}\n   *Version*: ${pkg.version}\n   *Description*: ${pkg.description}\n   *Link*: ${pkg.link}`).join('\n\n')}
+${data.objects.map((pkg, index) => `${index + 1}. *Name*: ${pkg.package.name}\n   *Version*: ${pkg.package.version}\n   *Description*: ${pkg.package.description}\n   *Link*: https://www.npmjs.com/package/${pkg.package.name}`).join('\n\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
@@ -305,7 +312,7 @@ dilalk.vercel.app
     }
 });
 
-// YouTube Search Command using yt-search
+// YouTube Search Command using ytdl-core
 cmd({
     pattern: "yts",
     desc: "Search for YouTube videos",
@@ -316,14 +323,14 @@ async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a search query.');
 
-        const r = await yts(q);
+        const data = await ytdl.search(q);
 
         let replyText = `
 *🔍 YouTube Search Results 🔍*
 
 🔍 *Query*: _${q}_
 
-${r.videos.slice(0, 5).map((video, index) => `${index + 1}. *Title*: ${video.title}\n   *Duration*: ${video.timestamp}\n   *Views*: ${video.views}\n   *Link*: ${video.url}`).join('\n\n')}
+${data.items.slice(0, 5).map((video, index) => `${index + 1}. *Title*: ${video.snippet.title}\n   *Duration*: ${video.contentDetails.duration}\n   *Views*: ${video.statistics.viewCount}\n   *Link*: https://www.youtube.com/watch?v=${video.id.videoId}`).join('\n\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
@@ -346,22 +353,22 @@ async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a YouTube video URL or ID.');
 
-        const video = await yts({ videoId: q });
+        const video = await ytdl.getInfo(q);
 
         let replyText = `
 *🎬 YouTube Video Information 🎬*
 
-🔗 *URL*: ${video.url}
+🔗 *URL*: ${video.video_url}
 🎥 *Title*: ${video.title}
-⌛ *Duration*: ${video.duration.timestamp}
-👁️ *Views*: ${video.views}
-📅 *Uploaded on*: ${video.uploadDate}
+⌛ *Duration*: ${video.length_seconds} seconds
+👁️ *Views*: ${video.view_count}
+📅 *Uploaded on*: ${video.upload_date}
 📢 *Channel*: ${video.author.name}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
-        await conn.sendMessage(from, { image: { url: video.thumbnail }, caption: replyText }, { quoted: mek });
+        await conn.sendMessage(from, { image: { url: video.thumbnail_url }, caption: replyText }, { quoted: mek });
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
@@ -379,15 +386,15 @@ async (conn, mek, m, { from, q, reply }) => {
     try {
         if (!q) return reply('Please provide a YouTube playlist ID.');
 
-        const list = await yts({ listId: q });
+        const playlist = await ytdl.getPlaylist(q);
 
         let replyText = `
 *🎶 YouTube Playlist Information 🎶*
 
-🔗 *Playlist URL*: ${list.url}
-🎵 *Playlist Title*: ${list.title}
+🔗 *Playlist URL*: ${playlist.url}
+🎵 *Playlist Title*: ${playlist.title}
 🗒️ *Videos in Playlist*:
-${list.videos.map((video, index) => `${index + 1}. *Title*: ${video.title} (${video.duration})`).join('\n')}
+${playlist.videos.map((video, index) => `${index + 1}. *Title*: ${video.title} (${video.duration})`).join('\n')}
 
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
