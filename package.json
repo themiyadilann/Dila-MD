@@ -28,6 +28,7 @@
     "ytdl-core":"4.11.5",
     "speedtest-net":"2.2.0",
     "wikipedia":"2.1.2",
-    "axios":"1.7.5"
+    "google-play-scraper":"10.0.0",
+    "node-fetch":"3.3.2"
   }
 }
