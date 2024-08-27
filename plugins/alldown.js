@@ -4,7 +4,7 @@ const fg = require('api-dylux');
 
 // Define the YouTube MP3 download command
 cmd({
-    pattern: "ytmp3",
+    pattern: "song",
     desc: "Download YouTube video as MP3",
     category: "downloader",
     filename: __filename
@@ -32,7 +32,7 @@ dilalk.vercel.app
 
 // Define the YouTube MP4 download command
 cmd({
-    pattern: "ytmp4",
+    pattern: "video",
     desc: "Download YouTube video as MP4",
     category: "downloader",
     filename: __filename
@@ -86,7 +86,7 @@ dilalk.vercel.app
 
 // Define the Instagram Story download command
 cmd({
-    pattern: "igstory",
+    pattern: "instagram",
     desc: "Download Instagram stories",
     category: "downloader",
     filename: __filename
