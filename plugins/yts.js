@@ -34,6 +34,7 @@ async (conn, mek, m, { from, q, reply }) => {
         let message = `*𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗦𝗲𝗮𝗿𝗰𝗵 𝗥𝗲𝘀𝘂𝗹𝘁 🎥*\n\n`;
 
         videos.forEach((data, index) => {
+            message += `*No - ${index + 1} ⤵*\n`;
             message += `🎶 *𝗧𝗶𝘁𝗹𝗲*: _${data.title}_\n`;
             message += `👤 *𝗖𝗵𝗮𝗻𝗻𝗲𝗹*: _${data.author.name}_\n`;
             message += `📝 *𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: _${data.description}_\n`;
@@ -41,14 +42,9 @@ async (conn, mek, m, { from, q, reply }) => {
             message += `⏱️ *𝗔𝗴𝗼*: _${data.ago}_\n`;
             message += `👁️‍🗨️ *𝗩𝗶𝗲𝘄𝘀*: _${formatViews(data.views)}_\n`;
             message += `🔗 *𝗟𝗶𝗻𝗸*: ${data.url}\n\n`;
-
-            // Add a separator for every video
-            if (index < videos.length - 1) {
-                message += `\n`;
-            }
         });
 
-        message += "\ndilalk.vercel.app\nᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ";
+        message += "dilalk.vercel.app\nᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ";
 
         // Send the video details
         await conn.sendMessage(from, { text: message }, { quoted: mek });
