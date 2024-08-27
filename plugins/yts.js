@@ -14,11 +14,11 @@ const formatViews = (views) => {
     }
 };
 
-//========= YTS Search Command =========//
+//========= YTS Search Command for 100 Videos =========//
 
 cmd({
     pattern: "yts",
-    desc: "Search and display YouTube video details",
+    desc: "Search and display up to 100 YouTube video details",
     category: "search",
     filename: __filename
 },
@@ -27,25 +27,31 @@ async (conn, mek, m, { from, q, reply }) => {
         if (!q) return reply("Please type a Name or Url... 🤖");
 
         const search = await yts(q);
-        const data = search.videos[0];
-        if (!data) return reply("No video found for your query.");
+        const videos = search.videos.slice(0, 100); // Get only the first 100 videos
 
-        let desc = `
-*𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗦𝗲𝗮𝗿𝗰𝗵 𝗥𝗲𝘀𝘂𝗹𝘁 🎥*
+        if (videos.length === 0) return reply("No videos found for your query.");
 
-🎶 *𝗧𝗶𝘁𝗹𝗲*: _${data.title}_
-👤 *𝗖𝗵𝗮𝗻𝗻𝗲𝗹*: _${data.author.name}_
-📝 *𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: _${data.description}_
-⏳ *𝗧𝗶𝗺𝗲*: _${data.timestamp}_
-⏱️ *𝗔𝗴𝗼*: _${data.ago}_
-👁️‍🗨️ *𝗩𝗶𝗲𝘄𝘀*: _${formatViews(data.views)}_
-🔗 *𝗟𝗶𝗻𝗸*: ${data.url}
+        let message = `*𝗗𝗶𝗹𝗮𝗠𝗗 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗦𝗲𝗮𝗿𝗰𝗵 𝗥𝗲𝘀𝘂𝗹𝘁 🎥*\n\n`;
 
-dilalk.vercel.app
-ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ`;
+        videos.forEach((data, index) => {
+            message += `🎶 *𝗧𝗶𝘁𝗹𝗲*: _${data.title}_\n`;
+            message += `👤 *𝗖𝗵𝗮𝗻𝗻𝗲𝗹*: _${data.author.name}_\n`;
+            message += `📝 *𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗶𝗼𝗻*: _${data.description}_\n`;
+            message += `⏳ *𝗧𝗶𝗺𝗲*: _${data.timestamp}_\n`;
+            message += `⏱️ *𝗔𝗴𝗼*: _${data.ago}_\n`;
+            message += `👁️‍🗨️ *𝗩𝗶𝗲𝘄𝘀*: _${formatViews(data.views)}_\n`;
+            message += `🔗 *𝗟𝗶𝗻𝗸*: ${data.url}\n\n`;
 
-        // Send video details with thumbnail
-        await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
+            // Add a separator for every video
+            if (index < videos.length - 1) {
+                message += `\n`;
+            }
+        });
+
+        message += "\ndilalk.vercel.app\nᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᵒᶠᶜ";
+
+        // Send the video details
+        await conn.sendMessage(from, { text: message }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
