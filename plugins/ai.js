@@ -1,1 +1,36 @@
-const _0x3a1c=["../config","../command","../lib/functions","require","fetchJson","cmd","ai","AI chat","main","__filename","from","quoted","body","isCmd","command","args","q","isGroup","sender","senderNumber","botNumber2","botNumber","pushname","isMe","isOwner","groupMetadata","groupName","participants","groupAdmins","isBotAdmins","isAdmins","reply","https://chatgptforprabath-md.vercel.app/api/gptv1?q=","data","\n*𝗗𝗶𝗹𝗮𝗠𝗗 𝗔𝗜 𝗖𝗵𝗮𝘁 🧠*\n\n🔍 *𝗤𝘂𝗲𝗿𝘆*: _","_\n\n💬 *𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲*: _","_\n\ndilalk.vercel.app\nᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ","https://telegra.ph/file/5aee066590cf0c6eabf9d.jpg","sendMessage","image","url","caption","catch","Error: "];const config=require(_0x3a1c[0]),{cmd,commands}=require(_0x3a1c[1]),{fetchJson}=require(_0x3a1c[2]);cmd({pattern:_0x3a1c[5],desc:_0x3a1c[6],category:_0x3a1c[7],filename:_0x3a1c[8]},async(conn,mek,m,{from,quoted,body,isCmd,command,args,q,isGroup,sender,senderNumber,botNumber2,botNumber,pushname,isMe,isOwner,groupMetadata,groupName,participants,groupAdmins,isBotAdmins,isAdmins,reply})=>{try{let _0x1a6d=await fetchJson(_0x3a1c[30]+q),_0x3135=_0x1a6d[_0x3a1c[31]],_0x5482=_0x3a1c[32]+q+_0x3a1c[33]+_0x3135+_0x3a1c[34];await conn.sendMessage(from,{image:{url:_0x3a1c[35]},caption:_0x5482},{quoted:mek});}catch(_0x10e3){console.log(_0x10e3),reply(_0x3a1c[36]+_0x10e3.message);}});
+const config = require('../config');
+const { cmd, commands } = require('../command');
+const { fetchJson } = require('../lib/functions');
+
+// Define the ai command
+cmd({
+    pattern: "ai",
+    desc: "AI chat",
+    category: "main",
+    filename: __filename
+},
+async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        // Fetch response from AI API
+        let data = await fetchJson(`https://chatgptforprabath-md.vercel.app/api/gptv1?q=${q}`);
+        let response = data.data;
+
+        // Format the reply
+        let replyText = `
+*𝗗𝗶𝗹𝗮𝗠𝗗 𝗔𝗜 𝗖𝗵𝗮𝘁 🧠*
+
+🔍 *𝗤𝘂𝗲𝗿𝘆*: _${q}_
+
+💬 *𝗥𝗲𝘀𝗽𝗼𝗻𝘀𝗲*: _${response}_
+
+dilalk.vercel.app
+ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
+
+        // Send the reply with the thumbnail image
+        await conn.sendMessage(from, { image: { url: 'https://telegra.ph/file/5aee066590cf0c6eabf9d.jpg' }, caption: replyText }, { quoted: mek });
+
+    } catch (e) {
+        console.log(e);
+        reply(`Error: ${e.message}`);
+    }
+});
