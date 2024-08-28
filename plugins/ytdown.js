@@ -162,7 +162,7 @@ dilalk.vercel.app
 //========= YouTube Video Info Command =========//
 
 cmd({
-    pattern: "ytinfo",
+    pattern: "ytinfo1",
     desc: "Get YouTube video info",
     category: "info",
     filename: __filename
@@ -205,7 +205,7 @@ dilalk.vercel.app
 //========= YouTube Search Command =========//
 
 cmd({
-    pattern: "ytsearch",
+    pattern: "ytsearch1",
     desc: "Search YouTube videos",
     category: "search",
     filename: __filename
@@ -484,40 +484,6 @@ async (conn, mek, m, { from, q, reply }) => {
     }
 });
 
-//========= YouTube Trending Videos Fetcher Command =========//
-
-cmd({
-    pattern: "yttrending",
-    desc: "Fetch trending YouTube videos",
-    category: "info",
-    filename: __filename
-},
-async (conn, mek, m, { from, q, reply }) => {
-    try {
-        if (!q) {
-            reply("Please provide a region code (e.g., US, IN, etc.).");
-            return;
-        }
-
-        const trending = await fg.yttrending(q); // Assuming fg.yttrending fetches trending videos by region
-
-        let desc = `*𝗗𝗶𝗹𝗮𝗠𝗗 𝗧𝗿𝗲𝗻𝗱𝗶𝗻𝗴 𝗬𝗼𝘂𝘁𝘂𝗯𝗲 𝗩𝗶𝗱𝗲𝗼𝘀 📈*\n\n`;
-
-        trending.forEach((video, index) => {
-            desc += `${index + 1}. 🎶 *Title*: _${video.title}_\n`;
-            desc += `   👤 *Channel*: _${video.author.name}_\n`;
-            desc += `   👁️‍🗨️ *Views*: _${formatViews(video.views)}_\n`;
-            desc += `   🔗 *Link*: ${video.url}\n\n`;
-        });
-
-        await conn.sendMessage(from, { text: desc }, { quoted: mek });
-
-    } catch (e) {
-        console.log(e);
-        reply(`Error: ${e.message}`);
-    }
-});
-
 
 //========= YouTube Related Videos Fetcher Command =========//
 
@@ -557,7 +523,7 @@ async (conn, mek, m, { from, q, reply }) => {
 //========= YouTube Channel Info Fetcher Command =========//
 
 cmd({
-    pattern: "ytchannel",
+    pattern: "ytchannel2",
     desc: "Fetch information about a YouTube channel",
     category: "info",
     filename: __filename
@@ -596,7 +562,7 @@ async (conn, mek, m, { from, q, reply }) => {
 //========= YouTube Video Info Fetcher Command =========//
 
 cmd({
-    pattern: "ytinfo",
+    pattern: "ytinfo2",
     desc: "Fetch detailed information about a YouTube video",
     category: "info",
     filename: __filename
@@ -632,7 +598,7 @@ async (conn, mek, m, { from, q, reply }) => {
 //========= YouTube Video Search Command =========//
 
 cmd({
-    pattern: "ytsearch",
+    pattern: "ytsearch2",
     desc: "Search YouTube videos by query",
     category: "search",
     filename: __filename
