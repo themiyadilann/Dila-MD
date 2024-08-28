@@ -9,8 +9,7 @@
     <p align="center">
 <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-MrDila-red.svg?style=for-the-badge&logo=github"></a>
      
-<a href = ""><img alt="MR NIMA ODC" src="https://img.shields.io/youtube/channel/subscribers/UCjDKRYcwd5ZIpGICcVVL96Q" target="_blank" /></a>
-</p>
+
 <p align="center">
 <a href="https://github.com/themiyadilann?tab=followers"><img title="Followers" src="https://img.shields.io/github/followers/themiyadilann?color=green&style=flat-square"></a>
 <a href="https://github.com/themiyadilann/Dila-Md/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?color=white&style=flat-square"></a>
