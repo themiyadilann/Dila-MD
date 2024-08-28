@@ -79,7 +79,7 @@ console.log('Bot connected to whatsapp ✅')
 
 let up = `*Hey I'M Online Now*\n_Type To Menu Get Bot All Commands_ ⤵\n\nᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ`;
 
-conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg` }, caption: up })
+conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/cef9e06c2bb1935ac36ee.jpg` }, caption: up })
 
 }
 })
