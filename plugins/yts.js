@@ -25,6 +25,7 @@ const voiceUrl = 'https://drive.google.com/uc?export=download&id=1_Pd4yQVfofr14x
 
 cmd({
     pattern: "yts",
+    alias: ["yta","ytv","yt"],
     desc: "Search and display up to 100 YouTube video details",
     category: "search",
     filename: __filename
