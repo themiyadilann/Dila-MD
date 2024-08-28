@@ -1,1 +1,57 @@
-const _0x3c72=[ 'require','../config','../command','os','../lib/functions','speedtest-net','module','exports','cmd','pattern','system','alias','status','botinfo','runtime','uptime','ping','desc','Check uptime, RAM usage, network speed, and more','category','main','filename','__filename','async','conn','mek','m','from','quoted','body','isCmd','command','args','q','isGroup','sender','senderNumber','botNumber2','botNumber','pushname','isMe','isOwner','groupMetadata','groupName','participants','groupAdmins','isBotAdmins','isAdmins','reply','try','Date','now','Promise','resolve','setTimeout','100','end','RAM usage','Math','round','process','memoryUsage','heapUsed','speed','acceptLicense','true','speed.download.bandwidth','125000','toFixed','speed.upload.bandwidth','status','runtime','process.uptime','Ping','Used','MB','Free','Total','Network Speed','Download','Upload','HostName','Ubuntu VPS','Owner','ᴍʀ ᴅɪʟᴀ','console.log','Error','sendMessage','from','image','url','caption','catch'];(function(_0x1a17e2,_0x5d5d7a){const _0x1a47=_0x3c72[_0x1a17e2];while(--_0x5d5d7a){_0x1a17e2.push(_0x1a17e2.shift());}})(_0x3c72,0x1c0);const config=require(_0x3c72[0x0]),{cmd,commands}=require(_0x3c72[0x1]),os=require(_0x3c72[0x2]),{runtime}=require(_0x3c72[0x3]),speedTest=require(_0x3c72[0x4]);cmd({pattern:_0x3c72[0x5],alias:[_0x3c72[0x6],_0x3c72[0x7],_0x3c72[0x8],_0x3c72[0x9],_0x3c72[0xa]],desc:_0x3c72[0xb],category:_0x3c72[0xc],filename:_0x3c72[0xd]},async(conn,mek,m,{from,quoted,body,isCmd,command,args,q,isGroup,sender,senderNumber,botNumber2,botNumber,pushname,isMe,isOwner,groupMetadata,groupName,participants,groupAdmins,isBotAdmins,isAdmins,reply})=>{try{const _0x4cfb35=Date[_0x3c72[0xe]]();await new Promise(_0x8f7b73=>setTimeout(_0x8f7b73,0x64));const _0x1d04=Date[_0x3c72[0xe]](),_0x3c18=_0x1d04-_0x4cfb35,_0x6e64=Math[_0x3c72[0xf]](os[_0x3c72[0x10]]()/0x400/0x400),_0x4c84=(process[_0x3c72[0x11]]()[_0x3c72[0x12]]/0x400/0x400).toFixed(0x2),_0x3d83=(_0x6e64-parseFloat(_0x4c84)).toFixed(0x2),_0x5d18=await speedTest({'acceptLicense':true}),_0x3455=(_0x5d18.download.bandwidth/0x1e848).toFixed(0x2),_0x2fb0=(_0x5d18.upload.bandwidth/0x1e848).toFixed(0x2),_0x5bc5e=`*🕒 Uptime:* ${runtime(process.uptime())}\n*📶 Ping:* ${_0x3c18} ms\n*💾 RAM Usage:*\n- *Used*: ${_0x4c84} MB\n- *Free*: ${_0x3d83} MB\n- *Total*: ${_0x6e64} MB\n*🌐 Network Speed:*\n- *Download*: ${_0x3455} MB/sec\n- *Upload*: ${_0x2fb0} MB/sec\n*🏠 HostName:* Ubuntu VPS\n*👤 Owner:* ᴍʀ ᴅɪʟᴀ\n`,_0x23b5='https://telegra.ph/file/50e9d2e8b43e5efe0b05f.jpg';await conn.sendMessage(from,{image:{url:_0x23b5},caption:_0x5bc5e},{quoted:mek||null});}catch(_0x173c){console.log(_0x173c),reply('Error: '+_0x173c);}});
+const config = require('../config');
+const { cmd, commands } = require('../command');
+const os = require("os");
+const { runtime } = require('../lib/functions');
+const speedTest = require('speedtest-net'); 
+
+cmd({
+    pattern: "system",
+    alias: ["status", "botinfo", "runtime", "uptime","ping"],
+    desc: "Check uptime, RAM usage, network speed, and more",
+    category: "main",
+    filename: __filename
+}, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => {
+    try {
+        // Calculate ping with delay
+        const start = Date.now();
+        await new Promise(resolve => setTimeout(resolve, 100)); // 100ms delay
+        const end = Date.now();
+        const ping = end - start;
+
+        // RAM usage
+        const totalRAM = Math.round(require('os').totalmem() / 1024 / 1024); // Total RAM in MB
+        const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // Used RAM in MB
+        const freeRAM = (totalRAM - parseFloat(usedRAM)).toFixed(2); // Free RAM in MB
+
+        // Network speed test
+        const speed = await speedTest({ acceptLicense: true });
+        const downloadSpeed = (speed.download.bandwidth / 125000).toFixed(2); // Convert from bits/sec to MB/sec
+        const uploadSpeed = (speed.upload.bandwidth / 125000).toFixed(2); // Convert from bits/sec to MB/sec
+
+        let status = `*🕒 Uptime:* ${runtime(process.uptime())}
+*📶 Ping:* ${ping} ms
+*💾 RAM Usage:* 
+- *Used*: ${usedRAM} MB
+- *Free*: ${freeRAM} MB
+- *Total*: ${totalRAM} MB
+*🌐 Network Speed:*
+- *Download*: ${downloadSpeed} MB/sec
+- *Upload*: ${uploadSpeed} MB/sec
+*🏠 HostName:* Ubuntu VPS
+*👤 Owner:* ᴍʀ ᴅɪʟᴀ
+`;
+
+        // URL of the image you want to include
+        const imageUrl = 'https://telegra.ph/file/50e9d2e8b43e5efe0b05f.jpg'; // Replace with your actual image URL
+
+        // Send the image with the status as the caption
+        await conn.sendMessage(from, {
+            image: { url: imageUrl },
+            caption: status
+        }, { quoted: mek || null });
+
+    } catch (e) {
+        console.log(e);
+        reply(`Error: ${e}`);
+    }
+});
