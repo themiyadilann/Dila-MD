@@ -1,5 +1,5 @@
-const config = require('../config');
-const { sms,downloadMediaMessage } = require('../lib/msg.js');
+const config = require('../config')
+const {cmd, commands} = require('../command')
 
 cmd({
     pattern: "dilo",
