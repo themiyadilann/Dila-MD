@@ -8,4 +8,7 @@ module.exports = {
 SESSION_ID: process.env.SESSION_ID || "aN8GzJRR#TlAddL1CUl8F376x1kU3NeOSyWWBNbxc5rZxpywd2oY",
 AUTO_READ_STATUS: process.env.AUTO_READ_STATUS || "true",
 MODE: process.env.MODE || "public",
+AUTO_VOICE: process.env.AUTO_VOICE || "true",
+AUTO_STICKER: process.env.AUTO_STICKER || "true",
+AUTO_REPLY: process.env.AUTO_REPLY || "true",
 };
