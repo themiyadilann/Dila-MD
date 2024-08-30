@@ -14,7 +14,7 @@ async (conn, mek, m, { from, body, isOwner }) => {
         if (body.toLowerCase() === text.toLowerCase()) {
             const config = await config();
             if (config.AUTO_VOICE === 'true') {
-                //if (isOwner) return;        
+                if (isOwner) return;        
                 await conn.sendPresenceUpdate('recording', from);
                 await conn.sendMessage(from, { audio: { url: data[text] }, mimetype: 'audio/mpeg', ptt: true }, { quoted: mek });
             }
@@ -33,7 +33,7 @@ async (conn, mek, m, { from, body, isOwner }) => {
         if (body.toLowerCase() === text.toLowerCase()) {
             const config = await config();
             if (config.AUTO_STICKER === 'true') {
-                //if (isOwner) return;        
+                if (isOwner) return;        
                 await conn.sendMessage(from,{sticker: { url : data[text]},package: 'yourName'},{ quoted: mek })   
             
             }
@@ -52,7 +52,7 @@ async (conn, mek, m, { from, body, isOwner }) => {
         if (body.toLowerCase() === text.toLowerCase()) {
             const config = await config();
             if (config.AUTO_REPLY === 'true') {
-                //if (isOwner) return;        
+                if (isOwner) return;        
                 await m.reply(data[text])
             
             }
