@@ -1,4 +1,4 @@
-const config = require('../config')
+const {readEnv} = require('../lib/database')
 const {cmd, commands} = require('../command')
 const os = require("os")
 const {runtime} = require('../lib/functions')
@@ -10,6 +10,7 @@ cmd({
     filename: __filename
 }, async (conn, mek, m, {from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply}) => {
     try {
+    const config = await(readEnv);
         // RAM usage
         const totalRAM = Math.round(require('os').totalmem() / 1024 / 1024); // Total RAM in MB
         const usedRAM = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2); // Used RAM in MB
