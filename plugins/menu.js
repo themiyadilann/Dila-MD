@@ -108,12 +108,10 @@ _.gpt3_
 dilalk.vercel.app
 ᵐᵃᵈᵆ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`
 
-        // URL of the image you want to include
-        const imageUrl = 'https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg'; // Replace with your actual image URL
 
         // Send the image with the status as the caption
         await conn.sendMessage(from, {
-            image: { url: imageUrl },
+            image: { url: config.ALIVE_IMG },
             caption: status
         }, { quoted: mek || null });
         
