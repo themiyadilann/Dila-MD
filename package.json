@@ -26,6 +26,7 @@
     "yt-search":"2.12.1",
     "wikipedia":"2.1.2",
     "ytdl-core":"4.11.5",
-    "api-dylux":"1.8.5"
+    "api-dylux":"1.8.5",
+    "mongoose":"8.5.3"
   }
 }
