@@ -17,7 +17,7 @@
     <a href="https://github.com/themiyadilann/Dila-Md/stargazers/"><img title="Stars" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?color=blue&style=flat-square" /></a>
     <a href="https://github.com/themiyadilann/Dila-Md/network/members"><img title="Forks" src="https://img.shields.io/github/forks/themiyadilann/Dila-Md?color=blue&style=flat-square" /></a>
     <a href="https://github.com/themiyadilann/Dila-Md/watchers"><img title="Watching" src="https://img.shields.io/github/watchers/themiyadilann/Dila-MD?label=Watchers&color=blue&style=flat-square" /></a>
-    <a href="https://github.com/themiyadilann/Dila-Md"><img title="Size" src="https://img.shields.io/github/repo-size/themiyadilann/QDila-Md?style=flat-square&color=blue" /></a>
+    <a href="https://github.com/themiyadilann/Dila-Md"><img title="Size" src="https://img.shields.io/github/repo-size/themiyadilann/Dila-Md?style=flat-square&color=blue" /></a>
   </p>
   
   <p align="center">
@@ -26,7 +26,7 @@
   
   <!-- New Buttons -->
   <p align="center">
-    <a href="https://github.com/themiyadilann/Dila-MD-V1.0.1/fork"><img src="https://img.shields.io/badge/Fork-Repository-blue.svg?style=for-the-badge" alt="Fork" /></a>
+    <a href="https://github.com/themiyadilann/Dila-MD/fork"><img src="https://img.shields.io/badge/Fork-Repository-blue.svg?style=for-the-badge" alt="Fork" /></a>
     <a href="https://dilamdbot.vercel.app"><img src="https://img.shields.io/badge/Pair_Code-Dilamdbot-blue.svg?style=for-the-badge" alt="Pair Code" /></a>
     <a href="https://dashboard.heroku.com/new?template=https://github.com/themiyadilann/Dila-MD/"><img src="https://img.shields.io/badge/Heroku_Deploy-blue.svg?style=for-the-badge" alt="Heroku Deploy" /></a>
     <a href="https://www.koyeb.com"><img src="https://img.shields.io/badge/Koyeb_Deploy-blue.svg?style=for-the-badge" alt="Koyeb Deploy" /></a>
