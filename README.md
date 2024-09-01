@@ -1,7 +1,7 @@
 <div class="repo" align="center">
 
   <a href="#">
-    <img src="logologo.jpg" width="300" height="300" />
+    <img src="media/readme/img/logologo.jpg" width="300" height="300" />
   </a>
   
   <p align="center">
