@@ -1,5 +1,3 @@
-const fs = require('fs');
-const path = require('path');
 const { cmd } = require('../command');
 const fg = require('api-dylux');
 const yts = require('yt-search');
@@ -53,38 +51,18 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᵉ ʙʏ ᴍʀᴅɪʟᴀ ᴏғᴄ`;
+ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
         await conn.sendPresenceUpdate('typing', from);
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
-        // Download the audio
+        // Download and send audio
         let down = await fg.yta(url);
         let downloadUrl = down.dl_url;
-
-        // Store the download URL in a temporary file or cache
-        const downloadInfo = {
-            type: 'audio',
-            url: downloadUrl,
-            title: data.title,
-            mimetype: "audio/mpeg",
-            fileName: `${data.title}.mp3`
-        };
-
-        await conn.sendMessage(from, { text: 'Reply with 1 for MP3, 2 for MP3 as document' }, { quoted: mek });
-
-        conn.reply(from, "Awaiting your response...", mek).then(async (resp) => {
-            let userResponse = resp.body;
-
-            if (userResponse === '1') {
-                await conn.sendMessage(from, { audio: { url: downloadInfo.url }, mimetype: downloadInfo.mimetype }, { quoted: mek });
-            } else if (userResponse === '2') {
-                await conn.sendMessage(from, { document: { url: downloadInfo.url }, mimetype: downloadInfo.mimetype, fileName: downloadInfo.fileName, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
-            } else {
-                reply("Invalid option.");
-            }
-        });
+        await conn.sendPresenceUpdate('recording', from);
+        await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
@@ -128,38 +106,17 @@ async (conn, mek, m, { from, q, reply }) => {
 🔗 *𝗟𝗶𝗻𝗸*: ${url}
 
 dilalk.vercel.app
-ᵐᵃᵈᴇ ʙʏ ᴍʀᴅɪʟᴀ ᴏғᴄ`;
+ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
         await conn.sendPresenceUpdate('typing', from);
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
-        // Download the video
+        // Download and send video
         let down = await fg.ytv(url);
         let downloadUrl = down.dl_url;
-
-        // Store the download URL in a temporary file or cache
-        const downloadInfo = {
-            type: 'video',
-            url: downloadUrl,
-            title: data.title,
-            mimetype: "video/mp4",
-            fileName: `${data.title}.mp4`
-        };
-
-        await conn.sendMessage(from, { text: 'Reply with 3 for MP4, 4 for MP4 as document' }, { quoted: mek });
-
-        conn.reply(from, "Awaiting your response...", mek).then(async (resp) => {
-            let userResponse = resp.body;
-
-            if (userResponse === '3') {
-                await conn.sendMessage(from, { video: { url: downloadInfo.url }, mimetype: downloadInfo.mimetype }, { quoted: mek });
-            } else if (userResponse === '4') {
-                await conn.sendMessage(from, { document: { url: downloadInfo.url }, mimetype: downloadInfo.mimetype, fileName: downloadInfo.fileName, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʀᴅɪʟᴀ*" }, { quoted: mek });
-            } else {
-                reply("Invalid option.");
-            }
-        });
+        await conn.sendMessage(from, { video: { url: downloadUrl }, mimetype: "video/mp4" }, { quoted: mek });
+        await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "video/mp4", fileName: `${data.title}.mp4`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
 
     } catch (e) {
         console.log(e);
