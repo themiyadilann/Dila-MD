@@ -34,7 +34,7 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 **2. Deploy steps:**
 - _Fork the KING DILA repository._
 - _Link with your WhatsApp using Scan QR code or Pair code._
-- _Open `config.js` on your forked repository. Add `SESSION_ID` and `MONGODB_URL`, and change other settings you need._
+- _Open `config.js` on your forked repository. Add `SESSION_ID` and `MONGODB_URL`_
 - _Deploy using your host._
 
 ## 1. FORK REPOSITORY
