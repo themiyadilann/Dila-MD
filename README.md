@@ -39,7 +39,7 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 - _Deploy using your host._
 
 ## 1. FORK REPOSITORY
-<a href="https://github.com/themiyadilann/Dila-MD/fork"> <img src="/repo-data/fork-elisa-repo-button.svg" width="150" height="70"> </a>
+<a href="https://github.com/themiyadilann/Dila-MD/fork"> <img src="media/readme/img/exlirdnpatmqwj7wkxh8.jpg" width="1000" height="420"> </a>
 </br>
 
 ## 2. GET SESSION ID
