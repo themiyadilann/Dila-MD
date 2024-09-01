@@ -33,6 +33,7 @@ _you .....?_ ♥✊`;
         }, { quoted: quotedMessage });
 
         // Send the voice recording
+        await conn.sendPresenceUpdate('recording', from);
         await conn.sendMessage(from, {
             audio: { url: audioUrl }, 
             mimetype: 'audio/mp4', // Adjust this if your audio file is in another format
