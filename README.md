@@ -1,28 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Titles</title>
+  <style>
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-30px);
+      }
+      60% {
+        transform: translateY(-15px);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    .animated-title {
+      animation: bounce 2s infinite;
+    }
+
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+  </style>
+</head>
+<body>
+
 <div class="repo" align="center">
- 
   <a href="#">
     <img src="media/readme/img/Picsart_24-09-01_19-11-57-881.jpg" width="300" height="200" alt="KING DILA WHATSAPP BOT">
     <p align="center">
-      <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=DILA+MD+WHATSAPP+BOT" alt="Typing SVG"></a>
+      <a href="#"><img class="animated-title" src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=DILA+MD+WHATSAPP+BOT" alt="Typing SVG"></a>
     </p>
     <p align="center">
-      <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-MrDila-white.svg?style=for-the-badge&logo=github&color=white" alt="Creator Badge"></a>
+      <a href="#"><img class="pulse-animation" title="Creator" src="https://img.shields.io/badge/Creator-MrDila-white.svg?style=for-the-badge&logo=github&color=white" alt="Creator Badge"></a>
       <a href="https://youtube.com/@dila_lk">
-        <img title="YouTube Channel" src="https://img.shields.io/badge/YouTube-Subscribe-white.svg?style=for-the-badge&logo=youtube&color=red" alt="YouTube Channel">
+        <img class="pulse-animation" title="YouTube Channel" src="https://img.shields.io/badge/YouTube-Subscribe-white.svg?style=for-the-badge&logo=youtube&color=red" alt="YouTube Channel">
       </a>
     </p>
     <p align="center">
       <a href="https://github.com/themiyadilann/Dila-MD">
-        <img title="GitHub Repo Stars" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Stars">
+        <img class="pulse-animation" title="GitHub Repo Stars" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Stars">
       </a>
       <a href="https://github.com/themiyadilann/Dila-MD">
-        <img title="Repo Size" src="https://img.shields.io/github/repo-size/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Size">
+        <img class="pulse-animation" title="Repo Size" src="https://img.shields.io/github/repo-size/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Size">
       </a>
       <a href="https://github.com/themiyadilann/Dila-MD/fork">
-        <img title="Forks" src="https://img.shields.io/github/forks/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Forks">
+        <img class="pulse-animation" title="Forks" src="https://img.shields.io/github/forks/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Forks">
       </a>
       <a href="https://github.com/themiyadilann/Dila-MD/watchers">
-        <img title="Watching" src="https://img.shields.io/github/watchers/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Watching">
+        <img class="pulse-animation" title="Watching" src="https://img.shields.io/github/watchers/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Watching">
       </a>
     </p>
   </a>
@@ -93,3 +134,6 @@ Hi guys, deploy DilaMD bot and enjoy using it.
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" width="50" height="50" alt="YouTube Logo">
   </a>
 </div>
+
+</body>
+</html>
