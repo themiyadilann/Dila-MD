@@ -82,17 +82,13 @@ Hi guys, deploy DilaMD bot and enjoy using it.
   <img src="https://img.youtube.com/vi/aPPDOI5shq4/hqdefault.jpg" alt="How to Deploy DilaMD Bot - Heroku" width="320" height="180" style="border: none; cursor: pointer;">
 </a>
 
-## Run on Termux
-```bash
-apt update
-apt upgrade
-pkg update && pkg upgrade
-pkg install bash
-pkg install libwebp
-pkg install git -y
-pkg install nodejs -y 
-pkg install imagemagick -y
-git clone https://github.com/themiyadilann/Dila-MD
-cd Dila-MD
-npm install
-npm start
+
+<!-- Add this section at the bottom of your existing HTML -->
+<div class="social-buttons" align="center">
+  <a href="https://whatsapp.com/channel/0029ValK0gn4SpkP6iaXoj2y" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="50" height="50" alt="WhatsApp Logo">
+  </a>
+  <a href="https://t.me/dilalk" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="50" height="50" alt="Telegram Logo">
+  </a>
+</div>
