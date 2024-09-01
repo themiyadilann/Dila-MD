@@ -3,7 +3,7 @@
   <a href="#">
     <img src="media/readme/img/Picsart_24-09-01_19-11-57-881.jpg" width="300" height="200" alt="KING DILA WHATSAPP BOT"></img>
     <p align="center">
-      <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=KING+DILA+WHATSAPP+BOT" alt="Typing SVG"></a>
+      <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=DILA+MD+WHATSAPP+BOT" alt="Typing SVG"></a>
     </p>
     <p align="center">
       <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-MrDila-white.svg?style=for-the-badge&logo=github&color=white" alt="Creator Badge"></a>
@@ -40,14 +40,14 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 #### GitHub Repository
 [Follow Me on GitHub](https://github.com/themiyadilann/Dila-MD)
 
-## How to create KING DILA.
+## How to create DILAMD.
 **1. You must have these things before deploying:**
 - _GitHub Account._
 - _MongoDB URL (sign up and get MongoDB URL)._
 - _Host._
 
 **2. Deploy steps:**
-- _Fork the KING DILA repository._
+- _Fork the  DILA MD repository._
 - _Link with your WhatsApp using Scan QR code or Pair code._
 - _Open `config.js` on your forked repository. Add `SESSION_ID` and `MONGODB_URL`_
 - _Deploy using your host._
