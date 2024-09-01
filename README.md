@@ -43,9 +43,9 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 </br>
 
 ## 2. GET SESSION ID
-<a href="https://Dilamdbot.vercel.app"> <img src="/repo-data/elisa-scan-qr-code.svg" width="150" height="70"> </a></br>
+<a href="https://Dilamdbot.vercel.app"> <img src="media/readme/img/facebook.png" width="150" height="150"> </a></br>
     OR   
-<a href="https://Dilamdbot.vercel.app"> <img src="/repo-data/elisa-pair-code.svg" width="150" height="70"> </a>
+<a href="https://Dilamdbot.vercel.app"> <img src="media/readme/img/facebook.png" width="150" height="150"> </a>
 </br>
 
 ## Deploy.
