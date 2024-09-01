@@ -6,12 +6,12 @@
   <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=KING+DILA+WHATSAPP+BOT" alt="">
 </p>
 <p align="center">
-  <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-MrDila-black.svg?style=for-the-badge&logo=github&color=white"></a>
-  <a href="https://youtube.com/@dila_lk"><img alt="Dila YouTube Channel" src="https://img.shields.io/youtube/channel/subscribers/UCjDKRYcwd5ZIpGICcVVL96Q?style=for-the-badge&color=black&logo=white" target="_blank" /></a>
+  <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-MrDila-white.svg?style=for-the-badge&logo=github&color=white"></a>
+  <a href="https://youtube.com/@dila_lk"><img alt="Dila YouTube Channel" src="https://img.shields.io/youtube/channel/subscribers/UCjDKRYcwd5ZIpGICcVVL96Q?style=for-the-badge&color=white&logoColor=white" target="_blank" /></a>
 </p>
 <p align="center">
-  <a href="https://github.com/themiyadilann/Dila-MD"><img title="GitHub Repo" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?color=white&style=flat-square&color=black"></a>
-  <a href="https://github.com/themiyadilann/Dila-MD"><img title="Size" src="https://img.shields.io/github/repo-size/themiyadilann/Dila-MD?style=flat-square&color=black"></a>
+  <a href="https://github.com/themiyadilann/Dila-MD"><img title="GitHub Repo" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?style=flat-square&color=white"></a>
+  <a href="https://github.com/themiyadilann/Dila-MD"><img title="Size" src="https://img.shields.io/github/repo-size/themiyadilann/Dila-MD?style=flat-square&color=white"></a>
 </p>
 </a>
 </div>
@@ -49,15 +49,15 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 </br>
 
 ## Deploy.
-[![nima](https://img.shields.io/badge/dila_deploy_on_heroku-black?style=for-the-badge&logo=heroku&logoColor=white&buttcode=1n2i3m4a)](https://heroku.com/deploy?template=https://github.com/themiyadilann/Dila-MD)
+[![nima](https://img.shields.io/badge/dila_deploy_on_heroku-white?style=for-the-badge&logo=heroku&logoColor=white)](https://heroku.com/deploy?template=https://github.com/themiyadilann/Dila-MD)
   
-[![nima](https://img.shields.io/badge/dila_deploy_on_railway-black?style=for-the-badge&logo=railway&logoColor=white&buttcode=1n2i3m4a)](https://railway.app?referralCode=king-dila)
+[![nima](https://img.shields.io/badge/dila_deploy_on_railway-white?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app?referralCode=king-dila)
    
-[![nima](https://img.shields.io/badge/dila_deploy_on_replit-black?style=for-the-badge&logo=replit&logoColor=white&buttcode=1n2i3m4a)](https://replit.com/)
+[![nima](https://img.shields.io/badge/dila_deploy_on_replit-white?style=for-the-badge&logo=replit&logoColor=white)](https://replit.com/)
    
-[![nima](https://img.shields.io/badge/dila_deploy_on_render-black?style=for-the-badge&logo=render&logoColor=white&buttcode=1n2i3m4a)](https://docs.render.com/free)
+[![nima](https://img.shields.io/badge/dila_deploy_on_render-white?style=for-the-badge&logo=render&logoColor=white)](https://docs.render.com/free)
 
-[![nima](https://img.shields.io/badge/dila_deploy_on_toystack-black?style=for-the-badge&logo=render&logoColor=white&buttcode=1n2i3m4a)](https://toystack.ai)
+[![nima](https://img.shields.io/badge/dila_deploy_on_toystack-white?style=for-the-badge&logo=render&logoColor=white)](https://toystack.ai)
 
 ## Watch YouTube Videos
 - [How to Deploy DilaMD Bot - Render](https://youtu.be/7PJ5_gYJ9CM?si=qpSW7aDLlJrVuVey)
