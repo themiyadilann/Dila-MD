@@ -20,7 +20,7 @@ const axios = require('axios')
 const { File } = require('megajs')
 
 
-const ownerNumber = ['94777839446']
+const ownerNumber = ['94727839446']
 
 //===================SESSION-AUTH============================
 if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
@@ -80,9 +80,9 @@ require("./plugins/" + plugin);
 console.log('Plugins installed successful ✅')
 console.log('Bot connected to whatsapp ✅')
 
-let up = `*Hey I'M Online Now*\n_Type To Menu Get Bot All Commands_ ⤵\n\nᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ`;
+let up = `𝗧𝗵𝗮𝗻𝗸𝘀 𝗙𝗼𝗿 𝗗𝗲𝗽𝗹𝗼𝘆 𝗠𝗲 🤡\n\nᴹᵃᵈᵉ ᴮʸ ᴹʳᴰⁱˡᵃ`;
 
-conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/2905fce5b1eabd989bcda.jpg` }, caption: up })
+conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/94055e3a7e18f50199374.jpg` }, caption: up })
 
 }
 })
