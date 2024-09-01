@@ -1,3 +1,5 @@
+const fs = require('fs');
+const path = require('path');
 const { cmd } = require('../command');
 const fg = require('api-dylux');
 const yts = require('yt-search');
