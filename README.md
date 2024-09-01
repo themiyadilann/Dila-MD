@@ -1,7 +1,7 @@
 <div class="repo" align="center">
  
   <a href="#">
-    <img src="media/readme/img/Picsart_24-09-01_19-11-57-881.jpg" width="300" height="200" alt="KING DILA WHATSAPP BOT"></img>
+    <img src="media/readme/img/Picsart_24-09-01_19-11-57-881.jpg" width="300" height="200" alt="KING DILA WHATSAPP BOT">
     <p align="center">
       <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=DILA+MD+WHATSAPP+BOT" alt="Typing SVG"></a>
     </p>
@@ -24,9 +24,7 @@
       <a href="https://github.com/themiyadilann/Dila-MD/watchers">
         <img title="Watching" src="https://img.shields.io/github/watchers/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Watching">
       </a>
-      <a href="https://github.com/themiyadilann/Dila-MD/branches">
-
-   
+    </p>
   </a>
 </div>
 
@@ -82,16 +80,16 @@ Hi guys, deploy DilaMD bot and enjoy using it.
   <img src="https://img.youtube.com/vi/aPPDOI5shq4/hqdefault.jpg" alt="How to Deploy DilaMD Bot - Heroku" width="320" height="180" style="border: none; cursor: pointer;">
 </a>
 
-
 <!-- Add this section at the bottom of your existing HTML -->
 <div class="social-buttons" align="center">
-  <a href="https://whatsapp.com/channel/0029ValK0gn4SpkP6iaXoj2y" target="_blank">
+  <p><strong>Connect with Us:</strong></p>
+  <a href="https://whatsapp.com/channel/0029ValK0gn4SpkP6iaXoj2y" target="_blank" title="Join our WhatsApp Channel">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="50" height="50" alt="WhatsApp Logo">
   </a>
-  <a href="https://t.me/dilalk" target="_blank">
+  <a href="https://t.me/dilalk" target="_blank" title="Join our Telegram Group">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="50" height="50" alt="Telegram Logo">
   </a>
-  <a href="https://youtube.com/@dila_lk?si=QrRSHY33aKbdtZyf" target="_blank">
+  <a href="https://youtube.com/@dila_lk?si=QrRSHY33aKbdtZyf" target="_blank" title="Visit our YouTube Channel">
     <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" width="50" height="50" alt="YouTube Logo">
   </a>
 </div>
