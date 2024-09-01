@@ -77,8 +77,18 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 [![Deploy on Toystack](https://img.shields.io/badge/dila_deploy_on_toystack-ff8c00?style=for-the-badge&logo=render&logoColor=white)](https://toystack.ai)
 
 ## Watch YouTube Videos
-- [How to Deploy DilaMD Bot - Render](https://youtu.be/7PJ5_gYJ9CM?si=qpSW7aDLlJrVuVey)
-- [How to Deploy DilaMD Bot - Heroku](https://youtu.be/aPPDOI5shq4?si=bSjQgjgAhQcAeTm7)
+
+<a href="https://youtu.be/7PJ5_gYJ9CM?si=qpSW7aDLlJrVuVey" target="_blank">
+  <button style="background: url('https://img.youtube.com/vi/7PJ5_gYJ9CM/hqdefault.jpg') no-repeat center; background-size: cover; width: 320px; height: 180px; border: none; cursor: pointer; color: transparent;">
+    <span>How to Deploy DilaMD Bot - Render</span>
+  </button>
+</a>
+
+<a href="https://youtu.be/aPPDOI5shq4?si=bSjQgjgAhQcAeTm7" target="_blank">
+  <button style="background: url('https://img.youtube.com/vi/aPPDOI5shq4/hqdefault.jpg') no-repeat center; background-size: cover; width: 320px; height: 180px; border: none; cursor: pointer; color: transparent;">
+    <span>How to Deploy DilaMD Bot - Heroku</span>
+  </button>
+</a>
 
 ## Run on Termux
 ```bash
