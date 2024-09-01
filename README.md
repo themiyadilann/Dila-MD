@@ -24,7 +24,13 @@
       <a href="https://github.com/themiyadilann/Dila-MD/watchers">
         <img title="Watching" src="https://img.shields.io/github/watchers/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Watching">
       </a>
-      <a href="https://github.com/themiyadilann/Dila-MD/branches"> 
+      <a href="https://github.com/themiyadilann/Dila-MD/branches">
+        <img title="Branches" src="https://img.shields.io/github/branches/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Branches">
+      </a>
+      <a href="https://github.com/themiyadilann/Dila-MD/tags">
+        <img title="Tags" src="https://img.shields.io/github/tags/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Tags">
+      </a>
+    </p>
   </a>
 </div>
 
@@ -60,15 +66,15 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 </br>
 
 ## Deploy.
-[![Deploy on Heroku](https://img.shields.io/badge/dila_deploy_on_heroku-white?style=for-the-badge&logo=heroku&logoColor=white)](https://heroku.com/deploy?template=https://github.com/themiyadilann/Dila-MD)
+[![Deploy on Heroku](https://img.shields.io/badge/dila_deploy_on_heroku-7300d8?style=for-the-badge&logo=heroku&logoColor=white)](https://heroku.com/deploy?template=https://github.com/themiyadilann/Dila-MD)
   
-[![Deploy on Railway](https://img.shields.io/badge/dila_deploy_on_railway-white?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app?referralCode=king-dila)
+[![Deploy on Railway](https://img.shields.io/badge/dila_deploy_on_railway-00c851?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app?referralCode=king-dila)
    
-[![Deploy on Replit](https://img.shields.io/badge/dila_deploy_on_replit-white?style=for-the-badge&logo=replit&logoColor=white)](https://replit.com/)
+[![Deploy on Replit](https://img.shields.io/badge/dila_deploy_on_replit-ff4000?style=for-the-badge&logo=replit&logoColor=white)](https://replit.com/)
    
-[![Deploy on Render](https://img.shields.io/badge/dila_deploy_on_render-white?style=for-the-badge&logo=render&logoColor=white)](https://docs.render.com/free)
+[![Deploy on Render](https://img.shields.io/badge/dila_deploy_on_render-3f0f3f?style=for-the-badge&logo=render&logoColor=white)](https://docs.render.com/free)
 
-[![Deploy on Toystack](https://img.shields.io/badge/dila_deploy_on_toystack-white?style=for-the-badge&logo=render&logoColor=white)](https://toystack.ai)
+[![Deploy on Toystack](https://img.shields.io/badge/dila_deploy_on_toystack-ff8c00?style=for-the-badge&logo=render&logoColor=white)](https://toystack.ai)
 
 ## Watch YouTube Videos
 - [How to Deploy DilaMD Bot - Render](https://youtu.be/7PJ5_gYJ9CM?si=qpSW7aDLlJrVuVey)
