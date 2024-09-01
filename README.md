@@ -24,13 +24,7 @@
       <a href="https://github.com/themiyadilann/Dila-MD/watchers">
         <img title="Watching" src="https://img.shields.io/github/watchers/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Watching">
       </a>
-      <a href="https://github.com/themiyadilann/Dila-MD/branches">
-        <img title="Branches" src="https://img.shields.io/github/branches/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Branches">
-      </a>
-      <a href="https://github.com/themiyadilann/Dila-MD/tags">
-        <img title="Tags" src="https://img.shields.io/github/tags/themiyadilann/Dila-MD?style=flat-square&color=white" alt="Tags">
-      </a>
-    </p>
+      <a href="https://github.com/themiyadilann/Dila-MD/branches"> 
   </a>
 </div>
 
