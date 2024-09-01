@@ -27,6 +27,7 @@ _ex-.aiHey_
 𝚆𝚑𝚊𝚝𝚜𝚊𝚙𝚙-https://whatsapp.com/channel/0029ValK0gn4SpkP6iaXoj2y
 𝚈𝚘𝚞𝚝𝚞𝚋𝚎-https://youtube.com/@dila_lk
 𝚆𝚎𝚋𝚂𝚒𝚝𝚎-dilalk.vercel.app
+𝙱𝙾𝚃 𝚁𝚎𝚙𝚘-https://github.com/themiyadilann/Dila-MD/
 
 *Uptime:* ${runtime(process.uptime())}
 *RAM Usage:* 
