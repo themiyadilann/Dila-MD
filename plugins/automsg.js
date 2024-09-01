@@ -22,6 +22,43 @@ async (conn, mek, m, { from, body, isOwner }) => {
     }                
 });
 
+//auto_image
+cmd({
+  on: "body"
+},    
+async (conn, mek, m, { from, body, isOwner }) => {
+    const filePath = path.join(__dirname, '../media/autoimage.json');
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    for (const text in data) {
+        if (body.toLowerCase() === text.toLowerCase()) {
+            const config = await readEnv();
+            if (config.AUTO_IMAGE === 'true') {
+                if (isOwner) return;       
+                await conn.sendMessage(from,{ image: { url: data[text] }, mimetype: 'image/jpeg' },{ quoted: mek });
+            }
+        }
+    }                
+});
+
+//auto_video
+cmd({
+  on: "body"
+},    
+async (conn, mek, m, { from, body, isOwner }) => {
+    const filePath = path.join(__dirname, '../media/autovideo.json');
+    const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+    for (const text in data) {
+        if (body.toLowerCase() === text.toLowerCase()) {
+            const config = await readEnv();
+            if (config.AUTO_VIDEO === 'true') {
+                if (isOwner) return;       
+                await conn.sendMessage(from,{ video: { url: data[text] }, mimetype: 'video/mp4' },{ quoted: mek });
+            }
+        }
+    }                
+});
+
+
 //auto sticker 
 cmd({
   on: "body"
