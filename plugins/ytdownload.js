@@ -25,7 +25,15 @@ cmd({
 },
 async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply("Please type a Name or Url... 🤖");
+        if (!q) {
+            await conn.sendPresenceUpdate('recording', from);
+            await conn.sendMessage(from, { 
+                audio: { url: 'https://github.com/themiyadilann/DilaMD-Media/raw/main/voice/song.mp3' }, 
+                mimetype: 'audio/mpeg', 
+                ptt: true 
+            }, { quoted: mek });
+            return;
+        }
 
         const search = await yts(q);
         const data = search.videos[0];
@@ -70,7 +78,15 @@ cmd({
 },
 async (conn, mek, m, { from, q, reply }) => {
     try {
-        if (!q) return reply("Please type a Name or Url... 🤖");
+        if (!q) {
+            await conn.sendPresenceUpdate('recording', from);
+            await conn.sendMessage(from, { 
+                audio: { url: 'https://github.com/themiyadilann/DilaMD-Media/raw/main/voice/video.mp3' }, 
+                mimetype: 'audio/mpeg', 
+                ptt: true 
+            }, { quoted: mek });
+            return;
+        }
 
         const search = await yts(q);
         const data = search.videos[0];
@@ -104,5 +120,3 @@ dilalk.vercel.app
         reply(`Error: ${e.message}`);
     }
 });
-
-
