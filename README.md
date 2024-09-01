@@ -79,15 +79,11 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 ## Watch YouTube Videos
 
 <a href="https://youtu.be/7PJ5_gYJ9CM?si=qpSW7aDLlJrVuVey" target="_blank">
-  <button style="background: url('https://telegra.ph/file/a7d145d4353cab3fccd7b.jpg') no-repeat center; background-size: cover; width: 320px; height: 180px; border: none; cursor: pointer; color: transparent;">
-    <span>How to Deploy DilaMD Bot - Render</span>
-  </button>
+  <img src="https://img.youtube.com/vi/7PJ5_gYJ9CM/hqdefault.jpg" alt="How to Deploy DilaMD Bot - Render" width="320" height="180" style="border: none; cursor: pointer;">
 </a>
 
 <a href="https://youtu.be/aPPDOI5shq4?si=bSjQgjgAhQcAeTm7" target="_blank">
-  <button style="background: url('https://img.youtube.com/vi/aPPDOI5shq4/hqdefault.jpg') no-repeat center; background-size: cover; width: 320px; height: 180px; border: none; cursor: pointer; color: transparent;">
-    <span>How to Deploy DilaMD Bot - Heroku</span>
-  </button>
+  <img src="https://img.youtube.com/vi/aPPDOI5shq4/hqdefault.jpg" alt="How to Deploy DilaMD Bot - Heroku" width="320" height="180" style="border: none; cursor: pointer;">
 </a>
 
 ## Run on Termux
