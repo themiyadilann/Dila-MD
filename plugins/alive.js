@@ -23,7 +23,7 @@ cmd({
         // Send the audio from the specified path
         const audioPath = '../media/voice/alive.mp3';
         await conn.sendMessage(from, { 
-            audio: { url: audioPath }, 
+            audio: audioPath, 
             mimetype: 'audio/mpeg', 
             ptt: true 
         }, { quoted: mek });
