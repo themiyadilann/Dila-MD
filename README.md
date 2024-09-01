@@ -7,8 +7,7 @@
 </p>
 <p align="center">
   <a href="#"><img title="Creator" src="https://img.shields.io/badge/Creator-MrDila-white.svg?style=for-the-badge&logo=github&color=white"></a>
-  <a href="https://youtube.com/@dila_lk"><img alt="Dila YouTube Channel" src="https://img.shields.io/youtube/channel/subscribers/UCjDKRYcwd5ZIpGICcVVL96Q?style=for-the-badge&color=white&logoColor=white" target="_blank" /></a>
-</p>
+  <a href="https://youtube.com/@dila_lk">
 <p align="center">
   <a href="https://github.com/themiyadilann/Dila-MD"><img title="GitHub Repo" src="https://img.shields.io/github/stars/themiyadilann/Dila-MD?style=flat-square&color=white"></a>
   <a href="https://github.com/themiyadilann/Dila-MD"><img title="Size" src="https://img.shields.io/github/repo-size/themiyadilann/Dila-MD?style=flat-square&color=white"></a>
