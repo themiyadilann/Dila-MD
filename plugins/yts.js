@@ -18,8 +18,7 @@ const formatViews = (views) => {
 // URL for the thumbnail image
 const thumbnailUrl = 'https://telegra.ph/file/bdc5a5b7af8bea3139d42.jpg';
 
-// URL for the voice note
-const voiceUrl = 'https://drive.google.com/uc?export=download&id=1_Pd4yQVfofr14xPMIOvebVGwoXh1rohu';
+
 
 //========= YTS Search Command for 100 Videos =========//
 
@@ -61,8 +60,12 @@ async (conn, mek, m, { from, q, reply }) => {
         await conn.sendMessage(from, { image: { url: thumbnailUrl }, caption: message }, { quoted: mek });
 
         // Send the voice note after sending the message
-        await conn.sendMessage(from, { audio: { url: voiceUrl }, mimetype: 'audio/mp4', ptt: true }, { quoted: mek });
 
+await conn.sendPresenceUpdate('recording', from);
+await conn.sendMessage(from, { audio: { url: 'https://github.com/themiyadilann/DilaMD-Media/raw/main/voice/song.mp3' }, mimetype: 'audio/mpeg', ptt: true }, { quoted: mek });
+await conn.sendMessage(from, { audio: { url: 'https://github.com/themiyadilann/DilaMD-Media/raw/main/voice/video.mp3' }, mimetype: 'audio/mpeg', ptt: true }, { quoted: mek });
+
+        
     } catch (e) {
         console.log(e);
         reply(`Error: ${e.message}`);
