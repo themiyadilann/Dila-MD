@@ -91,4 +91,7 @@ Hi guys, deploy DilaMD bot and enjoy using it.
   <a href="https://t.me/dilalk" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" width="50" height="50" alt="Telegram Logo">
   </a>
+  <a href="https://youtube.com/@dila_lk?si=QrRSHY33aKbdtZyf" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" width="50" height="50" alt="YouTube Logo">
+  </a>
 </div>
