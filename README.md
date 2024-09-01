@@ -1,7 +1,7 @@
 <div class="repo" align="center">
  
 <a href="#">
-<img src="media/readme/img/logologo.jpg" width="300" height="300"></img>
+<img src="media/readme/img/Picsart_24-09-01_19-11-57-881.jpg" width="300" height="200"></img>
 <p align="center">
   <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=KING+DILA+WHATSAPP+BOT" alt="">
 </p>
