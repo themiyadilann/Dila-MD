@@ -54,11 +54,13 @@ dilalk.vercel.app
 ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
+        await conn.sendPresenceUpdate('typing', from);
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
         // Download and send audio
         let down = await fg.yta(url);
         let downloadUrl = down.dl_url;
+        await conn.sendPresenceUpdate('recording', from);
         await conn.sendMessage(from, { audio: { url: downloadUrl }, mimetype: "audio/mpeg" }, { quoted: mek });
         await conn.sendMessage(from, { document: { url: downloadUrl }, mimetype: "audio/mpeg", fileName: `${data.title}.mp3`, caption: "💻 *ᴍᴀᴅᴇ ʙʏ ᴍʳᴅɪʟᴀ*" }, { quoted: mek });
 
@@ -107,6 +109,7 @@ dilalk.vercel.app
 ᵐᵃᵈᵉ ᵇʸ ᵐʳᵈⁱˡᵃ ᵒᶠᶜ`;
 
         // Send video details with thumbnail
+        await conn.sendPresenceUpdate('typing', from);
         await conn.sendMessage(from, { image: { url: data.thumbnail }, caption: desc }, { quoted: mek });
 
         // Download and send video
