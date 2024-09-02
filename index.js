@@ -80,7 +80,7 @@ require("./plugins/" + plugin);
 console.log('Plugins installed successful ✅')
 console.log('Bot connected to whatsapp ✅')
 
-let up = `𝗛𝗲𝘆 𝗗𝗶𝗹𝗮 𝗜 𝗮𝗺 𝗢𝗻𝗹𝗶𝗻𝗲 𝗡𝗼𝘄 🤡`;
+let up = `𝗛𝗲𝘆 𝗗𝗶𝗹𝗮\n𝗜 𝗮𝗺\n𝗢𝗻𝗹𝗶𝗻𝗲 𝗡𝗼𝘄 🤡`;
 
 conn.sendMessage(ownerNumber + "@s.whatsapp.net", { image: { url: `https://telegra.ph/file/94055e3a7e18f50199374.jpg` }, caption: up })
 
