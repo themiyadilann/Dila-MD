@@ -56,9 +56,9 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 <a href="https://github.com/themiyadilann/Dila-MD/fork"> <img src="media/readme/img/Picsart_24-09-02_15-24-30-989.png" width="150" height="40" alt="Fork Repository"> </a>
 
 ## 2. GET SESSION ID
-<a href="https://Dilamdbot.vercel.app"> <img src="media/readme/img/facebook.png" width="150" height="150" alt="Get Session ID"> </a></br>
+<a href="https://Dilamdbot.vercel.app"> <img src="media/readme/img/Picsart_24-09-02_15-30-52-464.jpg" width="150" height="40" alt="Get Session ID"> </a></br>
     OR   
-<a href="https://Dilamdbot.vercel.app"> <img src="media/readme/img/facebook.png" width="150" height="150" alt="Get Session ID"> </a>
+<a href="https://Dilamdbot.vercel.app"> <img src="media/readme/img/facebook.png" width="150" height="40" alt="Get Session ID"> </a>
 </br>
 
 ## Deploy.
