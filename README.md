@@ -74,6 +74,10 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 
 ## Watch YouTube Videos
 
+<a href="https://youtu.be/WKtNfJeJdYg?si=Cw61gkpIdWhJOdTu" target="_blank">
+  <img src="https://img.youtube.com/vi/WKtNfJeJdYg/hqdefault.jpg" alt="New Video" width="320" height="180" style="border: none; cursor: pointer; margin-top: 10px;">
+</a>
+
 <a href="https://youtu.be/7PJ5_gYJ9CM?si=qpSW7aDLlJrVuVey" target="_blank">
   <img src="https://img.youtube.com/vi/7PJ5_gYJ9CM/hqdefault.jpg" alt="How to Deploy DilaMD Bot - Render" width="320" height="180" style="border: none; cursor: pointer;">
 </a>
