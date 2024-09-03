@@ -11,7 +11,7 @@ cmd({
 async (conn, mek, m, { from, body, isOwner }) => {
     try {
         const config = await readEnv();
-        if (config.AUTO_REPLY === 'true') {
+        if (config.AUTO_AI === 'true') {
             if (isOwner) return;
 
             // Fetch response from AI API
