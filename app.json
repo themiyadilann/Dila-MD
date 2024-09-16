@@ -8,7 +8,7 @@
   "env": {
     "SESSION_ID": {
       "description": "Add DilaMD Session ID",
-      "required": true
+      "required": false
     },  
 
         "MONGODB": {
