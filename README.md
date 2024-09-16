@@ -58,7 +58,7 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 ## 2. GET SESSION ID Or CREDS.JSON
 <a href="https://Dilamdbot.vercel.app"> <img src="media/readme/img/Picsart_24-09-02_15-30-52-464.jpg" width="150" height="40" alt="Get Session ID"> </a></br>
     OR   
-<a href="https://replit.com/@themiyadilann/Dila-Md-pair-code"> <img src="media/readme/img/Picsart_24-09-02_15-32-12-268.png" width="150" height="40" alt="Get Session ID"> </a>
+<a href="https://replit.com/@Themiyadilan/Dila-Md-pair-code"> <img src="media/readme/img/Picsart_24-09-02_15-32-12-268.png" width="150" height="40" alt="Get Session ID"> </a>
 </br>
 
 ## Deploy.
