@@ -1,1 +1,23 @@
-const config = require('../config'); const {cmd, commands} = require('../command'); cmd({ pattern: "dilo", alias: ["owner","developer","bot"], desc: "Check if the bot is online.", category: "main", filename: __filename }, async (conn, mek, m, { from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply }) => { try { const status = `*Name*: Dilan\n*From*: Matara\n*Number*: 94727839446\n*Web*: dilalk.vercel.app`; const imageUrl = 'https://telegra.ph/file/dcd097f9f7a124d47e5b2.jpg'; const audioUrl = 'https://drive.google.com/uc?export=download&id=1YYPnkKWdrxFe8C2kWdwf8qkeE0PO5RjW'; const quotedMessage = mek ? mek : null; await conn.sendMessage(from, { image: { url: imageUrl }, caption: status }, { quoted: quotedMessage }); await conn.sendPresenceUpdate('recording', from); await conn.sendMessage(from, { audio: { url: audioUrl }, mimetype: 'audio/mp4', ptt: true }, { quoted: quotedMessage }); } catch (e) { console.error('Error sending message:', e); reply(`An error occurred: ${e.message}`); } });
+const _0x1a2b3c = require('\x2e\x2e\x2f\x63\x6f\x6e\x66\x69\x67');
+const _0x4d5e6f = require('\x2e\x2e\x2f\x63\x6f\x6d\x6d\x61\x6e\x64');
+const _0x7g8h9i = _0x4d5e6f\x2e\x63\x6d\x64;
+_0x7g8h9i({
+    pattern: '\x64\x69\x6c\x6f',
+    alias: ['\x6f\x77\x6e\x65\x72', '\x64\x65\x76\x65\x6c\x6f\x70\x65\x72', '\x62\x6f\x74'],
+    desc: '\x43\x68\x65\x63\x6b\x20\x69\x66\x20\x74\x68\x65\x20\x62\x6f\x74\x20\x69\x73\x20\x6f\x6e\x6c\x69\x6e\x65\x2e',
+    category: '\x6d\x61\x69\x6e',
+    filename: __filename
+}, async (_0xa1b2c3, _0xd4e5f6, _0x789a0b, { _0x1c2d3e, _0x4f5g6h, _0x7i8j9k, _0x0l1m2n, _0x3o4p5q, _0x6r7s8t, _0x9u0v1w, _0x2x3y4z, _0x5a6b7c, _0x8d9e0f, _0x1g2h3i, _0x4j5k6l, _0x7m8n9o, _0x0p1q2r, _0x3s4t5u, _0x6v7w8x, _0x9y0z1a, _0x2b3c4d, _0x5e6f7g, _0x8h9i0j, reply }) => {
+    try {
+        const _0x1a2b3c = `\x2a\x4e\x61\x6d\x65\x2a\x3a\x20\x44\x69\x6c\x61\x6e\x5c\x6e\x2a\x46\x72\x6f\x6d\x2a\x3a\x20\x4d\x61\x74\x61\x72\x61\x5c\x6e\x2a\x4e\x75\x6d\x62\x65\x72\x2a\x3a\x20\x39\x34\x37\x32\x37\x38\x33\x39\x34\x34\x36\x5c\x6e\x2a\x57\x65\x62\x2a\x3a\x20\x64\x69\x6c\x61\x6c\x6b\x2e\x76\x65\x72\x63\x65\x6c\x2e\x61\x70\x70`;
+        const _0x4d5e6f = '\x68\x74\x74\x70\x73\x3a\x2f\x2f\x74\x65\x6c\x65\x67\x72\x61\x2e\x70\x68\x2f\x66\x69\x6c\x65\x2f\x64\x63\x64\x30\x39\x37\x66\x39\x66\x37\x61\x31\x32\x34\x64\x34\x37\x65\x35\x62\x32\x2e\x6a\x70\x67';
+        const _0x7g8h9i = '\x68\x74\x74\x70\x73\x3a\x2f\x2f\x64\x72\x69\x76\x65\x2e\x67\x6f\x6f\x67\x6c\x65\x2e\x63\x6f\x6d\x2f\x75\x63\x3f\x65\x78\x70\x6f\x72\x74\x3d\x64\x6f\x77\x6e\x6c\x6f\x61\x64\x26\x69\x64\x3d\x31\x59\x59\x50\x6e\x6b\x4b\x57\x64\x72\x78\x46\x65\x38\x43\x32\x6b\x57\x64\x77\x66\x38\x71\x6b\x65\x45\x30\x50\x4f\x35\x52\x6a\x57';
+        const _0x8r9s0t = _0xd4e5f6 ? _0xd4e5f6 : null;
+        await _0xa1b2c3.sendMessage(_0x1c2d3e, { image: { url: _0x4d5e6f }, caption: _0x1a2b3c }, { quoted: _0x8r9s0t });
+        await _0xa1b2c3.sendPresenceUpdate('\x72\x65\x63\x6f\x72\x64\x69\x6e\x67', _0x1c2d3e);
+        await _0xa1b2c3.sendMessage(_0x1c2d3e, { audio: { url: _0x7g8h9i }, mimetype: '\x61\x75\x64\x69\x6f\x2f\x6d\x70\x34', ptt: true }, { quoted: _0x8r9s0t });
+    } catch (_0x9m0n1o) {
+        console.error('\x45\x72\x72\x6f\x72\x20\x73\x65\x6e\x64\x69\x6e\x67\x20\x6d\x65\x73\x73\x61\x67\x65\x3a', _0x9m0n1o);
+        reply(`\x41\x6e\x20\x65\x72\x72\x6f\x72\x20\x6f\x63\x63\x75\x72\x72\x65\x64\x3a\x20${_0x9m0n1o.message}`);
+    }
+});
