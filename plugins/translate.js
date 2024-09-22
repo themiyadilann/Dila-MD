@@ -8,19 +8,21 @@ cmd({
     category: "main", 
     filename: __filename 
 }, async (conn, mek, m, { from, args, reply }) => { 
-    if (args.length < 4 || args[1] !== 'to') {
+    // Check for the correct number of arguments and format
+    if (args.length < 4 || args[1].toLowerCase() !== 'to') {
         return reply('Usage: .translate <language> to <text>');
     }
 
-    const targetLanguage = args[0]; // The first argument is the target language
-    const textToTranslate = args.slice(2).join(" "); // The rest is the text to translate
+    const targetLanguage = args[0]; // Language code (e.g., 'en', 'si', 'ko')
+    const textToTranslate = args.slice(2).join(" "); // Join remaining args as text to translate
 
     try {
-        const res = await translate(textToTranslate, { to: targetLanguage });
-        const translationText = res.text;
-
+        // Call the translation function
+        const { text: translationText } = await translate(textToTranslate, { to: targetLanguage });
+        
         const responseText = `*🌐 Translation Info 🌐*\n📜 *Original*: ${textToTranslate}\n🌍 *Translated (${targetLanguage})*: ${translationText}\n\n${sensitiveData.siteUrl}\n${sensitiveData.footerText}`;
-
+        
+        // Send the response message
         await conn.sendMessage(from, { text: responseText }, { quoted: mek });
     } catch (err) {
         return reply(`Error: ${err.message || "Translation failed"}`);
