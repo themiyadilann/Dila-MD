@@ -20,7 +20,7 @@ cmd({
         const translationText = res.text;
 
         const responseText = `*🌐 Translation Info 🌐*\n📜 *Original*: ${textToTranslate}\n🌍 *Translated (${targetLanguage})*: ${translationText}\n\n${sensitiveData.siteUrl}\n${sensitiveData.footerText}`;
-        
+
         await conn.sendMessage(from, { text: responseText }, { quoted: mek });
     } catch (err) {
         return reply(`Error: ${err.message || "Translation failed"}`);
