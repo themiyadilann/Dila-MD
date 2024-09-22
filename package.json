@@ -36,6 +36,7 @@
     "@sl-code-lords/esana-news" : "latest",
     "@kaveesha-sithum/derana-news" : "latest",
     "hirunews-scraper":"3.0.0",
-    "weather-js":"2.0.0"
+    "weather-js":"2.0.0",
+    "@vitalets/google-translate-api":"9.2.0"
   }
 }
