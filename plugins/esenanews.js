@@ -86,24 +86,31 @@ cmd({
     isOwner: false,
     react: "📰",
     filename: __filename
-}, async (conn, mek, m, { from, isGroup }) => {
+}, async (conn, mek, m, { from, isGroup, participants }) => {
     try {
         if (isGroup) {
-            if (!activeGroups[from]) {
-                activeGroups[from] = true; // Activate the news service for this group
+            const isAdmin = participants.some(p => p.id === mek.sender && p.admin);
+            const isBotOwner = mek.sender === conn.user.jid; // Check if the user is the bot owner
 
-                // Notify the group
-                await conn.sendMessage(from, { text: "📰 News service has been activated for this group!" });
+            if (isAdmin || isBotOwner) {
+                if (!activeGroups[from]) {
+                    activeGroups[from] = true; // Activate the news service for this group
 
-                // Periodically check for new news every 15 minutes (900,000 milliseconds)
-                setInterval(async () => {
-                    if (activeGroups[from]) {
-                        await checkAndPostNews(conn, from);
-                    }
-                }, 900000); // Adjust this time as necessary
+                    // Notify the group
+                    await conn.sendMessage(from, { text: "📰 News service has been activated for this group!" });
 
+                    // Periodically check for new news every 1 minute (60,000 milliseconds)
+                    setInterval(async () => {
+                        if (activeGroups[from]) {
+                            await checkAndPostNews(conn, from);
+                        }
+                    }, 60000); // 60,000 milliseconds = 1 minute
+
+                } else {
+                    await conn.sendMessage(from, { text: "📰 News service is already active in this group." });
+                }
             } else {
-                await conn.sendMessage(from, { text: "📰 News service is already active in this group." });
+                await conn.sendMessage(from, { text: "🚫 This command can only be used by group admins or the bot owner." });
             }
         } else {
             await conn.sendMessage(from, { text: "This command can only be used in groups." });
