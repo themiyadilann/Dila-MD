@@ -28,10 +28,10 @@ cmd({ pattern: "opentime", desc: "Set daily open time for the group", category: 
 
     schedule.scheduleJob('openGroup', openCron, async () => {
         await conn.groupSettingUpdate(from, 'not_announcement');
-        await conn.sendMessage(from, { text: `Group opened at ${openTime} (Asia/Colombo time). 🔓\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
+        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
     });
 
-    reply(`Group will open daily at ${openTime} (Asia/Colombo time), which corresponds to ${adjustedOpenTime} in your current system time. ⏰`);
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗢𝗽𝗲𝗯 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${openTime}. ⏰*`);
 });
 
 cmd({ pattern: "closetime", desc: "Set daily close time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
@@ -50,8 +50,8 @@ cmd({ pattern: "closetime", desc: "Set daily close time for the group", category
 
     schedule.scheduleJob('closeGroup', closeCron, async () => {
         await conn.groupSettingUpdate(from, 'announcement');
-        await conn.sendMessage(from, { text: `Group closed at ${closeTime} (Asia/Colombo time). 🔒\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
+        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
     });
 
-    reply(`Group will close daily at ${closeTime} (Asia/Colombo time), which corresponds to ${adjustedCloseTime} in your current system time. ⏰`);
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗖𝗹𝗼𝘀𝗲 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${closeTime}. ⏰*`);
 });
