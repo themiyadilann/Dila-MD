@@ -31,6 +31,10 @@
     "mongoose":"8.5.3",
     "speedtest-net":"2.2.0",
     "systeminformation":"5.23.5",
-    "moment-timezone":"0.5.45"
+    "moment-timezone":"0.5.45",
+    "hirunews-scrap":"1.1.2",
+    "@sl-code-lords/esana-news" : "latest",
+    "@kaveesha-sithum/derana-news" : "latest",
+    "hirunews-scraper":"3.0.0"
   }
 }
