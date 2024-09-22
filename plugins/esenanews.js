@@ -99,12 +99,16 @@ cmd({
                     // Notify the group
                     await conn.sendMessage(from, { text: "📰 News service has been activated for this group!" });
 
-                    // Periodically check for new news every 1 minute (60,000 milliseconds)
-                    setInterval(async () => {
-                        if (activeGroups[from]) {
-                            await checkAndPostNews(conn, from);
-                        }
-                    }, 60000); // 60,000 milliseconds = 1 minute
+                    // Check for new news every 5 minutes (300,000 milliseconds)
+                    if (!activeGroups['interval']) {
+                        activeGroups['interval'] = setInterval(async () => {
+                            for (const groupId in activeGroups) {
+                                if (activeGroups[groupId] && groupId !== 'interval') {
+                                    await checkAndPostNews(conn, groupId);
+                                }
+                            }
+                        }, 300000); // 300,000 milliseconds = 5 minutes
+                    }
 
                 } else {
                     await conn.sendMessage(from, { text: "📰 News service is already active in this group." });
