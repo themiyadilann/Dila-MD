@@ -1,6 +1,7 @@
 const { cmd } = require('../command');
 const schedule = require('node-schedule');
-const moment = require('moment-timezone'); // Ensure you have installed this package
+const moment = require('moment-timezone');// Ensure you have installed this package
+const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
 
 let openTime, closeTime;
 
@@ -28,10 +29,10 @@ cmd({ pattern: "opentime", desc: "Set daily open time for the group", category: 
 
     schedule.scheduleJob('openGroup', openCron, async () => {
         await conn.groupSettingUpdate(from, 'not_announcement');
-        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
+        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\n${sensitiveData.footerText}` });
     });
 
-    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗢𝗽𝗲𝗯 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${openTime}. ⏰*`);
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗢𝗽𝗲𝗯 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${openTime}. ⏰*${sensitiveData.footerText}`);
 });
 
 cmd({ pattern: "closetime", desc: "Set daily close time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
@@ -50,8 +51,8 @@ cmd({ pattern: "closetime", desc: "Set daily close time for the group", category
 
     schedule.scheduleJob('closeGroup', closeCron, async () => {
         await conn.groupSettingUpdate(from, 'announcement');
-        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
+        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\n${sensitiveData.footerText}` });
     });
 
-    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗖𝗹𝗼𝘀𝗲 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${closeTime}. ⏰*`);
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗖𝗹𝗼𝘀𝗲 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${closeTime}. ⏰*${sensitiveData.footerText}`);
 });
