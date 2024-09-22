@@ -8,7 +8,9 @@ cmd({
     category: "main", 
     filename: __filename 
 }, async (conn, mek, m, { from, args, reply }) => { 
-    if (args.length < 3 || args[1] !== 'to') return reply('Usage: .translate <language> to <text>');
+    if (args.length < 4 || args[1] !== 'to') {
+        return reply('Usage: .translate <language> to <text>');
+    }
 
     const targetLanguage = args[0]; // The first argument is the target language
     const textToTranslate = args.slice(2).join(" "); // The rest is the text to translate
