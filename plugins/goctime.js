@@ -32,7 +32,7 @@ cmd({ pattern: "opentime", desc: "Set daily open time for the group", category: 
         await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\n${sensitiveData.footerText}` });
     });
 
-    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗢𝗽𝗲𝗯 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${openTime}. ⏰*${sensitiveData.footerText}`);
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗢𝗽𝗲𝗯 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${openTime}. ⏰*\n${sensitiveData.footerText}`);
 });
 
 cmd({ pattern: "closetime", desc: "Set daily close time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
@@ -54,5 +54,5 @@ cmd({ pattern: "closetime", desc: "Set daily close time for the group", category
         await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\n${sensitiveData.footerText}` });
     });
 
-    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗖𝗹𝗼𝘀𝗲 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${closeTime}. ⏰*${sensitiveData.footerText}`);
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗖𝗹𝗼𝘀𝗲 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${closeTime}. ⏰*\n${sensitiveData.footerText}`);
 });
