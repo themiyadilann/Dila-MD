@@ -5,29 +5,21 @@ const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
 const sendGroupWelcomeMessage = async (conn, groupId, participants, groupName) => {
     // Create a mention list for the message
     const mentions = participants.map(participant => participant.split('@')[0]);
-    const welcomeMessage = `𝗛𝗲𝘆 ${mentions.join(', ')} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
-
-    const groupDp = await conn.profilePictureUrl(groupId, 'image')
-        .catch(() => 'https://example.com/default-group-dp.jpg'); // Default DP if fetching fails
+    const welcomeMessage = `𝗛𝗲𝘆 ${mentions.join(', ')} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵊ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
 
     await conn.sendMessage(groupId, {
         text: welcomeMessage,
-        mentions: participants,
-        thumbnail: groupDp
+        mentions: participants
     });
 };
 
 // Function to send a private welcome message to each new member
 const sendPrivateWelcomeMessage = async (conn, memberId, groupName) => {
     const pushname = memberId.split('@')[0]; // Get the member's name from the ID
-    const welcomeMessage = `𝗛𝗲𝘆 ${pushname} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵊᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
-
-    const groupDp = await conn.profilePictureUrl(groupId, 'image')
-        .catch(() => 'https://example.com/default-group-dp.jpg'); // Default DP if fetching fails
+    const welcomeMessage = `𝗛𝗲𝘆 ${pushname} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵊ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
 
     await conn.sendMessage(memberId, {
-        text: welcomeMessage,
-        thumbnail: groupDp
+        text: welcomeMessage
     });
 };
 
