@@ -47,7 +47,7 @@ cmd({
     react: "👋", 
     desc: "Turn welcome messages on/off", 
     category: "group", 
-    use: '.welcome on/off', 
+    use: '&welcome on/off',  // Update the pattern to use '&' as the prefix
     filename: __filename 
 }, 
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
@@ -60,7 +60,7 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
         
         // Validate the argument for "on" or "off"
         if (!action || (action !== 'on' && action !== 'off')) {
-            return reply('Please use `.welcome on` or `.welcome off`. ⚙️');
+            return reply('Please use `&welcome on` or `&welcome off`. ⚙️'); // Adjust for the correct prefix
         }
 
         // Toggle welcome message setting
@@ -79,7 +79,7 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
         }
         
     } catch (e) {
+        console.error("Detailed error setting up welcome messages:", e); // Add this to log the exact error
         reply('Error setting up welcome messages. ⚠️');
-        console.error("Error setting up welcome messages:", e);
     }
 });
