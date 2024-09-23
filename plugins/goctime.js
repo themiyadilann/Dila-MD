@@ -4,7 +4,7 @@ const moment = require('moment-timezone');
 const fs = require('fs');
 
 const TIMEZONE = 'Asia/Colombo'; // Set the timezone
-const dbFilePath = '../data/goctimes.json'; // Updated path for the JSON file
+const dbFilePath = 'data/goctimes.json'; // Updated path for the JSON file
 
 // Function to adjust time
 function adjustTime(time) {
