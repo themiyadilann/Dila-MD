@@ -4,13 +4,15 @@ const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
 // Function to send welcome message to new members with profile picture
 const sendWelcomeMessage = async (conn, groupId, memberId, groupName) => {
     try {
+        console.log(`Preparing to send welcome message to: ${memberId}`);
+
         // Attempt to get the profile picture of the new member
         let profilePicUrl;
         try {
             profilePicUrl = await conn.profilePictureUrl(memberId, 'image'); // Get profile picture
             console.log(`Profile picture for ${memberId}: ${profilePicUrl}`);
         } catch (err) {
-            profilePicUrl = 'https://example.com/default-profile-picture.jpg'; // Use a default image if profile picture is not available
+            profilePicUrl = 'https://example.com/default-profile-picture.jpg'; // Default image
             console.log(`Error fetching profile picture for ${memberId}, using default.`);
         }
 
@@ -18,7 +20,7 @@ const sendWelcomeMessage = async (conn, groupId, memberId, groupName) => {
         const welcomeMessage = {
             caption: `𝗛𝗲𝘆 @${memberId.split('@')[0]} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʀ ᴅɪʟᴀ ᴏꜰᴄ`,
             mentions: [memberId],
-            image: { url: profilePicUrl } // Attach the profile picture
+            image: { url: profilePicUrl } // Attach profile picture
         };
 
         // Send the welcome message to the group
@@ -33,16 +35,21 @@ const sendWelcomeMessage = async (conn, groupId, memberId, groupName) => {
 const registerGroupWelcomeListener = (conn) => {
     conn.ev.on('group-participants.update', async (update) => {
         try {
+            console.log('Group participants update detected:', update);
             const { id, participants, action } = update; // id = group id, participants = new members, action = add/remove
-            if (action === 'add') {  // Check if the action is a new member joining
+
+            if (action === 'add') {  // Check if action is a new member joining
                 const groupMetadata = await conn.groupMetadata(id); // Fetch group details
                 const groupName = groupMetadata.subject; // Get the group name
                 console.log(`New participants added to group ${groupName}: ${participants}`);
 
                 // Send welcome message to each new participant
                 participants.forEach(async (participant) => {
+                    console.log(`Sending welcome message to: ${participant}`);
                     await sendWelcomeMessage(conn, id, participant, groupName);
                 });
+            } else {
+                console.log('No new members to welcome.');
             }
         } catch (e) {
             console.error('Error handling group participant update:', e);
@@ -60,9 +67,9 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
 
         // Register the event listener for new participants
         registerGroupWelcomeListener(conn);
+        console.log('Welcome message listener registered.');
 
         reply('Welcome message functionality activated! 🥳');
-        console.log('Welcome message listener registered.');
     } catch (e) {
         reply('Error setting up welcome messages. ⚠️');
         console.log('Error setting up welcome messages:', e);
