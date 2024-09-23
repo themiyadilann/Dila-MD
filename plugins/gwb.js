@@ -1,142 +1,57 @@
-const fs = require('fs');
 const { cmd } = require('../command');
 const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
-const welcomeGroupsFile = './data/welcomeGroups.json'; // Path to the JSON file
 
-// Function to load enabled groups from the JSON file
-const loadEnabledGroups = () => {
-    if (!fs.existsSync(welcomeGroupsFile)) {
-        fs.writeFileSync(welcomeGroupsFile, JSON.stringify({ enabledGroups: [], privateWelcomeEnabled: false })); // Create file if it doesn't exist
-    }
-    const data = fs.readFileSync(welcomeGroupsFile);
-    return JSON.parse(data);
-};
+// In-memory store for the welcome feature toggle
+const welcomeSettings = {}; // Key: groupId, Value: true (on) or false (off)
 
-// Function to save enabled groups to the JSON file
-const saveEnabledGroups = (data) => {
-    fs.writeFileSync(welcomeGroupsFile, JSON.stringify(data));
-};
-
-// Function to check if a group is enabled for welcome messages
-const isGroupEnabled = (groupId) => {
-    const { enabledGroups } = loadEnabledGroups();
-    return enabledGroups.includes(groupId);
-};
-
-// Function to add a group to the enabled list
-const addGroup = (groupId) => {
-    const data = loadEnabledGroups();
-    if (!data.enabledGroups.includes(groupId)) {
-        data.enabledGroups.push(groupId);
-        saveEnabledGroups(data);
-    }
-};
-
-// Function to remove a group from the enabled list
-const removeGroup = (groupId) => {
-    const data = loadEnabledGroups();
-    if (data.enabledGroups.includes(groupId)) {
-        const updatedGroups = data.enabledGroups.filter(id => id !== groupId);
-        data.enabledGroups = updatedGroups;
-        saveEnabledGroups(data);
-    }
-};
-
-// Function to check if private welcome messages are enabled
-const arePrivateWelcomeEnabled = () => {
-    const { privateWelcomeEnabled } = loadEnabledGroups();
-    return privateWelcomeEnabled;
-};
-
-// Function to set the private welcome messages enabled status
-const setPrivateWelcomeEnabled = (status) => {
-    const data = loadEnabledGroups();
-    data.privateWelcomeEnabled = status;
-    saveEnabledGroups(data);
-};
-
-// Function to send welcome message to new members in group
-const sendGroupWelcomeMessage = async (conn, groupId, participants, groupName) => {
-    const mentions = participants.map(participant => participant.split('@')[0]);
-    const welcomeMessage = `𝗛𝗲𝘆 ${mentions.join(', ')} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵊ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
-
-    await conn.sendMessage(groupId, {
-        text: welcomeMessage,
-        mentions: participants
-    });
-};
-
-// Function to send a private welcome message to each new member
-const sendPrivateWelcomeMessage = async (conn, memberId, groupName) => {
-    const pushname = memberId.split('@')[0];
-    const welcomeMessage = `𝗛𝗲𝘆 ${pushname} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵊ ᵍʳᵒᵘᵖ ᵈᵊˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
-
-    await conn.sendMessage(memberId, {
-        text: welcomeMessage
-    });
+// Function to send welcome message to new members
+const sendWelcomeMessage = async (conn, groupId, memberId) => {
+    const welcomeMessage = `*Welcome to the group, @${memberId.split('@')[0]}! 🎉*\nFeel free to introduce yourself and have fun! ✨\n${sensitiveData.footerText}`;
+    await conn.sendMessage(groupId, { text: welcomeMessage, mentions: [memberId] });
 };
 
 // Event listener for new group participants
 const registerGroupWelcomeListener = (conn) => {
     conn.ev.on('group-participants.update', async (update) => {
-        const { id, participants, action } = update;
-        if (action === 'add' && isGroupEnabled(id)) { // Check if the group is enabled
-            const groupMetadata = await conn.groupMetadata(id);
-            const groupName = groupMetadata.subject;
-
-            // Send group welcome message
-            await sendGroupWelcomeMessage(conn, id, participants, groupName);
-
-            // Send private welcome messages if enabled
-            if (arePrivateWelcomeEnabled()) {
-                for (const participant of participants) {
-                    await sendPrivateWelcomeMessage(conn, participant, groupName);
-                }
-            }
+        const { id, participants, action } = update; // id = group id, participants = new members, action = add/remove
+        if (action === 'add' && welcomeSettings[id]) {  // Check if welcome is enabled for the group
+            participants.forEach(async (participant) => {
+                await sendWelcomeMessage(conn, id, participant);  // Send welcome message to each new member
+            });
         }
     });
 };
 
-// Unified welcome command
-cmd({
-    pattern: "welcome ?(on|off|alleton|alletoff|list)?",
-    react: "👋",
-    desc: "Manage welcome messages in the group",
-    category: "group",
-    use: '.welcome on | off | alleton | alletoff | list',
-    filename: __filename
-}, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
+// Example of registering the event listener in your main file
+cmd({ pattern: "welcome", react: "👋", desc: "Turn welcome messages on/off", category: "group", use: '.welcome on/off', filename: __filename }, 
+async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
     try {
         if (!isGroup) return reply('This command can only be used in a group. 🚫');
         if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
         if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
 
-        const option = args[0]; // Get the option (on/off/alleton/alletoff/list)
-
-        if (option === 'on') {
-            addGroup(from); // Add the group ID to the enabled list
-            registerGroupWelcomeListener(conn); // Register listener if not already registered
-            reply('Welcome messages are now enabled for this group! 🥳');
-        } else if (option === 'off') {
-            removeGroup(from); // Remove the group ID from the enabled list
-            reply('Welcome messages are now disabled for this group! ❌');
-        } else if (option === 'alleton') {
-            setPrivateWelcomeEnabled(true); // Enable private welcome messages
-            reply('Private welcome messages are now enabled! 🎉');
-        } else if (option === 'alletoff') {
-            setPrivateWelcomeEnabled(false); // Disable private welcome messages
-            reply('Private welcome messages are now disabled! ❌');
-        } else if (option === 'list') {
-            const { enabledGroups } = loadEnabledGroups();
-            if (enabledGroups.length === 0) {
-                return reply('No groups have welcome messages enabled. 🚫');
-            }
-            reply(`Enabled groups:\n${enabledGroups.join('\n')}`);
-        } else {
-            return reply('Invalid option. Use "on", "off", "alleton", "alletoff", or "list".');
+        const action = args[0]?.toLowerCase();
+        
+        if (!action || (action !== 'on' && action !== 'off')) {
+            return reply('Please use `.welcome on` or `.welcome off`. ⚙️');
         }
+
+        // Toggle welcome message setting
+        if (action === 'on') {
+            welcomeSettings[from] = true;
+            reply('Welcome message functionality activated! 🥳');
+        } else if (action === 'off') {
+            welcomeSettings[from] = false;
+            reply('Welcome message functionality deactivated! 😶');
+        }
+
+        // Register the event listener for new participants (if not already registered)
+        if (!conn.ev.listenerCount('group-participants.update')) {
+            registerGroupWelcomeListener(conn);
+        }
+        
     } catch (e) {
-        reply('Error processing your request. ⚠️');
-        console.log('Error processing welcome command:', e);
+        reply('Error setting up welcome messages. ⚠️');
+        console.log(e);
     }
 });
