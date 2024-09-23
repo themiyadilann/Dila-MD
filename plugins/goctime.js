@@ -22,6 +22,7 @@ const loadGroupTimes = async () => {
         groupTimes[groupId] = { openTime, closeTime };
     });
 
+    console.log("Loaded group times:", groupTimes); // Debugging output
     return groupTimes;
 };
 
@@ -38,6 +39,8 @@ const scheduleGroupTimes = async (conn) => {
         
         const [closeHour, closeMinute] = adjustedCloseTime.split(':').map(Number);
         const closeCron = `0 ${closeMinute} ${closeHour} * * *`;
+
+        console.log(`Scheduling group ${groupId}: Open at ${openCron}, Close at ${closeCron}`); // Debugging output
 
         // Schedule opening
         schedule.scheduleJob(`openGroup_${groupId}`, openCron, async () => {
