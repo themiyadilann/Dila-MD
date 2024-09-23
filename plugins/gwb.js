@@ -1,7 +1,7 @@
 const fs = require('fs');
 const { cmd } = require('../command');
 const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
-const welcomeGroupsFile = './data/welcomeGroups.json'; // Path to the JSON file
+const welcomeGroupsFile = './welcomeGroups.json'; // Path to the JSON file
 
 // Function to load enabled groups from the JSON file
 const loadEnabledGroups = () => {
@@ -97,13 +97,13 @@ const registerGroupWelcomeListener = (conn) => {
     });
 };
 
-// Command to toggle welcome messages
+// Command to toggle welcome messages and private welcome messages
 cmd({
-    pattern: "welcome ?(on|off)?",
+    pattern: "welcome (on|off|alleton|alletoff|list)",
     react: "👋",
-    desc: "Enable or disable group welcome messages",
+    desc: "Enable or disable group welcome messages and private welcome messages",
     category: "group",
-    use: '.welcome on | off',
+    use: '.welcome (on|off|alleton|alletoff|list)',
     filename: __filename
 }, async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
     try {
@@ -111,63 +111,43 @@ cmd({
         if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
         if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
 
-        const option = args[0]; // Get the option (on/off)
+        const option = args[0]; // Get the option
 
-        if (option === 'on') {
-            addGroup(from); // Add the group ID to the enabled list
-            registerGroupWelcomeListener(conn); // Register listener if not already registered
-            reply('Welcome messages are now enabled for this group! 🥳');
-        } else if (option === 'off') {
-            removeGroup(from); // Remove the group ID from the enabled list
-            reply('Welcome messages are now disabled for this group! ❌');
-        } else {
-            return reply('Invalid option. Use "on" or "off".');
+        switch (option) {
+            case 'on':
+                addGroup(from); // Add the group ID to the enabled list
+                registerGroupWelcomeListener(conn); // Register listener if not already registered
+                reply('Welcome messages are now enabled for this group! 🥳');
+                break;
+
+            case 'off':
+                removeGroup(from); // Remove the group ID from the enabled list
+                reply('Welcome messages are now disabled for this group! ❌');
+                break;
+
+            case 'alleton':
+                setPrivateWelcomeEnabled(true); // Enable private welcome messages
+                reply('Private welcome messages are now enabled! 🎉');
+                break;
+
+            case 'alletoff':
+                setPrivateWelcomeEnabled(false); // Disable private welcome messages
+                reply('Private welcome messages are now disabled! ❌');
+                break;
+
+            case 'list':
+                const { enabledGroups } = loadEnabledGroups();
+                if (enabledGroups.length === 0) {
+                    return reply('No groups have welcome messages enabled. 🚫');
+                }
+                reply(`Enabled groups:\n${enabledGroups.join('\n')}`);
+                break;
+
+            default:
+                return reply('Invalid option. Use "on", "off", "alleton", "alletoff", or "list".');
         }
     } catch (e) {
         reply('Error processing your request. ⚠️');
         console.log('Error processing welcome command:', e);
     }
-});
-
-// Command to toggle private welcome messages
-cmd({
-    pattern: "welcome alleton|welcome alletoff",
-    react: "👋",
-    desc: "Enable or disable private welcome messages",
-    category: "group",
-    use: '.welcome alleton | alletoff',
-    filename: __filename
-}, async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
-    try {
-        if (!isGroup) return reply('This command can only be used in a group. 🚫');
-        if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
-        if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
-
-        if (m.text.includes('alleton')) {
-            setPrivateWelcomeEnabled(true); // Enable private welcome messages
-            reply('Private welcome messages are now enabled! 🎉');
-        } else {
-            setPrivateWelcomeEnabled(false); // Disable private welcome messages
-            reply('Private welcome messages are now disabled! ❌');
-        }
-    } catch (e) {
-        reply('Error processing your request. ⚠️');
-        console.log('Error processing private welcome command:', e);
-    }
-});
-
-// Command to check all enabled groups
-cmd({
-    pattern: "welcome list",
-    react: "📋",
-    desc: "List all groups with welcome messages enabled",
-    category: "group",
-    use: '.welcome list',
-    filename: __filename
-}, async (conn, mek, m, { reply }) => {
-    const { enabledGroups } = loadEnabledGroups();
-    if (enabledGroups.length === 0) {
-        return reply('No groups have welcome messages enabled. 🚫');
-    }
-    reply(`Enabled groups:\n${enabledGroups.join('\n')}`);
 });
