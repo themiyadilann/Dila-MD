@@ -1,27 +1,64 @@
 const { cmd } = require('../command');
 const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
 
-// Function to send welcome message to new members
-const sendWelcomeMessage = async (conn, groupId, memberId) => {
-    const welcomeMessage = `*Welcome to the group, @${memberId.split('@')[0]}! 🎉*\nFeel free to introduce yourself and have fun! ✨\n${sensitiveData.footerText}`;
-    await conn.sendMessage(groupId, { text: welcomeMessage, mentions: [memberId] });
+// Function to send welcome message to new members in group
+const sendGroupWelcomeMessage = async (conn, groupId, participants, groupName) => {
+    // Create a mention list for the message
+    const mentions = participants.map(participant => participant.split('@')[0]);
+    const welcomeMessage = `𝗛𝗲𝘆 ${mentions.join(', ')} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
+
+    const groupDp = await conn.profilePictureUrl(groupId, 'image')
+        .catch(() => 'https://example.com/default-group-dp.jpg'); // Default DP if fetching fails
+
+    await conn.sendMessage(groupId, {
+        text: welcomeMessage,
+        mentions: participants,
+        thumbnail: groupDp
+    });
+};
+
+// Function to send a private welcome message to each new member
+const sendPrivateWelcomeMessage = async (conn, memberId, groupName) => {
+    const pushname = memberId.split('@')[0]; // Get the member's name from the ID
+    const welcomeMessage = `𝗛𝗲𝘆 ${pushname} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵊᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʳ ᴅɪʟᴀ ᴏꜰᴄ`;
+
+    const groupDp = await conn.profilePictureUrl(groupId, 'image')
+        .catch(() => 'https://example.com/default-group-dp.jpg'); // Default DP if fetching fails
+
+    await conn.sendMessage(memberId, {
+        text: welcomeMessage,
+        thumbnail: groupDp
+    });
 };
 
 // Event listener for new group participants
 const registerGroupWelcomeListener = (conn) => {
     conn.ev.on('group-participants.update', async (update) => {
         const { id, participants, action } = update; // id = group id, participants = new members, action = add/remove
-        if (action === 'add') {  // Check if the action is a new member joining
-            participants.forEach(async (participant) => {
-                await sendWelcomeMessage(conn, id, participant);  // Send welcome message to each new member
-            });
+        if (action === 'add') { // Check if the action is a new member joining
+            const groupMetadata = await conn.groupMetadata(id);
+            const groupName = groupMetadata.subject;
+
+            // Send group welcome message
+            await sendGroupWelcomeMessage(conn, id, participants, groupName);
+
+            // Send private welcome messages
+            for (const participant of participants) {
+                await sendPrivateWelcomeMessage(conn, participant, groupName);
+            }
         }
     });
 };
 
 // Example of registering the event listener in your main file
-cmd({ pattern: "welcome", react: "👋", desc: "Send a welcome message when a new member joins the group", category: "group", use: '.greet', filename: __filename }, 
-async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
+cmd({
+    pattern: "welcome",
+    react: "👋",
+    desc: "Send a welcome message when a new member joins the group",
+    category: "group",
+    use: '.greet',
+    filename: __filename
+}, async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
     try {
         if (!isGroup) return reply('This command can only be used in a group. 🚫');
         if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
@@ -33,6 +70,6 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
         reply('Welcome message functionality activated! 🥳');
     } catch (e) {
         reply('Error setting up welcome messages. ⚠️');
-        console.log(e);
+        console.log('Error setting up welcome messages:', e);
     }
 });
