@@ -1,10 +1,29 @@
 const { cmd } = require('../command');
 const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
 
-// Function to send welcome message to new members
+// Function to send welcome message to new members with profile picture
 const sendWelcomeMessage = async (conn, groupId, memberId, groupName) => {
-    const welcomeMessage = `𝗛𝗲𝘆 @${memberId.split('@')[0]} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʀ ᴅɪʟᴀ ᴏꜰᴄ`;
-    await conn.sendMessage(groupId, { text: welcomeMessage, mentions: [memberId] });
+    try {
+        // Fetch the profile picture URL of the new member
+        let profilePicUrl;
+        try {
+            profilePicUrl = await conn.profilePictureUrl(memberId, 'image'); // Get the profile pic URL of the new member
+        } catch (err) {
+            profilePicUrl = 'https://example.com/default-profile-picture.jpg'; // Use a default image if the profile picture is not available
+        }
+
+        // Create the welcome message
+        const welcomeMessage = {
+            caption: `𝗛𝗲𝘆 @${memberId.split('@')[0]} 👋\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n\nᴍᴀᴅᴇ ʙʏ ᴍʀ ᴅɪʟᴀ ᴏꜰᴄ`,
+            mentions: [memberId],
+            image: { url: profilePicUrl } // Send the profile picture along with the message
+        };
+
+        // Send the welcome message with the profile picture
+        await conn.sendMessage(groupId, welcomeMessage);
+    } catch (e) {
+        console.log('Error sending welcome message:', e);
+    }
 };
 
 // Event listener for new group participants
