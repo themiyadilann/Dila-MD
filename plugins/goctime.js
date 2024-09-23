@@ -4,6 +4,7 @@ const moment = require('moment-timezone');
 const mongoose = require('mongoose');
 const config = require('../config');
 const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
+const TimeModel = require('./timeModel');  // Import the time model
 
 // MongoDB Connection
 mongoose.connect(config.MONGODB, {
@@ -14,116 +15,76 @@ mongoose.connect(config.MONGODB, {
 
 const TIMEZONE = 'Asia/Colombo';
 
-// Mongoose schema for open/close times per group
-const timeSchema = new mongoose.Schema({
-    groupId: { type: String, required: true, unique: true },
-    openTime: { type: String, required: true },
-    closeTime: { type: String, required: true }
-});
-
-const TimeModel = mongoose.model('Time', timeSchema);
-
-// Adjust time to a specific timezone and subtract 5:30 hours
+// Adjust time to a specific timezone
 function adjustTime(time) {
     const [hour, minute] = time.split(':').map(Number);
-    return moment.tz({ hour, minute }, TIMEZONE).subtract(5, 'hours').subtract(30, 'minutes').format('HH:mm');
+    return moment.tz({ hour, minute }, TIMEZONE).format('HH:mm');
 }
 
-// Save times for a specific group
-async function saveTimes(groupId, openTime, closeTime) {
+// Schedule open/close jobs for a group
+function scheduleJobs(groupId, openTime, closeTime, conn) {
+    const adjustedOpenTime = adjustTime(openTime);
+    const [hourOpen, minuteOpen] = adjustedOpenTime.split(':').map(Number);
+
+    const adjustedCloseTime = adjustTime(closeTime);
+    const [hourClose, minuteClose] = adjustedCloseTime.split(':').map(Number);
+
+    // Open group
+    const openJob = schedule.scheduleJob(`openGroup-${groupId}`, `${minuteOpen} ${hourOpen} * * *`, async () => {
+        await conn.groupSettingUpdate(groupId, 'not_announcement');
+        await conn.sendMessage(groupId, { text: `*Group opened at ${openTime}.* 🔓\n${sensitiveData.footerText}` });
+    });
+
+    // Close group
+    const closeJob = schedule.scheduleJob(`closeGroup-${groupId}`, `${minuteClose} ${hourClose} * * *`, async () => {
+        await conn.groupSettingUpdate(groupId, 'announcement');
+        await conn.sendMessage(groupId, { text: `*Group closed at ${closeTime}.* 🔒\n${sensitiveData.footerText}` });
+    });
+
+    console.log(`Scheduled for group ${groupId}: Open at ${openTime}, Close at ${closeTime}`);
+}
+
+// Command to set group times
+cmd({ pattern: "settime", desc: "Set open/close times for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isAdmins, reply }) => {
+    if (!isGroup) return reply('This command can only be used in a group.');
+    if (!isAdmins) return reply('Only admins can use this command.');
+
+    const [openTime, closeTime] = args;
+
+    if (!openTime || !closeTime) return reply('Usage: .settime <openTime> <closeTime> (format: HH:mm)');
+
     try {
-        let groupTime = await TimeModel.findOne({ groupId });
+        // Save times to MongoDB
+        let groupTime = await TimeModel.findOne({ groupId: from });
         if (!groupTime) {
-            groupTime = new TimeModel({ groupId, openTime, closeTime });
+            groupTime = new TimeModel({ groupId: from, openTime, closeTime });
         } else {
             groupTime.openTime = openTime;
             groupTime.closeTime = closeTime;
         }
         await groupTime.save();
-        console.log(`Times for group ${groupId} saved to MongoDB.`);
-    } catch (err) {
-        console.error('Error saving times:', err);
-    }
-}
 
-// Load times for all groups on startup
-async function loadAllGroupTimes() {
+        // Schedule jobs
+        scheduleJobs(from, openTime, closeTime, conn);
+
+        reply(`Times for group set: Open at ${openTime}, Close at ${closeTime}.`);
+
+    } catch (err) {
+        console.error(err);
+        reply('Failed to save group times.');
+    }
+});
+
+// On bot startup, load all saved times and schedule them
+async function scheduleAllGroups(conn) {
     try {
         const allTimes = await TimeModel.find();
-        return allTimes;
+        allTimes.forEach(({ groupId, openTime, closeTime }) => {
+            scheduleJobs(groupId, openTime, closeTime, conn);
+        });
     } catch (err) {
         console.error('Error loading group times:', err);
     }
 }
 
-// Reschedule jobs for a specific group
-function rescheduleGroupJobs(conn, groupId, openTime, closeTime) {
-    // Reschedule open time
-    const adjustedOpenTime = adjustTime(openTime);
-    const [adjustedHourOpen, adjustedMinuteOpen] = adjustedOpenTime.split(':').map(Number);
-    const openCron = `0 ${adjustedMinuteOpen} ${adjustedHourOpen} * * *`;
-
-    schedule.scheduleJob(`openGroup-${groupId}`, openCron, async () => {
-        await conn.groupSettingUpdate(groupId, 'not_announcement');
-        await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\n${sensitiveData.footerText}` });
-    });
-
-    // Reschedule close time
-    const adjustedCloseTime = adjustTime(closeTime);
-    const [adjustedHourClose, adjustedMinuteClose] = adjustedCloseTime.split(':').map(Number);
-    const closeCron = `0 ${adjustedMinuteClose} ${adjustedHourClose} * * *`;
-
-    schedule.scheduleJob(`closeGroup-${groupId}`, closeCron, async () => {
-        await conn.groupSettingUpdate(groupId, 'announcement');
-        await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\n${sensitiveData.footerText}` });
-    });
-
-    console.log(`Group ${groupId} scheduled to open at ${openTime} and close at ${closeTime}.`);
-}
-
-// Load and reschedule jobs for all groups on startup
-async function rescheduleAllGroups(conn) {
-    const allGroupTimes = await loadAllGroupTimes();
-    if (allGroupTimes.length > 0) {
-        allGroupTimes.forEach(groupTime => {
-            rescheduleGroupJobs(conn, groupTime.groupId, groupTime.openTime, groupTime.closeTime);
-        });
-    }
-}
-
-// Command to set daily open time for a group
-cmd({ pattern: "opentime", desc: "Set daily open time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
-    if (!isGroup) return reply('This command can only be used in a group. 🚫');
-    if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
-    if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
-
-    if (args.length < 1) return reply('Usage: .opentime <HH:mm>');
-
-    const openTime = args[0];
-    const groupId = from;
-
-    await saveTimes(groupId, openTime, closeTime = "");  // Save the open time to MongoDB for this group
-    rescheduleGroupJobs(conn, groupId, openTime, closeTime);  // Reschedule for this group
-
-    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗢𝗽𝗲𝗻 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${openTime}. ⏰*\n${sensitiveData.footerText}`);
-});
-
-// Command to set daily close time for a group
-cmd({ pattern: "closetime", desc: "Set daily close time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
-    if (!isGroup) return reply('This command can only be used in a group. 🚫');
-    if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
-    if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
-
-    if (args.length < 1) return reply('Usage: .closetime <HH:mm>');
-
-    const closeTime = args[0];
-    const groupId = from;
-
-    await saveTimes(groupId, openTime = "", closeTime);  // Save the close time to MongoDB for this group
-    rescheduleGroupJobs(conn, groupId, openTime, closeTime);  // Reschedule for this group
-
-    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗖𝗹𝗼𝘀𝗲 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${closeTime}. ⏰*\n${sensitiveData.footerText}`);
-});
-
-// Reschedule jobs on startup for all groups
-rescheduleAllGroups(conn);
+scheduleAllGroups(conn);
