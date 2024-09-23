@@ -71,7 +71,7 @@ const registerGroupWelcomeGoodbyeListener = (conn) => {
 
 // Welcome command to enable or disable welcome messages
 cmd({
-    pattern: "welcome on",
+    pattern: "welcome",
     react: "👋",
     desc: "Enable welcome messages for new group members",
     category: "group",
@@ -94,7 +94,7 @@ cmd({
 
 // Goodbye command to enable or disable goodbye messages
 cmd({
-    pattern: "goodbye on",
+    pattern: "goodbye",
     react: "👋",
     desc: "Enable goodbye messages for departing group members",
     category: "group",
