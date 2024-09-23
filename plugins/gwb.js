@@ -6,24 +6,50 @@ const welcomeSettings = {}; // Key: groupId, Value: true (on) or false (off)
 
 // Function to send welcome message to new members
 const sendWelcomeMessage = async (conn, groupId, memberId) => {
-    const welcomeMessage = `*Welcome to the group, @${memberId.split('@')[0]}! 🎉*\nFeel free to introduce yourself and have fun! ✨\n${sensitiveData.footerText}`;
-    await conn.sendMessage(groupId, { text: welcomeMessage, mentions: [memberId] });
+    try {
+        const welcomeMessage = `*Welcome to the group, @${memberId.split('@')[0]}! 🎉*\nFeel free to introduce yourself and have fun! ✨\n${sensitiveData.footerText}`;
+        console.log(`Sending welcome message to ${memberId} in group ${groupId}:`, welcomeMessage); // Debug log
+        await conn.sendMessage(groupId, { text: welcomeMessage, mentions: [memberId] });
+    } catch (error) {
+        console.error("Error sending welcome message:", error);
+    }
 };
 
 // Event listener for new group participants
 const registerGroupWelcomeListener = (conn) => {
     conn.ev.on('group-participants.update', async (update) => {
-        const { id, participants, action } = update; // id = group id, participants = new members, action = add/remove
-        if (action === 'add' && welcomeSettings[id]) {  // Check if welcome is enabled for the group
-            participants.forEach(async (participant) => {
-                await sendWelcomeMessage(conn, id, participant);  // Send welcome message to each new member
-            });
+        try {
+            const { id, participants, action } = update; // id = group id, participants = new members, action = add/remove
+            if (action === 'add') {
+                // Ensure welcome messages are enabled for this group
+                if (!welcomeSettings[id]) {
+                    console.log(`Welcome messages are disabled for group ${id}`);
+                    return;
+                }
+                
+                participants.forEach(async (participant) => {
+                    try {
+                        await sendWelcomeMessage(conn, id, participant);  // Send welcome message to each new member
+                    } catch (error) {
+                        console.error(`Error sending welcome message to participant ${participant}:`, error);
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("Error in group-participants.update event:", error);
         }
     });
 };
 
 // Example of registering the event listener in your main file
-cmd({ pattern: "welcome", react: "👋", desc: "Turn welcome messages on/off", category: "group", use: '.welcome on/off', filename: __filename }, 
+cmd({ 
+    pattern: "welcome", 
+    react: "👋", 
+    desc: "Turn welcome messages on/off", 
+    category: "group", 
+    use: '.welcome on/off', 
+    filename: __filename 
+}, 
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
     try {
         if (!isGroup) return reply('This command can only be used in a group. 🚫');
@@ -32,6 +58,7 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
 
         const action = args[0]?.toLowerCase();
         
+        // Validate the argument for "on" or "off"
         if (!action || (action !== 'on' && action !== 'off')) {
             return reply('Please use `.welcome on` or `.welcome off`. ⚙️');
         }
@@ -45,13 +72,14 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply, args }) => {
             reply('Welcome message functionality deactivated! 😶');
         }
 
-        // Register the event listener for new participants (if not already registered)
+        // Register the event listener for new participants if not already registered
         if (!conn.ev.listenerCount('group-participants.update')) {
+            console.log('Registering group-participants.update listener...');
             registerGroupWelcomeListener(conn);
         }
         
     } catch (e) {
         reply('Error setting up welcome messages. ⚠️');
-        console.log(e);
+        console.error("Error setting up welcome messages:", e);
     }
 });
