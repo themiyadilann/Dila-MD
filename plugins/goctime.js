@@ -29,15 +29,16 @@ cmd({ pattern: "opentime", desc: "Set daily open time for the group", category: 
     if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
     if (args.length < 1) return reply('Usage: .opentime <HH:mm>[,<HH:mm>,<HH:mm>...]');
 
-    const openTimes = args[0].split(',').map(adjustTime);  // Handle multiple times
-    openTimes.forEach((adjustedOpenTime) => {
+    const openTimes = args[0].split(',');  // Store original times
+    openTimes.forEach((openTime) => {
+        const adjustedOpenTime = adjustTime(openTime);  // Adjust each time
         const [adjustedHour, adjustedMinute] = adjustedOpenTime.split(':').map(Number);
         const openCron = `0 ${adjustedMinute} ${adjustedHour} * * *`;
-        
-        schedule.cancelJob(`openGroup_${from}_${adjustedOpenTime}`);  // Cancel job for each specific time
-        schedule.scheduleJob(`openGroup_${from}_${adjustedOpenTime}`, openCron, async () => {
+
+        schedule.cancelJob(`openGroup_${from}_${openTime}`);  // Cancel job for each specific time
+        schedule.scheduleJob(`openGroup_${from}_${openTime}`, openCron, async () => {
             await conn.groupSettingUpdate(from, 'not_announcement');
-            await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${adjustedOpenTime}. 🔓*\n${sensitiveData.footerText}` });
+            await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\n${sensitiveData.footerText}` });  // Use original openTime
         });
     });
 
@@ -55,15 +56,16 @@ cmd({ pattern: "closetime", desc: "Set daily close time for the group", category
     if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
     if (args.length < 1) return reply('Usage: .closetime <HH:mm>[,<HH:mm>,<HH:mm>...]');
 
-    const closeTimes = args[0].split(',').map(adjustTime);  // Handle multiple times
-    closeTimes.forEach((adjustedCloseTime) => {
+    const closeTimes = args[0].split(',');  // Store original times
+    closeTimes.forEach((closeTime) => {
+        const adjustedCloseTime = adjustTime(closeTime);  // Adjust each time
         const [adjustedHour, adjustedMinute] = adjustedCloseTime.split(':').map(Number);
         const closeCron = `0 ${adjustedMinute} ${adjustedHour} * * *`;
 
-        schedule.cancelJob(`closeGroup_${from}_${adjustedCloseTime}`);  // Cancel job for each specific time
-        schedule.scheduleJob(`closeGroup_${from}_${adjustedCloseTime}`, closeCron, async () => {
+        schedule.cancelJob(`closeGroup_${from}_${closeTime}`);  // Cancel job for each specific time
+        schedule.scheduleJob(`closeGroup_${from}_${closeTime}`, closeCron, async () => {
             await conn.groupSettingUpdate(from, 'announcement');
-            await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${adjustedCloseTime}. 🔒*\n${sensitiveData.footerText}` });
+            await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\n${sensitiveData.footerText}` });  // Use original closeTime
         });
     });
 
@@ -79,25 +81,27 @@ const loadScheduledJobs = () => {
     const groupTimes = readGroupTimes();
     for (const [groupId, times] of Object.entries(groupTimes)) {
         if (times.openTimes) {
-            const openTimes = times.openTimes.split(',').map(adjustTime);
-            openTimes.forEach((adjustedOpenTime) => {
+            const openTimes = times.openTimes.split(',');
+            openTimes.forEach((openTime) => {
+                const adjustedOpenTime = adjustTime(openTime);
                 const [adjustedHour, adjustedMinute] = adjustedOpenTime.split(':').map(Number);
                 const openCron = `0 ${adjustedMinute} ${adjustedHour} * * *`;
-                schedule.scheduleJob(`openGroup_${groupId}_${adjustedOpenTime}`, openCron, async () => {
+                schedule.scheduleJob(`openGroup_${groupId}_${openTime}`, openCron, async () => {
                     await conn.groupSettingUpdate(groupId, 'not_announcement');
-                    await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${adjustedOpenTime}. 🔓*\n${sensitiveData.footerText}` });
+                    await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\n${sensitiveData.footerText}` });  // Use original openTime
                 });
             });
         }
 
         if (times.closeTimes) {
-            const closeTimes = times.closeTimes.split(',').map(adjustTime);
-            closeTimes.forEach((adjustedCloseTime) => {
+            const closeTimes = times.closeTimes.split(',');
+            closeTimes.forEach((closeTime) => {
+                const adjustedCloseTime = adjustTime(closeTime);
                 const [adjustedHour, adjustedMinute] = adjustedCloseTime.split(':').map(Number);
                 const closeCron = `0 ${adjustedMinute} ${adjustedHour} * * *`;
-                schedule.scheduleJob(`closeGroup_${groupId}_${adjustedCloseTime}`, closeCron, async () => {
+                schedule.scheduleJob(`closeGroup_${groupId}_${closeTime}`, closeCron, async () => {
                     await conn.groupSettingUpdate(groupId, 'announcement');
-                    await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${adjustedCloseTime}. 🔒*\n${sensitiveData.footerText}` });
+                    await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\n${sensitiveData.footerText}` });  // Use original closeTime
                 });
             });
         }
