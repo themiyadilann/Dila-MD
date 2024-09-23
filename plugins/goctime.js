@@ -52,7 +52,7 @@ cmd({ pattern: "opentime", desc: "Set daily open time for the group", category: 
 
 // Command to set close time
 cmd({ pattern: "closetime", desc: "Set daily close time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
-    if (!isGroup) return reply('This command can only be used in a group. 🚫');
+    if (!isGroup) return reply('This command can only be used in a group. ❗');
     if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
     if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
 
