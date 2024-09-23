@@ -1,65 +1,57 @@
 const { cmd } = require('../command');
 const schedule = require('node-schedule');
 const moment = require('moment-timezone'); // Ensure you have installed this package
-const { readEnv } = require('../lib/database');
+
+let openTime, closeTime;
 
 const TIMEZONE = 'Asia/Colombo';  // Set the timezone
 
-// Function to adjust time by subtracting 5 hours and 30 minutes
+// Function to subtract 5 hours and 30 minutes from the input time
 function adjustTime(time) {
     const [hour, minute] = time.split(':').map(Number);
     return moment.tz({ hour, minute }, TIMEZONE).subtract(5, 'hours').subtract(30, 'minutes').format('HH:mm');
 }
 
-// Load group times from config
-const loadGroupTimes = async () => {
-    const config = await readEnv();
-    const groupTimeData = config.GROUP_TIME.split(',');
-    const groupTimes = {};
+cmd({ pattern: "opentime", desc: "Set daily open time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
+    if (!isGroup) return reply('This command can only be used in a group. 🚫');
+    if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
+    if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
+    
+    if (args.length < 1) return reply('Usage: .opentime <HH:mm>');
 
-    groupTimeData.forEach(data => {
-        const [groupId, openTime, closeTime] = data.split('/');
-        groupTimes[groupId] = { openTime, closeTime };
+    openTime = args[0];
+
+    // Adjust the time by subtracting 5 hours and 30 minutes
+    const adjustedOpenTime = adjustTime(openTime);
+    const [adjustedHour, adjustedMinute] = adjustedOpenTime.split(':').map(Number);
+    const openCron = `0 ${adjustedMinute} ${adjustedHour} * * *`;
+
+    schedule.scheduleJob('openGroup', openCron, async () => {
+        await conn.groupSettingUpdate(from, 'not_announcement');
+        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${openTime}. 🔓*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
     });
 
-    console.log("Loaded group times:", groupTimes); // Debugging output
-    return groupTimes;
-};
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗢𝗽𝗲𝗯 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${openTime}. ⏰*`);
+});
 
-// Schedule opening and closing for groups
-const scheduleGroupTimes = async (conn) => {
-    const groupTimes = await loadGroupTimes();
+cmd({ pattern: "closetime", desc: "Set daily close time for the group", category: "group", filename: __filename }, async (conn, mek, m, { from, args, isGroup, isBotAdmins, isAdmins, reply }) => {
+    if (!isGroup) return reply('This command can only be used in a group. 🚫');
+    if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
+    if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
 
-    for (const [groupId, times] of Object.entries(groupTimes)) {
-        const adjustedOpenTime = adjustTime(times.openTime);
-        const adjustedCloseTime = adjustTime(times.closeTime);
-        
-        const [openHour, openMinute] = adjustedOpenTime.split(':').map(Number);
-        const openCron = `0 ${openMinute} ${openHour} * * *`;
-        
-        const [closeHour, closeMinute] = adjustedCloseTime.split(':').map(Number);
-        const closeCron = `0 ${closeMinute} ${closeHour} * * *`;
+    if (args.length < 1) return reply('Usage: .closetime <HH:mm>');
 
-        console.log(`Scheduling group ${groupId}: Open at ${openCron}, Close at ${closeCron}`); // Debugging output
+    closeTime = args[0];
 
-        // Schedule opening
-        schedule.scheduleJob(`openGroup_${groupId}`, openCron, async () => {
-            await conn.groupSettingUpdate(groupId, 'not_announcement');
-            await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗢𝗽𝗲𝗻𝗲𝗱 𝗮𝘁 ${times.openTime}. 🔓*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
-        });
+    // Adjust the time by subtracting 5 hours and 30 minutes
+    const adjustedCloseTime = adjustTime(closeTime);
+    const [adjustedHour, adjustedMinute] = adjustedCloseTime.split(':').map(Number);
+    const closeCron = `0 ${adjustedMinute} ${adjustedHour} * * *`;
 
-        // Schedule closing
-        schedule.scheduleJob(`closeGroup_${groupId}`, closeCron, async () => {
-            await conn.groupSettingUpdate(groupId, 'announcement');
-            await conn.sendMessage(groupId, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${times.closeTime}. 🔒*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
-        });
-    }
-};
+    schedule.scheduleJob('closeGroup', closeCron, async () => {
+        await conn.groupSettingUpdate(from, 'announcement');
+        await conn.sendMessage(from, { text: `*𝗚𝗿𝗼𝘂𝗽 𝗖𝗹𝗼𝘀𝗲𝗱 𝗮𝘁 ${closeTime}. 🔒*\nᴍʀ ᴅɪʟᴀ ᴏꜰᴄ` });
+    });
 
-// Initialize scheduling
-const initGroupSchedules = async (conn) => {
-    await scheduleGroupTimes(conn);
-};
-
-// Call this function with your connection object to start scheduling
-// initGroupSchedules(conn);
+    reply(`*𝗚𝗿𝗼𝘂𝗽 𝗪𝗶𝗹𝗹 𝗖𝗹𝗼𝘀𝗲 𝗗𝗮𝗶𝗹𝘆 𝗮𝘁 ${closeTime}. ⏰*`);
+});
