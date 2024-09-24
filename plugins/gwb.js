@@ -132,23 +132,40 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
 });
 
 // Command to set a custom welcome message
-cmd({ pattern: "welcomemsg (.*)", react: "✍️", desc: "Set a custom welcome message for the group", category: "group", use: '.welcomemsg {TEXT}', filename: __filename },
-async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
+cmd({
+    pattern: "welcomemsg (.+)", // Use .+ to capture the entire message
+    react: "✍️",
+    desc: "Set a custom welcome message for the group",
+    category: "group",
+    use: '.welcomemsg {TEXT}',
+    filename: __filename
+}, async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
     try {
+        // Check if the command is being used in a group
         if (!isGroup) return reply('This command can only be used in a group. 🚫');
+        
+        // Check if the bot is an admin
         if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
+        
+        // Check if the user is an admin
         if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
 
-        const message = m.body.slice(12).trim(); // Extract the custom message from the command
-        if (!message) return reply('Please provide a welcome message.'); // Check if the message is provided
+        // Extract the custom message from the command input
+        const message = m.message.replace(/\.welcomemsg /, '').trim(); // Replace the command part with an empty string
 
-        WelcomeSettings.welcomeMessages[from] = message; // Save the message for the group
-        saveWelcomeMessages(); // Save to JSON file
+        // Check if the message is empty
+        if (!message) return reply('Please provide a welcome message.'); // Prompt user to provide a message
 
+        // Set the custom welcome message for the group
+        WelcomeSettings.welcomeMessages[from] = message; 
+        saveWelcomeMessages(); // Save the updated welcome messages to the JSON file
+
+        // Respond with confirmation
         reply(`Custom welcome message set! 🎉\n\n${message}`);
-    } catch (e) {
+    } catch (error) {
+        // Handle any errors that occur during the process
         reply('Error setting custom welcome message. ⚠️');
-        console.log(e);
+        console.log(error);
     }
 });
 
