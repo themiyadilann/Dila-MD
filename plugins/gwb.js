@@ -12,7 +12,7 @@ const sendWelcomeMessage = async (conn, groupId, participants) => {
     
     // Create mentions and build the welcome message with all participants
     const mentions = participants.map(participant => participant);
-    const welcomeMessage = `𝗛𝗲𝘆\n${mentions.map(memberId => `@${memberId.split('@')[0]}`).join('\n')}\n\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n${sensitiveData.footerText}`;
+    const welcomeMessage = `𝗛𝗲𝘆 ♥️🫂\n${mentions.map(memberId => `@${memberId.split('@')[0]}`).join('\n')}\n𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 *${groupName}* 🎉\nˢᵉᵉ ᵍʳᵒᵘᵖ ᵈᵉˢᶜʳⁱᵖᵗⁱᵒⁿ\n${sensitiveData.footerText}`;
 
     await conn.sendMessage(groupId, { text: welcomeMessage, mentions });
 };
