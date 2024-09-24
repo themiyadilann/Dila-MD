@@ -150,19 +150,6 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
     }
 });
 
-// Command to display welcome messages for the group
-cmd({ pattern: "welcomemsg", react: "📜", desc: "Display the current welcome message for the group", category: "group", use: '.welcomemsg', filename: __filename },
-async (conn, mek, m, { from, isGroup, reply }) => {
-    try {
-        if (!isGroup) return reply('This command can only be used in a group. 🚫');
-        
-        const message = WelcomeSettings.welcomeMessages[from] || 'No custom welcome message set.';
-        reply(`Current welcome message for the group:\n\n${message}`);
-    } catch (e) {
-        reply('Error displaying welcome message. ⚠️');
-        console.log(e);
-    }
-});
 
 // Command to delete the custom welcome message
 cmd({ pattern: "welcomedel", react: "🗑️", desc: "Delete the custom welcome message for the group", category: "group", use: '.welcomedel', filename: __filename },
