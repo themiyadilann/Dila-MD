@@ -152,47 +152,52 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
 
 // Command to display welcome messages for the group
 cmd({ pattern: "welcomemsg", react: "📜", desc: "Display the current welcome message for the group", category: "group", use: '.welcomemsg', filename: __filename },
-async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
+async (conn, mek, m, { from, isGroup, reply }) => {
     try {
         if (!isGroup) return reply('This command can only be used in a group. 🚫');
-        if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
-        if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
         
-        const currentMessage = WelcomeSettings.welcomeMessages[from] || 'No custom welcome message set.';
-        reply(`Current welcome message:\n\n${currentMessage}`);
+        const message = WelcomeSettings.welcomeMessages[from] || 'No custom welcome message set.';
+        reply(`Current welcome message for the group:\n\n${message}`);
     } catch (e) {
-        reply('Error fetching the welcome message. ⚠️');
+        reply('Error displaying welcome message. ⚠️');
         console.log(e);
     }
 });
 
 // Command to delete the custom welcome message
-cmd({ pattern: "delwelcomemsg", react: "🗑️", desc: "Delete the custom welcome message for the group", category: "group", use: '.delwelcomemsg', filename: __filename },
+cmd({ pattern: "welcomedel", react: "🗑️", desc: "Delete the custom welcome message for the group", category: "group", use: '.welcomedel', filename: __filename },
 async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
     try {
         if (!isGroup) return reply('This command can only be used in a group. 🚫');
         if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
         if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
 
-        delete WelcomeSettings.welcomeMessages[from]; // Remove the message for the group
+        delete WelcomeSettings.welcomeMessages[from]; // Delete the message for the group
         saveWelcomeMessages(); // Save changes to JSON file
-        
-        reply('Custom welcome message deleted! 🗑️');
+
+        reply('Custom welcome message has been deleted! 🗑️');
     } catch (e) {
-        reply('Error deleting the welcome message. ⚠️');
+        reply('Error deleting custom welcome message. ⚠️');
         console.log(e);
     }
 });
 
-// Load existing welcome messages on startup
-loadWelcomeMessages();
+// Command to display welcome settings
+cmd({ pattern: "welcomestates", react: "🔍", desc: "Display current welcome settings for the group", category: "group", use: '.welcomestates', filename: __filename },
+async (conn, mek, m, { from, isGroup, reply }) => {
+    try {
+        if (!isGroup) return reply('This command can only be used in a group. 🚫');
+        
+        const welcomeStatus = WelcomeSettings.welcomeEnabled ? 'Enabled' : 'Disabled';
+        const alertStatus = WelcomeSettings.welcomeAlertEnabled ? 'Enabled' : 'Disabled';
+        const customMessage = WelcomeSettings.welcomeMessages[from] ? WelcomeSettings.welcomeMessages[from] : 'No custom message set.';
 
-// Exporting the module if required
-module.exports = {
-    WelcomeSettings,
-    loadWelcomeMessages,
-    saveWelcomeMessages,
-};
+        reply(`Current welcome settings for the group:\n\nWelcome Messages: ${welcomeStatus}\nPrivate Alerts: ${alertStatus}\nCustom Welcome Message: ${customMessage}`);
+    } catch (e) {
+        reply('Error displaying welcome settings. ⚠️');
+        console.log(e);
+    }
+});     
 
 // Command to display welcome instructions
 cmd({ pattern: "welcome", react: "👑", desc: "Display group welcome commands", category: "group", use: '.welcome', filename: __filename },
