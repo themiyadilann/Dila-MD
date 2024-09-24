@@ -17,8 +17,7 @@ cmd({
     }
     const summary = await wiki.summary(q);
     
-    let replyText = `*📚 Wikipedia Summary 📚*\n\n🔍 *Query*: _${q}_\n\n💬 *Title*: _${summary.title}_\n\n📝 *Summary*: _${summary.extract}_\n\n🔗 *URL*: ${summary.content_urls.desktop.page}\n\n${sensitiveData.siteUrl}\n${sensitiveData.footerText}\n\n​\u200B\u200Bhttps://whatsapp.com/channel/0029VapPPNGEgGfO1JkeJF1h`;
-
+    let replyText = `*📚 Wikipedia Summary 📚*\n\n🔍 *Query*: _${q}_\n\n💬 *Title*: _${summary.title}_\n\n📝 *Summary*: _${summary.extract}_\n\n🔗 *URL*: ${summary.content_urls.desktop.page}\n\n${sensitiveData.siteUrl}\n${sensitiveData.footerText}\n\n​\u200B​\u200B​\u200B​https://whatsapp.com/channel/0029VapPPNGEgGfO1JkeJF1h​`;
     await conn.sendMessage(from, {
       image: { url: summary.originalimage.source },
       caption: replyText
