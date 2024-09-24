@@ -18,7 +18,7 @@ const loadWelcomeMessages = () => {
 
 // Save welcome messages to the JSON file
 const saveWelcomeMessages = () => {
-    fs.writeFileSync('./welcomeMessages.json', JSON.stringify(welcomeMessages, null, 2));
+    fs.writeFileSync('./data/welcomeMessages.json', JSON.stringify(welcomeMessages, null, 2));
 };
 
 // Function to send welcome message to the group (for multiple participants)
