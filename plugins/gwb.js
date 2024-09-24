@@ -3,6 +3,7 @@ const sensitiveData = require('../dila_md_licence/a/b/c/d/dddamsbs');
 
 let welcomeEnabled = false; // Track if welcome messages are enabled
 let welcomeAlertEnabled = false; // Track if welcome alerts (private messages) are enabled
+let welcomeListenerRegistered = false; // Track if the welcome listener is registered
 
 // Function to send welcome message to the group (for multiple participants)
 const sendWelcomeMessage = async (conn, groupId, participants) => {
@@ -28,6 +29,9 @@ const sendPrivateWelcomeAlert = async (conn, groupId, memberId) => {
 
 // Event listener for new group participants
 const registerGroupWelcomeListener = (conn) => {
+    if (welcomeListenerRegistered) return; // Prevent multiple registrations
+    welcomeListenerRegistered = true; // Mark the listener as registered
+
     conn.ev.on('group-participants.update', async (update) => {
         const { id, participants, action } = update; // id = group id, participants = new members, action = add/remove
         if (action === 'add') {  // New members added
