@@ -10,7 +10,7 @@ cmd({
   category: "main",
   filename: __filename
 }, async (conn, mek, m, {
-  from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, botNumber2, botNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
+  from, quoted, body, isCmd, command, args, q, isGroup, sender, senderNumber, pushname, isMe, isOwner, groupMetadata, groupName, participants, groupAdmins, isBotAdmins, isAdmins, reply
 }) => {
   try {
     // Check if query is provided
@@ -36,11 +36,10 @@ cmd({
 
     // Define button message
     const buttonMessage = {
-      image: { url: summary.originalimage.source }, // Image from Wikipedia
-      caption: replyText, // Main text content
-      footer: `${sensitiveData.siteUrl}\n${sensitiveData.footerText}`, // Footer text with sensitive data
+      text: replyText, // Main text content
+      footer: `${sensitiveData.siteUrl}\n${sensitiveData.footerText}`, // Footer text
       buttons: buttons, // Buttons array
-      headerType: 4 // Header type for image message
+      headerType: 1 // Header type for text-only message
     };
 
     // Send the button message
