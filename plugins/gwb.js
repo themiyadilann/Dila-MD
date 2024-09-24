@@ -138,8 +138,10 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
         if (!isGroup) return reply('This command can only be used in a group. 🚫');
         if (!isBotAdmins) return reply('Bot must be an admin to use this command. 🤖');
         if (!isAdmins) return reply('Only admins can use this command. 👮‍♂️');
-        
-        const message = m.matches[1]; // Extract the custom message
+
+        const message = m.body.slice(12).trim(); // Extract the custom message from the command
+        if (!message) return reply('Please provide a welcome message.'); // Check if the message is provided
+
         WelcomeSettings.welcomeMessages[from] = message; // Save the message for the group
         saveWelcomeMessages(); // Save to JSON file
 
@@ -149,7 +151,6 @@ async (conn, mek, m, { from, isGroup, isBotAdmins, isAdmins, reply }) => {
         console.log(e);
     }
 });
-
 
 // Command to delete the custom welcome message
 cmd({ pattern: "welcomedel", react: "🗑️", desc: "Delete the custom welcome message for the group", category: "group", use: '.welcomedel', filename: __filename },
