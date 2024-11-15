@@ -1,6 +1,7 @@
 <div class="repo" align="center">
  
   <a href="#">
+  <marquee> <h1>New Update is coming soon!!!</h1></marquee>
     <img src="media/readme/img/Picsart_24-09-01_19-11-57-881.jpg" width="300" height="200" alt="KING DILA WHATSAPP BOT"></img>
     <p align="center">
       <a href="#"><img src="http://readme-typing-svg.herokuapp.com?color=ffffff&center=true&vCenter=true&multiline=false&lines=DILA+MD+WHATSAPP+BOT" alt="Typing SVG"></a>
