@@ -54,15 +54,12 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 - _Deploy using your host._
 
 ## 1. FORK REPOSITORY
-<a href="https://github.com/themiyadilann/Dila-MD/fork"> <img src="media/readme/img/Picsart_24-09-02_15-24-30-989.png" width="150" height="40" alt="Fork Repository"> </a>
+<a href="https://github.com/themiyadilann/Dila-MD/fork"> <img src="media/readme/img/deploy.jpeg" width="150" height="40" alt="Fork Repository"> </a>
 
 ## 2.Click Deploy Button For Deploy & More Information !
   <a href="https://cyberdeadzoteam.vercel.app/" class="btn">Deploy</a>
  
- ## Meet The Develovers 
 
-  <button onclick="window.location.href='https://wa.me/94777839446?text=dilo'">
-                <img src="./src/whatsapp.png" alt="Whatsapp">
  
 </div>
 
