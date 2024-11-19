@@ -61,7 +61,8 @@ Hi guys, deploy DilaMD bot and enjoy using it.
  
  ## Meet The Develovers 
 
- <a href="https://github.com/themiyadilann/Dila-MD/fork"> <img src="https://github.com/themiyadilann/md.git/src/dila.jpeg" width="150" height="40" alt="Mr.Dila"> </a>
+  <button onclick="window.location.href='https://wa.me/94777839446?text=dilo'">
+                <img src="./src/whatsapp.png" alt="Whatsapp">
  
 </div>
 
