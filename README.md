@@ -57,6 +57,5 @@ Hi guys, deploy DilaMD bot and enjoy using it.
 <a href="https://github.com/themiyadilann/Dila-MD/fork"> <img src="media/readme/img/Picsart_24-09-02_15-24-30-989.png" width="150" height="40" alt="Fork Repository"> </a>
 
 ## 2.Click Deploy Button For More Information !
-<a href="https://cyberdeadzoteam.vercel.app/"> <img src="media/readme/img/Picsart_24-09-02_15-30-52-464.jpg" width="150" height="40" alt="Deploy"> </a></br>
-  <a href="https://whatsapp.com/channel/0029Vaw0NYoAInPkQUJJZK1t" class="btn">Support</a>
+  <a href="https://cyberdeadzoteam.vercel.app/" class="btn">Deploy</a>
 </div>
